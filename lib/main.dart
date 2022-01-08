@@ -1,5 +1,7 @@
 //import 'dart:html';
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
@@ -73,15 +75,21 @@ class _CasottoState extends State<CasottoHome> {
                         if (_pageController.hasClients) {
                           _pageController.animateToPage(
                             1,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOutCirc,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOutQuart,
                           );
                         }
                       },
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('lib/assets/umbrella.png'),
-                        width: 64,
-                        height: 64,
+                        width: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
+                        height: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
                       ),
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(
@@ -101,14 +109,20 @@ class _CasottoState extends State<CasottoHome> {
                           _pageController.animateToPage(
                             2,
                             duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
+                            curve: Curves.easeInOutQuart,
                           );
                         }
                       },
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('lib/assets/sunbed.png'),
-                        width: 64,
-                        height: 64,
+                        width: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
+                        height: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
                       ),
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(
@@ -135,15 +149,21 @@ class _CasottoState extends State<CasottoHome> {
                         if (_pageController.hasClients) {
                           _pageController.animateToPage(
                             3,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOutQuart,
                           );
                         }
                       },
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('lib/assets/fast-food.png'),
-                        width: 64,
-                        height: 64,
+                        width: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
+                        height: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
                       ),
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(
@@ -162,15 +182,21 @@ class _CasottoState extends State<CasottoHome> {
                         if (_pageController.hasClients) {
                           _pageController.animateToPage(
                             4,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.easeInOutQuart,
                           );
                         }
                       },
-                      child: const Image(
+                      child: Image(
                         image: AssetImage('lib/assets/party.png'),
-                        width: 64,
-                        height: 64,
+                        width: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
+                        height: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 64
+                            : 128,
                       ),
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(
@@ -205,65 +231,73 @@ class _CasottoState extends State<CasottoHome> {
               ),
             ),
             child: SizedBox(
-              width: MediaQuery.of(context).size.width * (3 / 4),
+              width: MediaQuery.of(context).orientation == Orientation.portrait
+                  ? MediaQuery.of(context).size.width * (3 / 4)
+                  : MediaQuery.of(context).size.width * 0.4,
               height: MediaQuery.of(context).size.height * (2 / 3),
               child: Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      padding: MediaQuery.of(context).orientation ==
-                              Orientation.portrait
-                          ? EdgeInsets.all(8.0)
-                          : EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue, //Color(0xffe69b10),
-                              offset: Offset.zero,
-                              spreadRadius: 1.0,
-                              blurRadius: 5.0,
-                            ),
-                          ],
-                          color: Colors.transparent,
+                    Transform.translate(
+                      offset:
+                          Offset(0, -MediaQuery.of(context).size.height / 12),
+                      child: Container(
+                        padding: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? EdgeInsets.all(8.0)
+                            : EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.lightBlue,
                           shape: BoxShape.circle,
-                          border: Border.all(
-                              color: Colors.white,
-                              width: MediaQuery.of(context).orientation ==
-                                      Orientation.portrait
-                                  ? 3.0
-                                  : 6.0)),
-                      child: Image(
-                        alignment: Alignment.topCenter,
-                        image: AssetImage('lib/assets/umbrella.png'),
-                        width: MediaQuery.of(context).orientation ==
-                                Orientation.portrait
-                            ? 64
-                            : 128,
-                        height: MediaQuery.of(context).orientation ==
-                                Orientation.portrait
-                            ? 64
-                            : 128,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Image(
+                          alignment: Alignment.topCenter,
+                          image: AssetImage('lib/assets/umbrella.png'),
+                          width: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? 64
+                              : 128,
+                          height: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? 64
+                              : 128,
+                        ),
                       ),
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).orientation ==
-                                    Orientation.portrait
-                                ? 30
-                                : 60)),
-                    Text(
-                      'Prenota ora il tuo ombrellone',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).orientation ==
-                                Orientation.portrait
-                            ? 24
-                            : 48,
-                        fontFamily: "Raleway",
-                        letterSpacing: 1.2,
-                        fontWeight: FontWeight.bold,
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Card(
+                            child: ListTile(
+                              leading: Icon(Icons.beach_access_outlined),
+                              title: Text('1'),
+                              subtitle: Text('prima fila'),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              leading: Icon(Icons.beach_access_outlined),
+                              title: Text('2'),
+                              subtitle: Text('prima fila'),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              leading: Icon(Icons.beach_access_outlined),
+                              title: Text('3'),
+                              subtitle: Text('prima fila'),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              leading: Icon(Icons.beach_access_outlined),
+                              title: Text('4'),
+                              subtitle: Text('seconda fila'),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     ElevatedButton(
@@ -281,11 +315,15 @@ class _CasottoState extends State<CasottoHome> {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
                           padding: MediaQuery.of(context).orientation ==
                                   Orientation.portrait
                               ? EdgeInsets.all(20)
                               : EdgeInsets.all(30),
-                          elevation: 3.0),
+                          elevation: 3,
+                          side: BorderSide(color: Colors.white70, width: 0.5),
+                          shape: BeveledRectangleBorder(
+                              borderRadius: BorderRadius.circular(3))),
                     ),
                   ],
                 ),
@@ -295,9 +333,9 @@ class _CasottoState extends State<CasottoHome> {
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.blue,
+                        color: Color(0xff161055),
                         offset: Offset.fromDirection(1, 5.0),
-                        blurRadius: 10.0,
+                        blurRadius: 5.0,
                       ),
                     ]),
               ),
