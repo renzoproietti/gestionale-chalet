@@ -17,7 +17,8 @@ class _CasottoState extends State<CasottoHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+        home: Scaffold(
       appBar: AppBar(
         leading: ElevatedButton(
           onPressed: () {},
@@ -215,132 +216,155 @@ class _CasottoState extends State<CasottoHome> {
             ),
           ),
           Container(
-            constraints: BoxConstraints.expand(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(
-                style: BorderStyle.solid,
+              constraints: BoxConstraints.expand(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  style: BorderStyle.solid,
+                ),
+                gradient: LinearGradient(
+                  colors: <Color>[Color(0xffffb643), Color(0xffe6ab10)],
+                  tileMode: TileMode.clamp,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
-              gradient: LinearGradient(
-                colors: <Color>[Color(0xffffb643), Color(0xffe6ab10)],
-                tileMode: TileMode.clamp,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).orientation == Orientation.portrait
-                  ? MediaQuery.of(context).size.width * (3 / 4)
-                  : MediaQuery.of(context).size.width * 0.4,
-              height: MediaQuery.of(context).size.height * (2 / 3),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Transform.translate(
-                      offset:
-                          Offset(0, -MediaQuery.of(context).size.height / 12),
-                      child: Container(
-                        padding: MediaQuery.of(context).orientation ==
-                                Orientation.portrait
-                            ? EdgeInsets.all(8.0)
-                            : EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.lightBlue,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Image(
-                          alignment: Alignment.topCenter,
-                          image: AssetImage('lib/assets/umbrella.png'),
-                          width: MediaQuery.of(context).orientation ==
-                                  Orientation.portrait
-                              ? 64
-                              : 128,
-                          height: MediaQuery.of(context).orientation ==
-                                  Orientation.portrait
-                              ? 64
-                              : 128,
-                        ),
-                      ),
+              child: Column(
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 40)),
+                  ElevatedButton(
+                    child: const Icon(
+                      Icons.arrow_circle_up_rounded,
+                      size: 42,
                     ),
-                    SingleChildScrollView(
+                    onPressed: () {
+                      if (_pageController.hasClients) {
+                        _pageController.animateTo(
+                          0,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOutQuart,
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(side: BorderSide.none)),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height) /
+                          40),
+                  SizedBox(
+                    width: MediaQuery.of(context).orientation ==
+                            Orientation.portrait
+                        ? MediaQuery.of(context).size.width * (3 / 4)
+                        : MediaQuery.of(context).size.width * 0.4,
+                    height: MediaQuery.of(context).size.height * (2 / 3),
+                    child: Container(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Card(
-                            child: ListTile(
-                              leading: Icon(Icons.beach_access_outlined),
-                              title: Text('1'),
-                              subtitle: Text('prima fila'),
+                          Container(
+                            padding: MediaQuery.of(context).orientation ==
+                                    Orientation.portrait
+                                ? EdgeInsets.all(8.0)
+                                : EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.lightBlue,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
+                            ),
+                            child: Image(
+                              alignment: Alignment.topCenter,
+                              image: AssetImage('lib/assets/umbrella.png'),
+                              width: MediaQuery.of(context).orientation ==
+                                      Orientation.portrait
+                                  ? 64
+                                  : 128,
+                              height: MediaQuery.of(context).orientation ==
+                                      Orientation.portrait
+                                  ? 64
+                                  : 128,
                             ),
                           ),
-                          Card(
-                            child: ListTile(
-                              leading: Icon(Icons.beach_access_outlined),
-                              title: Text('2'),
-                              subtitle: Text('prima fila'),
+                          Container(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Card(
+                                    child: ListTile(
+                                      leading:
+                                          Icon(Icons.beach_access_outlined),
+                                      title: Text('1'),
+                                      subtitle: Text('prima fila'),
+                                    ),
+                                  ),
+                                  Card(
+                                    child: ListTile(
+                                      leading:
+                                          Icon(Icons.beach_access_outlined),
+                                      title: Text('2'),
+                                      subtitle: Text('prima fila'),
+                                    ),
+                                  ),
+                                  Card(
+                                    child: ListTile(
+                                      leading:
+                                          Icon(Icons.beach_access_outlined),
+                                      title: Text('3'),
+                                      subtitle: Text('prima fila'),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          Card(
-                            child: ListTile(
-                              leading: Icon(Icons.beach_access_outlined),
-                              title: Text('3'),
-                              subtitle: Text('prima fila'),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Text(
+                              'PRENOTA',
+                              style: TextStyle(
+                                letterSpacing: 1.2,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Raleway",
+                                fontSize: MediaQuery.of(context).orientation ==
+                                        Orientation.portrait
+                                    ? 20
+                                    : 30,
+                              ),
                             ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              leading: Icon(Icons.beach_access_outlined),
-                              title: Text('4'),
-                              subtitle: Text('seconda fila'),
-                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.blue,
+                                padding: MediaQuery.of(context).orientation ==
+                                        Orientation.portrait
+                                    ? EdgeInsets.all(20)
+                                    : EdgeInsets.all(30),
+                                elevation: 3,
+                                side: BorderSide(
+                                    color: Colors.white70, width: 0.5),
+                                shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(3))),
                           ),
                         ],
                       ),
+                      decoration: BoxDecoration(
+                          color: Color(0xffe69b10),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff161055),
+                              offset: Offset.fromDirection(1, 5.0),
+                              blurRadius: 5.0,
+                            ),
+                          ]),
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'PRENOTA',
-                        style: TextStyle(
-                          letterSpacing: 1.2,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Raleway",
-                          fontSize: MediaQuery.of(context).orientation ==
-                                  Orientation.portrait
-                              ? 20
-                              : 30,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          padding: MediaQuery.of(context).orientation ==
-                                  Orientation.portrait
-                              ? EdgeInsets.all(20)
-                              : EdgeInsets.all(30),
-                          elevation: 3,
-                          side: BorderSide(color: Colors.white70, width: 0.5),
-                          shape: BeveledRectangleBorder(
-                              borderRadius: BorderRadius.circular(3))),
-                    ),
-                  ],
-                ),
-                decoration: BoxDecoration(
-                    color: Color(0xffe69b10),
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(5),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff161055),
-                        offset: Offset.fromDirection(1, 5.0),
-                        blurRadius: 5.0,
-                      ),
-                    ]),
-              ),
-            ),
-          ),
+                  ),
+                ],
+              )),
           Container(
             constraints: BoxConstraints.expand(
                 width: MediaQuery.of(context).size.width,
@@ -353,6 +377,108 @@ class _CasottoState extends State<CasottoHome> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 40)),
+                ElevatedButton(
+                  child: const Icon(
+                    Icons.arrow_circle_up_rounded,
+                    size: 42,
+                  ),
+                  onPressed: () {
+                    if (_pageController.hasClients) {
+                      _pageController.animateTo(
+                        0,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOutQuart,
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(side: BorderSide.none)),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height) /
+                        40),
+                SizedBox(
+                  width:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? MediaQuery.of(context).size.width * (3 / 4)
+                          : MediaQuery.of(context).size.width * 0.4,
+                  height: MediaQuery.of(context).size.height * (2 / 3),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          padding: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? EdgeInsets.all(8.0)
+                              : EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.lightBlue,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Image(
+                            alignment: Alignment.topCenter,
+                            image: AssetImage('lib/assets/sunbed.png'),
+                            width: MediaQuery.of(context).orientation ==
+                                    Orientation.portrait
+                                ? 64
+                                : 128,
+                            height: MediaQuery.of(context).orientation ==
+                                    Orientation.portrait
+                                ? 64
+                                : 128,
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'PRENOTA',
+                            style: TextStyle(
+                              letterSpacing: 1.2,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Raleway",
+                              fontSize: MediaQuery.of(context).orientation ==
+                                      Orientation.portrait
+                                  ? 20
+                                  : 30,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.blue,
+                              padding: MediaQuery.of(context).orientation ==
+                                      Orientation.portrait
+                                  ? EdgeInsets.all(20)
+                                  : EdgeInsets.all(30),
+                              elevation: 3,
+                              side:
+                                  BorderSide(color: Colors.white70, width: 0.5),
+                              shape: BeveledRectangleBorder(
+                                  borderRadius: BorderRadius.circular(3))),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: Color(0xffe69b10),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff160535),
+                            offset: Offset.fromDirection(1, 5.0),
+                            blurRadius: 5.0,
+                          ),
+                        ]),
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -380,8 +506,9 @@ class _CasottoState extends State<CasottoHome> {
       floatingActionButton: FloatingActionButton(
         elevation: 2.0,
         onPressed: () {},
-        child: Icon(Icons.chat),
+        child: Icon(Icons.quick_contacts_mail_rounded),
+        mini: true,
       ),
-    );
+    ));
   }
 }
