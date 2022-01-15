@@ -65,8 +65,9 @@ flutter:
     - lib/assets/sunbed_blue.png
     - lib/assets/sunbed.png
     - lib/assets/party.png
-    - lib/assets/green_light.png
-    - lib/assets/red_light.png
+    - lib/assets/icona.png
+    - lib/assets/red_circle.png
+    - lib/assets/green_circle.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
