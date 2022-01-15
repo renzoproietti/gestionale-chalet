@@ -87,62 +87,27 @@ class _CasottoState extends State<CasottoHome> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_pageController.hasClients) {
-                          _pageController.animateToPage(
-                            1,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOutQuart,
-                          );
-                        }
-                      },
-                      child: const Image(
-                        image: AssetImage('lib/assets/umbrella.png'),
-                        width: 64,
-                        height: 64,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(
-                          side: BorderSide(
-                              style: BorderStyle.solid,
-                              color: Colors.white,
-                              width: 2.0),
-                        ),
-                        padding: const EdgeInsets.all(28),
-                        elevation: 4.0,
-                      ),
-                    ),
+                    createButton(
+                      const AssetImage("lib/assets/umbrella.png"),
+                      64, //size
+                      24, //padding
+                      _pageController, //controller pagina
+                      1, //scrolla fino a questa pagina
+                      const Duration(
+                          milliseconds: 300), //durata della transizione
+                    ), //Bottone Sezione Ombrelloni
                     Padding(
                         padding:
                             EdgeInsets.all(MediaQuery.of(context).size.width) /
                                 30),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_pageController.hasClients) {
-                          _pageController.animateToPage(
-                            2,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOutQuart,
-                          );
-                        }
-                      },
-                      child: const Image(
-                        image: AssetImage('lib/assets/sunbed.png'),
-                        width: 64,
-                        height: 64,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(
-                          side: BorderSide(
-                              style: BorderStyle.solid,
-                              color: Colors.white,
-                              width: 2.0),
-                        ),
-                        padding: const EdgeInsets.all(28),
-                        elevation: 4.0,
-                      ),
-                    ),
+                    createButton(
+                      const AssetImage("lib/assets/sunbed.png"),
+                      64,
+                      24,
+                      _pageController,
+                      2,
+                      const Duration(milliseconds: 400),
+                    ), //Bottone Sezione lettini
                   ],
                 ),
                 Padding(
@@ -153,62 +118,26 @@ class _CasottoState extends State<CasottoHome> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_pageController.hasClients) {
-                          _pageController.animateToPage(
-                            3,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOutQuart,
-                          );
-                        }
-                      },
-                      child: const Image(
-                        image: AssetImage('lib/assets/fast-food.png'),
-                        width: 64,
-                        height: 64,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(
-                          side: BorderSide(
-                              style: BorderStyle.solid,
-                              color: Colors.white,
-                              width: 2.0),
-                        ),
-                        padding: const EdgeInsets.all(28),
-                        elevation: 4.0,
-                      ),
-                    ),
+                    createButton(
+                      const AssetImage("lib/assets/fast-food.png"),
+                      64,
+                      24,
+                      _pageController,
+                      3,
+                      const Duration(milliseconds: 500),
+                    ), //Bottone Sezione Cibo/Bevande
                     Padding(
                         padding:
                             EdgeInsets.all(MediaQuery.of(context).size.width) /
                                 30),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_pageController.hasClients) {
-                          _pageController.animateToPage(
-                            4,
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.easeInOutQuart,
-                          );
-                        }
-                      },
-                      child: const Image(
-                        image: AssetImage('lib/assets/party.png'),
-                        width: 64,
-                        height: 64,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(
-                          side: BorderSide(
-                              style: BorderStyle.solid,
-                              color: Colors.white,
-                              width: 2.0),
-                        ),
-                        padding: const EdgeInsets.all(28),
-                        elevation: 4.0,
-                      ),
-                    ),
+                    createButton(
+                      const AssetImage("lib/assets/party.png"),
+                      64,
+                      24,
+                      _pageController,
+                      4,
+                      const Duration(milliseconds: 600),
+                    ), //Bottone Sezione Eventi
                   ],
                 ),
               ],
@@ -236,47 +165,29 @@ class _CasottoState extends State<CasottoHome> {
                 Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height / 20)),
-                ElevatedButton(
-                  child: const Image(
-                    image: AssetImage("lib/assets/umbrella.png"),
-                    width: 64,
-                    height: 64,
-                  ),
-                  onPressed: () {
-                    if (_pageController.hasClients) {
-                      _pageController.animateTo(
-                        0,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOutQuart,
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(12),
-                    elevation: 1,
-                    shape: const CircleBorder(
-                      side: BorderSide(
-                          style: BorderStyle.solid,
-                          color: Colors.white,
-                          width: 2.0),
-                    ),
-                  ),
+                createButton(
+                  AssetImage("lib/assets/umbrella.png"),
+                  48,
+                  18,
+                  _pageController,
+                  0,
+                  Duration(milliseconds: 300),
                 ),
                 Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height / 20)),
                 SizedBox(
                   child: Container(
-                    decoration: const BoxDecoration(
-                        color: Color(0xffe6ab10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xff161055),
-                              spreadRadius: 1.0,
-                              blurRadius: 3.0)
-                        ]),
-                    width: MediaQuery.of(context).size.width - 20,
-                    height: MediaQuery.of(context).size.height / 1.7,
+                    decoration: BoxDecoration(
+                      color: Color(0xffe6ab10),
+                      border: Border.all(
+                        width: 5,
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    width: MediaQuery.of(context).size.width - 65,
+                    height: MediaQuery.of(context).size.height / 1.85,
                     child: Scrollbar(
                       child: ListView(
                         shrinkWrap: true,
@@ -331,7 +242,7 @@ class _CasottoState extends State<CasottoHome> {
                                                     left: MediaQuery.of(context)
                                                             .size
                                                             .width /
-                                                        9)),
+                                                        11)),
                                             Text(
                                               item.fila,
                                               textAlign: TextAlign.center,
@@ -339,7 +250,7 @@ class _CasottoState extends State<CasottoHome> {
                                                 fontFamily: 'Raleway',
                                                 fontWeight: FontWeight.normal,
                                                 letterSpacing: 1,
-                                                fontSize: 18,
+                                                fontSize: 14,
                                               ),
                                             ),
                                           ],
@@ -396,7 +307,7 @@ class _CasottoState extends State<CasottoHome> {
                     if (_pageController.hasClients) {
                       _pageController.animateTo(
                         0,
-                        duration: const Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOutQuart,
                       );
                     }
@@ -472,5 +383,35 @@ class _CasottoState extends State<CasottoHome> {
         mini: true,
       ),
     ));
+  }
+
+  ElevatedButton createButton(
+      AssetImage buttonIcon,
+      double size,
+      double innerPadding,
+      PageController pageController,
+      int page,
+      Duration animationTime) {
+    return ElevatedButton(
+      onPressed: () {
+        if (_pageController.hasClients) {
+          _pageController.animateToPage(page,
+              duration: animationTime, curve: Curves.easeInOutCirc);
+        }
+      },
+      child: Image(
+        image: buttonIcon,
+        width: size,
+        height: size,
+      ),
+      style: ElevatedButton.styleFrom(
+        shape: const CircleBorder(
+          side: BorderSide(
+              style: BorderStyle.solid, color: Colors.white, width: 2.0),
+        ),
+        padding: EdgeInsets.all(innerPadding),
+        elevation: 4.0,
+      ),
+    );
   }
 }
