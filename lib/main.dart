@@ -59,6 +59,7 @@ class _CasottoState extends State<CasottoHome> {
         title: Text('CASOTTO'),
       ),
       body: PageView(
+        physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         controller: _pageController,
         children: <Widget>[
@@ -143,237 +144,184 @@ class _CasottoState extends State<CasottoHome> {
               ],
             ),
           ),
-          Container(
-            constraints: BoxConstraints.expand(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(
-                style: BorderStyle.solid,
-              ),
-              gradient: const LinearGradient(
-                colors: <Color>[Color(0xffffb643), Color(0xffe6ab10)],
-                tileMode: TileMode.clamp,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+
+          createPageContainer(
+            Color(0xffffb643),
+            Color(0xffe6ab10),
+            MediaQuery.of(context).size.height / 15,
+            MediaQuery.of(context).size.height / 15,
+            createButton(
+              AssetImage("lib/assets/umbrella.png"),
+              48,
+              18,
+              _pageController,
+              0,
+              Duration(milliseconds: 300),
+            ),
+            SizedBox(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffe6ab10),
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                width: MediaQuery.of(context).size.width - 65,
+                height: MediaQuery.of(context).size.height / 1.85,
+                child: Scrollbar(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: <Widget>[
+                      ExpansionPanelList(
+                        expansionCallback: (int index, bool isExpanded) {
+                          setState(() {
+                            _ombrelloni[index].isExpanded =
+                                !_ombrelloni[index].isExpanded;
+                          });
+                        },
+                        children: _ombrelloni.map((OmbrelloneItem item) {
+                          return ExpansionPanel(
+                              canTapOnHeader: true,
+                              headerBuilder:
+                                  (BuildContext context, bool isExpanded) {
+                                return (Container(
+                                    padding: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width /
+                                                25),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        const Image(
+                                          image: AssetImage(
+                                              "lib/assets/green_circle.png"),
+                                          width: 24,
+                                          height: 24,
+                                        ),
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                left: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    9)),
+                                        const Icon(Icons.beach_access),
+                                        Text(
+                                          item.header,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            fontFamily: 'Raleway',
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                left: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    11)),
+                                        Text(
+                                          item.fila,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            fontFamily: 'Raleway',
+                                            fontWeight: FontWeight.normal,
+                                            letterSpacing: 1,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    )));
+                              },
+                              isExpanded: item.isExpanded,
+                              body: FittedBox(
+                                  child: Center(
+                                      child: TextButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            "Prenota",
+                                            style: TextStyle(
+                                              fontFamily: 'Raleway',
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 1,
+                                              fontSize: 16,
+                                            ),
+                                          )))));
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 20)),
-                createButton(
-                  AssetImage("lib/assets/umbrella.png"),
+          ),
+
+          createPageContainer(
+            Color(0xff161055),
+            Color(0xff161055),
+            MediaQuery.of(context).size.height / 15,
+            MediaQuery.of(context).size.height / 5,
+            createButton(
+              AssetImage("lib/assets/sunbed.png"),
+              48,
+              18,
+              _pageController,
+              0,
+              Duration(milliseconds: 400),
+            ),
+            SizedBox(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      createCustomSelectContainer(
+                        Icon(Icons.bed_rounded),
+                        'Lettini',
+                        MediaQuery.of(context).size.width / 5,
+                      ),
+                      createCustomSelectContainer(
+                        Icon(Icons.single_bed_rounded),
+                        'Sdraio',
+                        MediaQuery.of(context).size.width / 5,
+                      ),
+                      createCustomSelectContainer(
+                        Icon(Icons.chair_rounded),
+                        'Sedie',
+                        MediaQuery.of(context).size.width / 5,
+                      ),
+                    ]),
+                width: MediaQuery.of(context).size.width - 65,
+              ),
+            ),
+          ),
+
+          createPageContainer(
+              Color(0xffffb643), //gradient from
+              Color(0xffe6ab10),
+              MediaQuery.of(context).size.height / 15,
+              MediaQuery.of(context).size.height / 5, //gradient to
+              createButton(
+                  AssetImage("lib/assets/fast-food.png"),
                   48,
                   18,
                   _pageController,
                   0,
-                  Duration(milliseconds: 300),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 20)),
-                SizedBox(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xffe6ab10),
-                      border: Border.all(
-                        width: 5,
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    width: MediaQuery.of(context).size.width - 65,
-                    height: MediaQuery.of(context).size.height / 1.85,
-                    child: Scrollbar(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: <Widget>[
-                          ExpansionPanelList(
-                            expansionCallback: (int index, bool isExpanded) {
-                              setState(() {
-                                _ombrelloni[index].isExpanded =
-                                    !_ombrelloni[index].isExpanded;
-                              });
-                            },
-                            children: _ombrelloni.map((OmbrelloneItem item) {
-                              return ExpansionPanel(
-                                  canTapOnHeader: true,
-                                  headerBuilder:
-                                      (BuildContext context, bool isExpanded) {
-                                    return (Container(
-                                        padding: EdgeInsets.only(
-                                            left: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                25),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            const Image(
-                                              image: AssetImage(
-                                                  "lib/assets/green_circle.png"),
-                                              width: 24,
-                                              height: 24,
-                                            ),
-                                            Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        9)),
-                                            const Icon(Icons.beach_access),
-                                            Text(
-                                              item.header,
-                                              textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                fontFamily: 'Raleway',
-                                                fontWeight: FontWeight.bold,
-                                                letterSpacing: 1,
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                            Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        11)),
-                                            Text(
-                                              item.fila,
-                                              textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                fontFamily: 'Raleway',
-                                                fontWeight: FontWeight.normal,
-                                                letterSpacing: 1,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        )));
-                                  },
-                                  isExpanded: item.isExpanded,
-                                  body: FittedBox(
-                                      child: Center(
-                                          child: TextButton(
-                                              onPressed: () {},
-                                              child: const Text(
-                                                "Prenota",
-                                                style: TextStyle(
-                                                  fontFamily: 'Raleway',
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 1,
-                                                  fontSize: 16,
-                                                ),
-                                              )))));
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            constraints: BoxConstraints.expand(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height),
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: <Color>[Color(0xff161055), Color(0xff161055)],
-                tileMode: TileMode.clamp,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 40)),
-                ElevatedButton(
-                  child: const Icon(
-                    Icons.arrow_circle_up_rounded,
-                    size: 46,
-                  ),
-                  onPressed: () {
-                    if (_pageController.hasClients) {
-                      _pageController.animateTo(
-                        0,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeInOutQuart,
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      primary: Colors.transparent,
-                      shape: const CircleBorder(side: BorderSide.none)),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height) /
-                        40),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * (3 / 4),
-                  height: MediaQuery.of(context).size.height * (2 / 3),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.lightBlue,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                          ),
-                          child: const Image(
-                            alignment: Alignment.topCenter,
-                            image: AssetImage('lib/assets/sunbed.png'),
-                            width: 64,
-                            height: 64,
-                          ),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                        color: Color(0xffe69b10),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xff160535),
-                            offset: Offset.fromDirection(1, 5.0),
-                            blurRadius: 5.0,
-                          ),
-                        ]),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            constraints: BoxConstraints.expand(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height),
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(),
-          ),
-          Container(
-            constraints: BoxConstraints.expand(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height),
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(),
-          ),
+                  Duration(milliseconds: 500)), //fast-food button
+              SizedBox()),
+          //child
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -385,6 +333,7 @@ class _CasottoState extends State<CasottoHome> {
     ));
   }
 
+  //Creo i bottoni principali con un po' di customizzazione disponibile.
   ElevatedButton createButton(
       AssetImage buttonIcon,
       double size,
@@ -411,6 +360,79 @@ class _CasottoState extends State<CasottoHome> {
         ),
         padding: EdgeInsets.all(innerPadding),
         elevation: 4.0,
+      ),
+    );
+  }
+
+  //metodo per la creazione dei container a pagina 2 (Sezione lettini).
+  AnimatedContainer createCustomSelectContainer(
+      Icon icon, String text, double arrowPadding) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 0),
+      curve: Curves.easeInOut,
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+          vertical: 20, horizontal: MediaQuery.of(context).size.width / 25),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        const Image(
+          image: AssetImage("lib/assets/green_circle.png"),
+          width: 24,
+          height: 24,
+        ),
+        Padding(
+            padding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width / 6)),
+        icon,
+        Padding(
+            padding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width / 25)),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.normal,
+            letterSpacing: 1,
+            fontSize: 14,
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(left: arrowPadding)),
+        Icon(Icons.arrow_forward_ios_rounded),
+      ]),
+    );
+  }
+
+  Container createPageContainer(
+    Color gradientFrom,
+    Color gradientTo,
+    double firstPadding,
+    double secondPadding,
+    ElevatedButton button,
+    Widget child,
+  ) {
+    return Container(
+      constraints: BoxConstraints.expand(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        border: Border.all(
+          style: BorderStyle.solid,
+        ),
+        gradient: LinearGradient(
+          colors: <Color>[gradientFrom, gradientTo],
+          tileMode: TileMode.clamp,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Column(
+        children: [
+          Padding(padding: EdgeInsets.only(top: firstPadding)),
+          button,
+          Padding(padding: EdgeInsets.only(top: secondPadding)),
+          child,
+        ],
       ),
     );
   }
