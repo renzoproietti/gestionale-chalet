@@ -1,57 +1,36 @@
 import 'package:flutter/material.dart';
 import 'widgetsbuilder.dart';
 
+class LettinoItem extends ListItem {
+  LettinoItem({isExpanded, header, body, infos})
+      : super(isExpanded: false, header: header, body: body, infos: infos);
+}
+
+List<LettinoItem> _lettini = <LettinoItem>[
+  LettinoItem(header: "Lettini", body: '\t', infos: '\t'),
+  LettinoItem(header: "Sdraio", body: '\t', infos: '\t'),
+  LettinoItem(header: "Sedie", body: '\t', infos: '\t'),
+];
+
+List<LettinoItem> getLettini() {
+  return _lettini;
+}
+
 Container createSezioneLettini(
-    BuildContext context, PageController _pageController) {
-  return createPageContainer(
+  BuildContext context,
+  PageController _pageController,
+  Function(int, bool) callback,
+) {
+  return customScrollableListView(
     context,
-    const Color(0xff72030c),
-    const Color(0xff72030c),
-    MediaQuery.of(context).size.height / 15,
-    MediaQuery.of(context).size.height / 5,
-    createButton(
-      _pageController,
-      const AssetImage("lib/assets/sunbed_icon.png"),
-      48,
-      18,
-      0,
-      const Duration(milliseconds: 400),
-    ),
-    SizedBox(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black,
-          border: Border.all(
-            width: 2,
-            color: Colors.white,
-          ),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              createCustomSelectContainer(
-                context,
-                const Icon(Icons.bed_rounded),
-                'Lettini',
-                MediaQuery.of(context).size.width / 5,
-              ),
-              createCustomSelectContainer(
-                context,
-                const Icon(Icons.single_bed_rounded),
-                'Sdraio',
-                MediaQuery.of(context).size.width / 5,
-              ),
-              createCustomSelectContainer(
-                context,
-                const Icon(Icons.chair_rounded),
-                'Sedie',
-                MediaQuery.of(context).size.width / 5,
-              ),
-            ]),
-        width: MediaQuery.of(context).size.width - 65,
-      ),
-    ),
+    _pageController,
+    callback,
+    AssetImage("lib/assets/sunbed_icon.png"),
+    Duration(milliseconds: 400),
+    _lettini,
+    width: MediaQuery.of(context).size.width - 65,
+    height: MediaQuery.of(context).size.height / 2.85,
+    circle: green_light,
+    background: Color(0xffc00c18),
   );
 }

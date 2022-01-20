@@ -6,7 +6,6 @@ Container createSezioneEventi(
   return createPageContainer(
       context,
       const Color(0xff640135), //gradient from
-      const Color(0xff640135), //gradient to
       MediaQuery.of(context).size.height / 15, //first padding
       MediaQuery.of(context).size.height / 5, //second padding
       createButton(

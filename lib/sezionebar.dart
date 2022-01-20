@@ -19,7 +19,6 @@ Container createSezioneBar(
   return createPageContainer(
     context,
     const Color(0xff356968), //gradient from
-    const Color(0xff356968), //gradient to
     MediaQuery.of(context).size.height / 15, //first padding
     MediaQuery.of(context).size.height / 5, //second padding
     createButton(_pageController, const AssetImage("lib/assets/bar_icon.png"),
@@ -48,14 +47,15 @@ Container createSezioneBar(
                   createCustomSelectContainer(
                     context,
                     const Icon(Icons.fastfood_outlined),
-                    'Cibo',
+                    'Bar',
                     MediaQuery.of(context).size.width / 5,
                   ),
                   createCustomSelectContainer(
                     context,
                     const Icon(Icons.fastfood_outlined),
-                    'Bevande',
-                    MediaQuery.of(context).size.width / 6,
+                    'Ristorante',
+                    MediaQuery.of(context).size.width / 7,
+                    //green_light),
                   ),
                 ],
               ),

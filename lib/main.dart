@@ -45,7 +45,13 @@ class _CasottoState extends State<CasottoHome> {
               _ombrelloni[index].isExpanded = !_ombrelloni[index].isExpanded;
             });
           }),
-          createSezioneLettini(context, _pageController), //3rd page
+          createSezioneLettini(context, _pageController,
+              (int index, bool isExpanded) {
+            setState(() {
+              List<LettinoItem> _lettini = getLettini();
+              _lettini[index].isExpanded = !_lettini[index].isExpanded;
+            });
+          }), //3rd page
           createSezioneBar(context, _pageController), //4th page
           createSezioneEventi(context, _pageController) //5th page
         ],
