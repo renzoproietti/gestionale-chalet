@@ -9,15 +9,13 @@ Container createHomeScreen(
         height: MediaQuery.of(context).size.height),
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      border: Border.all(
-        color: const Color(0xff161055),
-        style: BorderStyle.solid,
-      ),
       gradient: const LinearGradient(
-        colors: <Color>[Color(0xff161055), Color(0xff161055)],
-        tileMode: TileMode.clamp,
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        colors: <Color>[
+          const Color(0xff161055),
+          const Color(0xff161055),
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
       ),
     ),
     child: Column(
@@ -30,10 +28,10 @@ Container createHomeScreen(
           children: [
             createButton(
               _pageController, //controller
-              const AssetImage("lib/assets/umbrella.png"),
+              const AssetImage("lib/assets/umbrella_icon.png"),
               64, //size
-              24, //padding
-              _pageController, //controller pagina
+              24,
+//padding
               1, //scrolla fino a questa pagina
               const Duration(milliseconds: 300), //durata della transizione
             ), //Bottone Sezione Ombrelloni
@@ -42,10 +40,9 @@ Container createHomeScreen(
                     EdgeInsets.all(MediaQuery.of(context).size.width) / 30),
             createButton(
               _pageController,
-              const AssetImage("lib/assets/sunbed.png"),
+              const AssetImage("lib/assets/sunbed_icon.png"),
               64,
               24,
-              _pageController,
               2,
               const Duration(milliseconds: 400),
             ), //Bottone Sezione lettini
@@ -59,10 +56,9 @@ Container createHomeScreen(
           children: [
             createButton(
               _pageController,
-              const AssetImage("lib/assets/fast-food.png"),
+              const AssetImage("lib/assets/bar_icon.png"),
               64,
               24,
-              _pageController,
               3,
               const Duration(milliseconds: 500),
             ), //Bottone Sezione Cibo/Bevande
@@ -71,10 +67,9 @@ Container createHomeScreen(
                     EdgeInsets.all(MediaQuery.of(context).size.width) / 30),
             createButton(
               _pageController,
-              const AssetImage("lib/assets/party.png"),
+              const AssetImage("lib/assets/event_icon.png"),
               64,
               24,
-              _pageController,
               4,
               const Duration(milliseconds: 600),
             ), //Bottone Sezione Eventi

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
+///Crea bottone di default con un'icona e altri parametri esposti.
+///Il bottone è collegato ad un _pageController e può o meno
+///effettuare una transizione ad una pagina se desiderato.
 ElevatedButton createButton(
     PageController _pageController,
     AssetImage buttonIcon,
     double size,
     double innerPadding,
-    PageController pageController,
     int page,
     Duration animationTime) {
   return ElevatedButton(
     onPressed: () {
       if (_pageController.hasClients) {
         _pageController.animateToPage(page,
-            duration: animationTime, curve: Curves.easeInOutCirc);
+            duration: animationTime, curve: Curves.linearToEaseOut);
       }
     },
     child: Image(
@@ -21,6 +23,7 @@ ElevatedButton createButton(
       height: size,
     ),
     style: ElevatedButton.styleFrom(
+      primary: Colors.white10,
       shape: const CircleBorder(
         side: BorderSide(
             style: BorderStyle.solid, color: Colors.white, width: 2.0),
@@ -31,7 +34,7 @@ ElevatedButton createButton(
   );
 }
 
-//metodo per la creazione dei container a pagina 2 (Sezione lettini).
+///metodo per la creazione dei container a pagina 2 (Sezione lettini).
 AnimatedContainer createCustomSelectContainer(
     BuildContext context, Icon icon, String text, double arrowPadding) {
   return AnimatedContainer(
@@ -40,7 +43,7 @@ AnimatedContainer createCustomSelectContainer(
     color: Colors.white,
     padding: EdgeInsets.symmetric(
         vertical: 20, horizontal: MediaQuery.of(context).size.width / 25),
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       const Image(
         image: AssetImage("lib/assets/green_circle.png"),
         width: 24,
@@ -69,7 +72,7 @@ AnimatedContainer createCustomSelectContainer(
   );
 }
 
-//crea container che occupa tutta la pagina visibile nel contesto
+///crea container che occupa tutta la pagina visibile nel contesto.
 Container createPageContainer(
   BuildContext context,
   Color gradientFrom,
@@ -88,11 +91,12 @@ Container createPageContainer(
       border: Border.all(
         style: BorderStyle.solid,
       ),
+      shape: BoxShape.rectangle,
       gradient: LinearGradient(
         colors: <Color>[gradientFrom, gradientTo],
         tileMode: TileMode.clamp,
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
       ),
     ),
     child: Column(
@@ -106,6 +110,7 @@ Container createPageContainer(
   );
 }
 
+///Crea testo semplice con font Raleway e alcuni parametri esposti.
 Text createText(String text, TextAlign alignment, FontWeight weight,
     double spacing, double size) {
   return Text(
@@ -117,4 +122,31 @@ Text createText(String text, TextAlign alignment, FontWeight weight,
       fontSize: size,
     ),
   );
+}
+
+///Mostra il carrello come dialog.
+///Hero permette la transizione da floating button a un altro widget.(guarda main per tag).
+Hero showCart(BuildContext context, Color currentColor) {
+  return Hero(
+      tag: 'cartpopup',
+      child: Dialog(
+        backgroundColor: Colors.white70,
+        child: Container(
+            decoration: BoxDecoration(
+              color: currentColor,
+              shape: BoxShape.rectangle,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(25),
+            ),
+            alignment: Alignment.center,
+            //color: Colors.white10,
+            width: MediaQuery.of(context).size.width / 3,
+            height: MediaQuery.of(context).size.height / 3,
+            child: Column(
+              children: [
+                createText(
+                    'Carrello', TextAlign.center, FontWeight.w400, 1.2, 18),
+              ],
+            )),
+      ));
 }
