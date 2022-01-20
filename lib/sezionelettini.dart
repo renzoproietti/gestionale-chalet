@@ -5,16 +5,15 @@ Container createSezioneLettini(
     BuildContext context, PageController _pageController) {
   return createPageContainer(
     context,
-    const Color(0xff161055),
-    const Color(0xff161055),
+    const Color(0xff72030c),
+    const Color(0xff72030c),
     MediaQuery.of(context).size.height / 15,
     MediaQuery.of(context).size.height / 5,
     createButton(
       _pageController,
-      const AssetImage("lib/assets/sunbed.png"),
+      const AssetImage("lib/assets/sunbed_icon.png"),
       48,
       18,
-      _pageController,
       0,
       const Duration(milliseconds: 400),
     ),

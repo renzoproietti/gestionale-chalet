@@ -4,6 +4,7 @@ import 'package:fluttertest/sezionebar.dart';
 import 'package:fluttertest/sezionelettini.dart';
 import 'package:fluttertest/sezioneombrelloni.dart';
 import 'package:fluttertest/sezioneeventi.dart';
+import 'package:fluttertest/widgetsbuilder.dart';
 
 void main() => runApp(MaterialApp(
       home: CasottoHome(),
@@ -23,7 +24,8 @@ class _CasottoState extends State<CasottoHome> {
         home: Scaffold(
       appBar: AppBar(
           elevation: 1,
-          actions: const <Widget>[Icon(Icons.question_mark_rounded)],
+          leading: const Icon(Icons.portrait_outlined),
+          actions: const <Widget>[Icon(Icons.more_vert_outlined)],
           centerTitle: true,
           title: const Text('CASOTTO',
               style: TextStyle(
@@ -49,9 +51,14 @@ class _CasottoState extends State<CasottoHome> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'cartpopup',
         elevation: 2.0,
-        onPressed: () {},
-        child: const Icon(Icons.quick_contacts_mail_rounded),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) => showCart(context, Colors.white70));
+        },
+        child: const Icon(Icons.shopping_cart_outlined),
         mini: true,
       ),
     ));
