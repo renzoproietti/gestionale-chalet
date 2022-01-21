@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:fluttertest/listitemhandler.dart';
 
 /**File utility per la creazione dell'interfaccia base.
-Tutti i metodi riguardanti operazioni di più basso livello
-vanno inseriti qui.*/
+Tutti i metodi riguardanti operazioni che vengono 
+effettuate più volte vanno inseriti qui.*/
 
 ///Crea bottone di default con un'icona e altri parametri esposti.
 ///Il bottone è collegato ad un _pageController e può o meno
@@ -40,27 +39,12 @@ ElevatedButton createButton(
   );
 }
 
-const Image empty = Image(
-  image: AssetImage("lib/assets/green_circle.png"),
-  width: 0,
-  height: 0,
-);
-const Image green_light = Image(
-  image: AssetImage("lib/assets/green_circle.png"),
-  width: 24,
-  height: 24,
-);
-const Image red_light = Image(
-  image: AssetImage("lib/assets/red_circle.png"),
-  width: 24,
-  height: 24,
-);
-double x = 0;
-
 ///metodo per la creazione dei container a pagina 2 (Sezione lettini).
 AnimatedContainer createCustomSelectContainer(
     BuildContext context, Icon icon, String text, double arrowPadding,
-    [double firstPadding = 0, double secondPadding = 0, Image image = empty]) {
+    [double firstPadding = 0,
+    double secondPadding = 0,
+    Image image = empty_image]) {
   return AnimatedContainer(
     duration: const Duration(milliseconds: 0),
     curve: Curves.easeInOut,
@@ -110,6 +94,7 @@ Container createPageContainer(
       shape: BoxShape.rectangle,
     ),
     child: Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
         Padding(padding: EdgeInsets.only(top: firstPadding)),
         button,
@@ -140,13 +125,15 @@ Hero showCart(BuildContext context, Color currentColor) {
   return Hero(
       tag: 'cartpopup',
       child: Dialog(
+        insetAnimationCurve: Curves.easeOut,
+        insetAnimationDuration: Duration(milliseconds: 300),
         backgroundColor: Colors.white70,
         child: Container(
             decoration: BoxDecoration(
               color: currentColor,
               shape: BoxShape.rectangle,
               border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(15),
             ),
             alignment: Alignment.center,
             //color: Colors.white10,
@@ -161,26 +148,10 @@ Hero showCart(BuildContext context, Color currentColor) {
       ));
 }
 
-class ListItem {
-  bool isExpanded;
-  String header;
-  String body;
-  String infos;
-  IconData icon;
-
-  ListItem(
-      {this.isExpanded = false,
-      this.header = '\t',
-      this.body = '\t',
-      this.infos = '\t',
-      this.icon = Icons.beach_access_outlined});
-}
-
 ///Crea lista espandibile, con items personalizzati.
 ///Gli items devono estendere la classe ListItem.
 ///E' possibile definire dei valori personalizzati se non si dispone
 ///di un ListItem, anche se il metodo è ottimizzato per ListItems.
-///Forse si potrebbe aggiungere una lista opzionale di info?(@Filippo)
 Container customScrollableListView(
     BuildContext context,
     PageController _pageController,
@@ -190,7 +161,19 @@ Container customScrollableListView(
     List<ListItem> _items,
     {double width = 0,
     double height = 0,
-    Image circle = empty,
+    double firstPaddingColumn = 0,
+    double secondPaddingColumn = 0,
+    double firstPaddingRow = 0,
+    double secondPaddingRow = 0,
+    double firstPaddingBodyRow = 0,
+    double secondPaddingBodyRow = 0,
+    double thirdPaddingBodyRow = 0,
+    double plusMinusIconsSizes = 0,
+    Image circle = empty_image,
+    Icon itemIcon = empty_icon,
+    Icon cartIcon = empty_icon,
+    Icon plusIcon = empty_icon,
+    Icon minusIcon = empty_icon,
     Color background = Colors.white,
     String header = '\t',
     String body = '\t',
@@ -199,8 +182,12 @@ Container customScrollableListView(
   return createPageContainer(
     context,
     background,
-    MediaQuery.of(context).size.height / 15,
-    MediaQuery.of(context).size.height / 15,
+    firstPaddingColumn != 0
+        ? firstPaddingColumn
+        : MediaQuery.of(context).size.height / 15,
+    secondPaddingColumn != 0
+        ? secondPaddingColumn
+        : MediaQuery.of(context).size.height / 15,
     createButton(
       _pageController,
       assetImage,
@@ -221,65 +208,117 @@ Container customScrollableListView(
       width: width,
       height: height,
       child: Scrollbar(
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            ExpansionPanelList(
-              expansionCallback: callback,
-              children: _items.map((ListItem? item) {
-                return ExpansionPanel(
+        child: Center(
+          child: ListView(
+            shrinkWrap: false,
+            children: <Widget>[
+              ExpansionPanelList(
+                expandedHeaderPadding:
+                    EdgeInsets.symmetric(vertical: 18, horizontal: 0),
+                expansionCallback: callback,
+                children: _items.map((ListItem? item) {
+                  return ExpansionPanel(
                     canTapOnHeader: true,
                     headerBuilder: (BuildContext context, bool isExpanded) {
                       return (Container(
-                          padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              circle,
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width /
-                                          9)),
-                              const Icon(Icons.beach_access),
-                              Text(
-                                item != null ? item.header : header,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                  fontSize: 18,
-                                ),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            circle,
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: firstPaddingRow != 0
+                                        ? firstPaddingRow
+                                        : MediaQuery.of(context).size.width /
+                                            9)),
+                            item != null ? item.icon : itemIcon,
+                            Text(
+                              item != null ? item.header : header,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1,
+                                fontSize: 18,
                               ),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width /
-                                          11)),
-                              createText(
-                                item != null ? item.infos : info,
-                                TextAlign.center,
-                                FontWeight.normal,
-                                1,
-                                14,
-                              ),
-                            ],
-                          )));
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: secondPaddingRow != 0
+                                        ? secondPaddingRow
+                                        : MediaQuery.of(context).size.width /
+                                            21)),
+                            createText(
+                              item != null ? item.infos : info,
+                              TextAlign.center,
+                              FontWeight.normal,
+                              1,
+                              14,
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: secondPaddingRow != 0
+                                        ? secondPaddingRow
+                                        : MediaQuery.of(context).size.width /
+                                            11)),
+                          ],
+                        ),
+                      ));
                     },
                     isExpanded: item != null ? item.isExpanded : isExpanded,
-                    body: FittedBox(
-                        child: TextButton(
+                    body: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          IconButton(
+                            iconSize: plusMinusIconsSizes,
+                            icon: minusIcon,
                             onPressed: () {},
-                            child: createText(
-                              "Prenota",
-                              TextAlign.center,
-                              FontWeight.w700,
-                              1,
-                              16,
-                            ))));
-              }).toList(),
-            ),
-          ],
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(right: firstPaddingBodyRow),
+                          ),
+                          Flexible(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: createText(
+                                item != null ? item.body : body,
+                                TextAlign.center,
+                                FontWeight.w700,
+                                1,
+                                22,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(right: firstPaddingBodyRow),
+                          ),
+                          IconButton(
+                            iconSize: plusMinusIconsSizes,
+                            icon: plusIcon,
+                            onPressed: () {},
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(right: secondPaddingBodyRow),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: const Icon(Icons.add_shopping_cart_rounded),
+                            style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder()),
+                          ),
+                        ]),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
         ),
       ),
     ),

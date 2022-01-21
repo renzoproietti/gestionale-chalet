@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'widgetsbuilder.dart';
+import 'package:fluttertest/listitemhandler.dart';
 
-class OmbrelloneItem extends ListItem {
-  OmbrelloneItem({isExpanded, header, body, infos})
-      : super(isExpanded: false, header: header, body: body, infos: infos);
-}
-
-List<OmbrelloneItem> _ombrelloni = <OmbrelloneItem>[
-  OmbrelloneItem(header: "1", body: "Body", infos: "prima fila"),
-  OmbrelloneItem(header: "2", body: "Body2", infos: "prima fila"),
-  OmbrelloneItem(header: "3", body: "Body3", infos: "prima fila"),
-  OmbrelloneItem(header: "4", body: "Body", infos: "prima fila"),
-  OmbrelloneItem(header: "5", body: "Body2", infos: "prima fila"),
-  OmbrelloneItem(header: "6", body: "Body3", infos: "seconda fila"),
-  OmbrelloneItem(header: "7", body: "Body", infos: "seconda fila"),
-  OmbrelloneItem(header: "8", body: "Body2", infos: "terza fila"),
-  OmbrelloneItem(header: "9", body: "Body3", infos: "quarta fila"),
+List<OmbrelloniItem> _ombrelloni = <OmbrelloniItem>[
+  OmbrelloniItem(header: "1", body: "Prenota", infos: "prima fila"),
+  OmbrelloniItem(header: "2", body: "Prenota", infos: "prima fila"),
+  OmbrelloniItem(header: "3", body: "Prenota", infos: "prima fila"),
+  OmbrelloniItem(header: "4", body: "Prenota", infos: "prima fila"),
+  OmbrelloniItem(header: "5", body: "Prenota", infos: "prima fila"),
+  OmbrelloniItem(header: "6", body: "Prenota", infos: "seconda fila"),
+  OmbrelloniItem(header: "7", body: "Prenota", infos: "seconda fila"),
+  OmbrelloniItem(header: "8", body: "Prenota", infos: "terza fila"),
+  OmbrelloniItem(header: "9", body: "Prenota", infos: "quarta fila"),
 ];
 
-List<OmbrelloneItem> getOmbrelloni() {
+List<OmbrelloniItem> getOmbrelloni() {
   return _ombrelloni;
 }
 
@@ -31,12 +27,13 @@ Container createSezioneOmbrelloni(
     context,
     _pageController,
     callback,
-    AssetImage("lib/assets/umbrella_icon.png"),
-    Duration(milliseconds: 300),
+    const AssetImage("lib/assets/umbrella_icon.png"),
+    const Duration(milliseconds: 300),
     _ombrelloni,
     width: MediaQuery.of(context).size.width - 65,
     height: MediaQuery.of(context).size.height / 1.85,
     circle: green_light,
-    background: Color(0xffffb643),
+    background: const Color(0xffffb643),
+    itemIcon: const Icon(Icons.beach_access_outlined),
   );
 }

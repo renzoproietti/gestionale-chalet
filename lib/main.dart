@@ -5,6 +5,7 @@ import 'package:fluttertest/sezionelettini.dart';
 import 'package:fluttertest/sezioneombrelloni.dart';
 import 'package:fluttertest/sezioneeventi.dart';
 import 'package:fluttertest/widgetsbuilder.dart';
+import 'package:fluttertest/listitemhandler.dart';
 
 void main() => runApp(MaterialApp(
       home: CasottoHome(),
@@ -41,14 +42,14 @@ class _CasottoState extends State<CasottoHome> {
           createSezioneOmbrelloni(context, _pageController, //2nd page
               (int index, bool isExpanded) {
             setState(() {
-              List<OmbrelloneItem> _ombrelloni = getOmbrelloni();
+              List<OmbrelloniItem> _ombrelloni = getOmbrelloni();
               _ombrelloni[index].isExpanded = !_ombrelloni[index].isExpanded;
             });
           }),
           createSezioneLettini(context, _pageController,
               (int index, bool isExpanded) {
             setState(() {
-              List<LettinoItem> _lettini = getLettini();
+              List<LettiniItem> _lettini = getLettini();
               _lettini[index].isExpanded = !_lettini[index].isExpanded;
             });
           }), //3rd page

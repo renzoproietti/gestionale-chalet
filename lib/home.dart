@@ -9,14 +9,7 @@ Container createHomeScreen(
         height: MediaQuery.of(context).size.height),
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      gradient: const LinearGradient(
-        colors: <Color>[
-          const Color(0xff161055),
-          const Color(0xff161055),
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
+      color: const Color(0xff161055),
     ),
     child: Column(
       mainAxisSize: MainAxisSize.min,
