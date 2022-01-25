@@ -50,7 +50,7 @@ const Image empty_image = Image(
   height: 0,
 );
 const Icon empty_icon = Icon(
-  Icons.abc,
+  Icons.ac_unit,
   size: 0,
 );
 const Image green_light = Image(
