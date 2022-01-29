@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:fluttertest/home.dart';
 import 'package:fluttertest/sezionebar.dart';
 import 'package:fluttertest/sezionelettini.dart';
@@ -9,6 +11,16 @@ import 'package:fluttertest/listitemhandler.dart';
 
 void main() => runApp(MaterialApp(
       home: CasottoHome(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en'),
+        const Locale('it', 'IT'),
+      ],
+      locale: const Locale('it', 'IT'),
     ));
 
 class CasottoHome extends StatefulWidget {
@@ -18,11 +30,10 @@ class CasottoHome extends StatefulWidget {
 
 class _CasottoState extends State<CasottoHome> {
   final _pageController = PageController(initialPage: 0);
-
+  final countKey = GlobalKey<State<Count>>();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       appBar: AppBar(
           elevation: 1,
           leading: const Icon(Icons.portrait_outlined),
@@ -68,6 +79,6 @@ class _CasottoState extends State<CasottoHome> {
         child: const Icon(Icons.shopping_cart_outlined),
         mini: true,
       ),
-    ));
+    );
   }
 }

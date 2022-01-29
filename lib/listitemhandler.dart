@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/widgetsbuilder.dart';
 
 abstract class ListItem {
   Icon icon;
@@ -7,6 +8,7 @@ abstract class ListItem {
   String header;
   String body;
   String infos;
+  int number;
 
   ListItem({
     this.isExpanded = false,
@@ -14,6 +16,7 @@ abstract class ListItem {
     this.body = '\t',
     this.infos = '\t',
     this.icon = empty_icon,
+    this.number = 0,
   });
 }
 
@@ -35,12 +38,14 @@ class LettiniItem extends ListItem {
     body,
     infos,
     icon,
+    number,
   }) : super(
           isExpanded: false,
           header: header,
           body: body,
           infos: infos,
           icon: empty_icon,
+          number: number,
         );
 }
 
@@ -65,3 +70,41 @@ const Image red_light = Image(
 );
 
 final List<ListItem> _cart = <ListItem>[];
+
+//Widget contatore che permette di aggiornare lo stato quando cambia il counter.
+//Lo stato mette a disposizione metodi per l'aggiornamento di stato al di fuori della classe.
+class Count extends StatefulWidget {
+  final int counter;
+
+  const Count(Key key, this.counter) : super(key: key);
+
+  @override
+  CountState createState() => CountState();
+}
+
+class CountState extends State<Count> {
+  int counter;
+
+  CountState({this.counter = 0});
+
+  @override
+  Widget build(BuildContext context) {
+    return createText('$counter');
+  }
+
+  void decrement() {
+    setState(() {
+      counter--;
+    });
+  }
+
+  void increment() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  bool checkPositive() {
+    return counter > 0;
+  }
+}

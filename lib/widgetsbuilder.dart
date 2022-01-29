@@ -106,16 +106,20 @@ Container createPageContainer(
 }
 
 ///Crea testo semplice con font Raleway e alcuni parametri esposti.
-Text createText(String text, TextAlign alignment, FontWeight weight,
-    double spacing, double size) {
+Text createText(String text,
+    [TextAlign alignment = TextAlign.center,
+    FontWeight weight = FontWeight.normal,
+    double letterSpacing = 1.0,
+    double size = 24,
+    Color color = Colors.white]) {
   return Text(
     text,
     textAlign: alignment,
     style: TextStyle(
-      fontFamily: 'Raleway',
-      fontWeight: weight,
-      fontSize: size,
-    ),
+        fontFamily: 'Raleway',
+        fontWeight: weight,
+        fontSize: size,
+        color: color != Colors.white ? color : Colors.black),
   );
 }
 
@@ -146,181 +150,4 @@ Hero showCart(BuildContext context, Color currentColor) {
               ],
             )),
       ));
-}
-
-///Crea lista espandibile, con items personalizzati.
-///Gli items devono estendere la classe ListItem.
-///E' possibile definire dei valori personalizzati se non si dispone
-///di un ListItem, anche se il metodo è ottimizzato per ListItems.
-Container customScrollableListView(
-    BuildContext context,
-    PageController _pageController,
-    Function(int, bool)? callback,
-    AssetImage assetImage,
-    Duration duration,
-    List<ListItem> _items,
-    {double width = 0,
-    double height = 0,
-    double firstPaddingColumn = 0,
-    double secondPaddingColumn = 0,
-    double firstPaddingRow = 0,
-    double secondPaddingRow = 0,
-    double firstPaddingBodyRow = 0,
-    double secondPaddingBodyRow = 0,
-    double thirdPaddingBodyRow = 0,
-    double plusMinusIconsSizes = 0,
-    Image circle = empty_image,
-    Icon itemIcon = empty_icon,
-    Icon cartIcon = empty_icon,
-    Icon plusIcon = empty_icon,
-    Icon minusIcon = empty_icon,
-    Color background = Colors.white,
-    String header = '\t',
-    String body = '\t',
-    String info = '\t',
-    bool isExpanded = false}) {
-  return createPageContainer(
-    context,
-    background,
-    firstPaddingColumn != 0
-        ? firstPaddingColumn
-        : MediaQuery.of(context).size.height / 15,
-    secondPaddingColumn != 0
-        ? secondPaddingColumn
-        : MediaQuery.of(context).size.height / 15,
-    createButton(
-      _pageController,
-      assetImage,
-      48,
-      18,
-      0,
-      duration,
-    ),
-    Container(
-      decoration: BoxDecoration(
-        color: const Color(0xffe6ab10),
-        border: Border.all(
-          width: 2,
-          color: Colors.white,
-        ),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      width: width,
-      height: height,
-      child: Scrollbar(
-        child: Center(
-          child: ListView(
-            shrinkWrap: false,
-            children: <Widget>[
-              ExpansionPanelList(
-                expandedHeaderPadding:
-                    EdgeInsets.symmetric(vertical: 18, horizontal: 0),
-                expansionCallback: callback,
-                children: _items.map((ListItem? item) {
-                  return ExpansionPanel(
-                    canTapOnHeader: true,
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return (Container(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 25),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            circle,
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: firstPaddingRow != 0
-                                        ? firstPaddingRow
-                                        : MediaQuery.of(context).size.width /
-                                            9)),
-                            item != null ? item.icon : itemIcon,
-                            Text(
-                              item != null ? item.header : header,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: secondPaddingRow != 0
-                                        ? secondPaddingRow
-                                        : MediaQuery.of(context).size.width /
-                                            21)),
-                            createText(
-                              item != null ? item.infos : info,
-                              TextAlign.center,
-                              FontWeight.normal,
-                              1,
-                              14,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: secondPaddingRow != 0
-                                        ? secondPaddingRow
-                                        : MediaQuery.of(context).size.width /
-                                            11)),
-                          ],
-                        ),
-                      ));
-                    },
-                    isExpanded: item != null ? item.isExpanded : isExpanded,
-                    body: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          IconButton(
-                            iconSize: plusMinusIconsSizes,
-                            icon: minusIcon,
-                            onPressed: () {},
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(right: firstPaddingBodyRow),
-                          ),
-                          Flexible(
-                            child: TextButton(
-                              onPressed: () {},
-                              child: createText(
-                                item != null ? item.body : body,
-                                TextAlign.center,
-                                FontWeight.w700,
-                                1,
-                                22,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(right: firstPaddingBodyRow),
-                          ),
-                          IconButton(
-                            iconSize: plusMinusIconsSizes,
-                            icon: plusIcon,
-                            onPressed: () {},
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(right: secondPaddingBodyRow),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Icon(Icons.add_shopping_cart_rounded),
-                            style: ElevatedButton.styleFrom(
-                                shape: const CircleBorder()),
-                          ),
-                        ]),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
 }
