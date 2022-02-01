@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/datepickerdialog.dart';
-import 'widgetsbuilder.dart';
-import 'package:fluttertest/listitemhandler.dart';
+import 'package:fluttertest/datepicker_dialog.dart';
+import 'widgets_builder.dart';
+import 'package:fluttertest/list_item_handler.dart';
 
 List<OmbrelloniItem> _ombrelloni = <OmbrelloniItem>[
   OmbrelloniItem(header: "1", body: "Prenota", infos: "prima fila"),
@@ -46,7 +46,7 @@ Container createSezioneOmbrelloni(
         ),
         borderRadius: BorderRadius.circular(5),
       ),
-      width: MediaQuery.of(context).size.width - 65,
+      width: MediaQuery.of(context).size.width / 1.2,
       height: MediaQuery.of(context).size.height / 1.85,
       child: Scrollbar(
         child: Center(

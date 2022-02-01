@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/listitemhandler.dart';
+import 'package:fluttertest/list_item_handler.dart';
 
 /**File utility per la creazione dell'interfaccia base.
 Tutti i metodi riguardanti operazioni che vengono 
@@ -129,16 +129,9 @@ Hero showCart(BuildContext context, Color currentColor) {
   return Hero(
       tag: 'cartpopup',
       child: Dialog(
-        insetAnimationCurve: Curves.easeOut,
         insetAnimationDuration: Duration(milliseconds: 300),
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.white,
         child: Container(
-            decoration: BoxDecoration(
-              color: currentColor,
-              shape: BoxShape.rectangle,
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(15),
-            ),
             alignment: Alignment.center,
             //color: Colors.white10,
             width: MediaQuery.of(context).size.width / 3,
@@ -146,7 +139,7 @@ Hero showCart(BuildContext context, Color currentColor) {
             child: Column(
               children: [
                 createText(
-                    'Carrello', TextAlign.center, FontWeight.w400, 1.2, 18),
+                    'Carrello', TextAlign.center, FontWeight.normal, 1.2, 20),
               ],
             )),
       ));

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/datepickerdialog.dart';
-import 'widgetsbuilder.dart';
-import 'package:fluttertest/listitemhandler.dart';
+import 'package:fluttertest/datepicker_dialog.dart';
+import 'widgets_builder.dart';
+import 'package:fluttertest/list_item_handler.dart';
 
 List<LettiniItem> _lettini = <LettiniItem>[
   LettiniItem(
@@ -43,7 +43,7 @@ Container createSezioneLettini(
           48, 18, 0, Duration(milliseconds: 400)),
       Container(
         decoration: BoxDecoration(
-          color: const Color(0xffa00c18),
+          color: const Color(0xff800c18),
           border: Border.all(
             width: 2,
             color: Colors.white,
@@ -62,7 +62,7 @@ Container createSezioneLettini(
                   expansionCallback: callback,
                   children: _lettini.map((ListItem? item) {
                     final countKey = GlobalKey<CountState>();
-                    int count = item != null ? item.number : 0;
+
                     return ExpansionPanel(
                       canTapOnHeader: true,
                       headerBuilder: (BuildContext context, bool isExpanded) {
@@ -98,13 +98,11 @@ Container createSezioneLettini(
                                   InkWell(
                                     onTap: () {
                                       //if the counter is positive then
-                                      //decrease it, else do nothing.
-                                      if (countKey.currentState != null) {
-                                        countKey.currentState
-                                                    ?.checkPositive() ==
-                                                true
-                                            ? countKey.currentState?.decrement()
-                                            : {};
+                                      //decrease it on tap of remove icon.
+                                      if (countKey.currentState
+                                              ?.checkPositive() ==
+                                          true) {
+                                        countKey.currentState?.decrement();
                                       }
                                     },
                                     child: const Icon(
@@ -112,7 +110,8 @@ Container createSezioneLettini(
                                       color: Colors.blue,
                                     ),
                                   ),
-                                  Count(countKey, count),
+                                  Count(
+                                      countKey, item != null ? item.number : 0),
                                   InkWell(
                                     onTap: () {
                                       countKey.currentState?.increment();

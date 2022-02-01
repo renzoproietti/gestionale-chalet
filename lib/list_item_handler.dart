@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/widgetsbuilder.dart';
+import 'package:fluttertest/widgets_builder.dart';
 
 abstract class ListItem {
   Icon icon;
@@ -69,10 +69,8 @@ const Image red_light = Image(
   height: 24,
 );
 
-final List<ListItem> _cart = <ListItem>[];
-
 //Widget contatore che permette di aggiornare lo stato quando cambia il counter.
-//Lo stato mette a disposizione metodi per l'aggiornamento di stato al di fuori della classe.
+//Lo stato mette a disposizione metodi per l'aggiornamento al di fuori della classe.
 class Count extends StatefulWidget {
   final int counter;
 
