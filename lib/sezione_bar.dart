@@ -33,48 +33,18 @@ Container createSezioneBar(
             ),
             borderRadius: BorderRadius.circular(5),
           ),
-<<<<<<< Updated upstream
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Scrollbar(
-          child: ListView(
-            shrinkWrap: true,
-            //scrollDirection: Axis.horizontal,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  createCustomSelectContainer(
-                    context,
-                    const Icon(Icons.fastfood_outlined),
-                    'Bar',
-                    MediaQuery.of(context).size.width / 5,
-
-                  ),
-                  createCustomSelectContainer(
-                    context,
-                    const Icon(Icons.fastfood_outlined),
-                    'Ristorante',
-                    MediaQuery.of(context).size.width / 7,
-                    //green_light),
-                  ),
-                ],
-              ),
-            ],
-=======
           child: Scrollbar(
             child: ListView(
               shrinkWrap: true,
+              //scrollDirection: Axis.horizontal,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [],
                 ),
               ],
             ),
->>>>>>> Stashed changes
           ),
         ),
       ),

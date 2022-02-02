@@ -38,6 +38,7 @@ class _CasottoState extends State<CasottoHome> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+          toolbarHeight: 70,
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
@@ -48,8 +49,13 @@ class _CasottoState extends State<CasottoHome> {
           ),
           actions: const <Widget>[Icon(Icons.more_vert_outlined)],
           centerTitle: true,
-          title: createText('CASOTTO', TextAlign.center, FontWeight.bold, 1.4,
-              24, Colors.white)),
+          title: const Text(
+            'Chalet',
+            style: TextStyle(
+                fontFamily: 'DancingScript',
+                fontSize: 40,
+                fontWeight: FontWeight.w500),
+          )),
       body: PageView(
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,

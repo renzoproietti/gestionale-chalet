@@ -122,7 +122,6 @@ class SignInDemoState extends State<SignInDemo> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-<<<<<<< Updated upstream
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -139,12 +138,10 @@ class SignInDemoState extends State<SignInDemo> {
                     shape: BoxShape.rectangle,
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
-
                   ),
                   height: 120.0,
                   width: 120.0,
                   child: Align(
-
                     child: Text(
                       "Registrati",
                       textAlign: TextAlign.center,
@@ -163,8 +160,6 @@ class SignInDemoState extends State<SignInDemo> {
                       border: Border.all(
                         color: Colors.black,
                         style: BorderStyle.solid,
-
-
                       ),
                       shape: BoxShape.rectangle,
                       color: Colors.white,
@@ -183,14 +178,9 @@ class SignInDemoState extends State<SignInDemo> {
                       ),
                     ),
                   ),
-
                 ),
               )
             ],
-=======
-          Card(
-            child: const Text("You are not currently signed in."),
->>>>>>> Stashed changes
           ),
           ElevatedButton(
             child: const Text('SIGN IN'),

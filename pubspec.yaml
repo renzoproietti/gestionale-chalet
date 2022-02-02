@@ -89,6 +89,9 @@ flutter:
     - family: Raleway
       fonts:
         - asset: lib/fonts/Raleway-Regular.ttf
+    - family: DancingScript
+      fonts:
+        - asset: lib/fonts/DancingScript-VariableFont_wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
