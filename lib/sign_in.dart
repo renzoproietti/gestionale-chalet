@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert' show json;
-
+import 'widgets_builder.dart';
 import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -13,15 +13,6 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
     'https://www.googleapis.com/auth/contacts.readonly',
   ],
 );
-
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Google Sign In',
-      home: SignInDemo(),
-    ),
-  );
-}
 
 class SignInDemo extends StatefulWidget {
   @override
@@ -131,7 +122,71 @@ class SignInDemoState extends State<SignInDemo> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          const Text("You are not currently signed in."),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(
+                //width: MediaQuery.of(context).size.width/2,
+                //height: MediaQuery.of(context).size.height/3.5,
+                child: Center(
+                    child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      style: BorderStyle.solid,
+                    ),
+                    shape: BoxShape.rectangle,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+
+                  ),
+                  height: 120.0,
+                  width: 120.0,
+                  child: Align(
+
+                    child: Text(
+                      "Registrati",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                )),
+              ),
+              SizedBox(
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        style: BorderStyle.solid,
+
+
+                      ),
+                      shape: BoxShape.rectangle,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    height: 120.0,
+                    width: 120.0,
+                    child: Align(
+                      child: Text(
+                        "Accedi",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ),
+              )
+            ],
+          ),
           ElevatedButton(
             child: const Text('SIGN IN'),
             onPressed: _handleSignIn,
@@ -143,9 +198,20 @@ class SignInDemoState extends State<SignInDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints.expand(),
-      child: _buildBody(),
-    );
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Profilo",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 22,
+              )),
+        ),
+        body: ConstrainedBox(
+          child: Container(
+            child: _buildBody(),
+            color: Color(0xff161055),
+          ),
+          constraints: const BoxConstraints.expand(),
+        ));
   }
 }

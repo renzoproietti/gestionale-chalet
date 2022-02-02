@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:fluttertest/home.dart';
 import 'package:fluttertest/sezione_bar.dart';
 import 'package:fluttertest/sezione_lettini.dart';

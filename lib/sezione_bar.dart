@@ -49,6 +49,7 @@ Container createSezioneBar(
                     const Icon(Icons.fastfood_outlined),
                     'Bar',
                     MediaQuery.of(context).size.width / 5,
+
                   ),
                   createCustomSelectContainer(
                     context,
