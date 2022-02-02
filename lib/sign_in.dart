@@ -122,6 +122,7 @@ class SignInDemoState extends State<SignInDemo> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
+<<<<<<< Updated upstream
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -186,6 +187,10 @@ class SignInDemoState extends State<SignInDemo> {
                 ),
               )
             ],
+=======
+          Card(
+            child: const Text("You are not currently signed in."),
+>>>>>>> Stashed changes
           ),
           ElevatedButton(
             child: const Text('SIGN IN'),

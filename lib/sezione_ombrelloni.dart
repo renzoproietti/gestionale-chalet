@@ -27,8 +27,6 @@ Container createSezioneOmbrelloni(
   return createPageContainer(
     context,
     const Color(0xffe6ab10),
-    MediaQuery.of(context).size.height / 15,
-    MediaQuery.of(context).size.height / 15,
     createButton(
       _pageController,
       AssetImage("lib/assets/umbrella_icon.png"),
@@ -38,6 +36,8 @@ Container createSezioneOmbrelloni(
       Duration(milliseconds: 300),
     ),
     Container(
+      width: MediaQuery.of(context).size.width / 1.2,
+      height: MediaQuery.of(context).size.height / 2,
       decoration: BoxDecoration(
         color: const Color(0xffe6ab10),
         border: Border.all(
@@ -46,92 +46,100 @@ Container createSezioneOmbrelloni(
         ),
         borderRadius: BorderRadius.circular(5),
       ),
-      width: MediaQuery.of(context).size.width / 1.2,
-      height: MediaQuery.of(context).size.height / 1.85,
       child: Scrollbar(
         child: Center(
-          child: ListView(
-            shrinkWrap: false,
-            children: <Widget>[
-              ExpansionPanelList(
-                expandedHeaderPadding:
-                    EdgeInsets.symmetric(vertical: 9, horizontal: 0),
-                expansionCallback: callback,
-                children: _ombrelloni.map((ListItem? item) {
-                  return ExpansionPanel(
-                    canTapOnHeader: true,
-                    headerBuilder: (BuildContext context, bool isExpanded) {
-                      return (Container(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 25),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+          child: MediaQuery.removePadding(
+            removeTop: true,
+            context: context,
+            child: ListView(
+              shrinkWrap: false,
+              children: <Widget>[
+                ExpansionPanelList(
+                  expandedHeaderPadding:
+                      EdgeInsets.symmetric(vertical: 9, horizontal: 0),
+                  expansionCallback: callback,
+                  children: _ombrelloni.map((ListItem? item) {
+                    return ExpansionPanel(
+                      canTapOnHeader: true,
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return (Container(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width / 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              green_light,
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width /
+                                          9)),
+                              item != null
+                                  ? item.icon
+                                  : Icon(Icons.beach_access_rounded),
+                              Text(
+                                item != null ? item.header : "-1",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontFamily: 'Raleway',
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width /
+                                          21)),
+                              createText(
+                                item != null ? item.infos : "n-fila",
+                                TextAlign.center,
+                                FontWeight.normal,
+                                1,
+                                16,
+                              ),
+                            ],
+                          ),
+                        ));
+                      },
+                      isExpanded: item != null ? item.isExpanded : false,
+                      body: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            green_light,
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left:
-                                        MediaQuery.of(context).size.width / 9)),
-                            item != null
-                                ? item.icon
-                                : Icon(Icons.beach_access_rounded),
-                            Text(
-                              item != null ? item.header : "-1",
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1,
-                                fontSize: 16,
+                            Flexible(
+                              child: TextButton(
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          LocalizationDatePicker());
+                                },
+                                child: createText(
+                                  item != null ? item.body : "Prenota",
+                                  TextAlign.center,
+                                  FontWeight.w700,
+                                  1,
+                                  20,
+                                  Colors.blue,
+                                ),
                               ),
                             ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width /
-                                        21)),
-                            createText(
-                              item != null ? item.infos : "n-fila",
-                              TextAlign.center,
-                              FontWeight.normal,
-                              1,
-                              16,
-                            ),
-                          ],
-                        ),
-                      ));
-                    },
-                    isExpanded: item != null ? item.isExpanded : false,
-                    body: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Flexible(
-                            child: TextButton(
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        LocalizationDatePicker());
-                              },
-                              child: createText(
-                                item != null ? item.body : "Prenota",
-                                TextAlign.center,
-                                FontWeight.w700,
-                                1,
-                                20,
-                                Colors.blue,
-                              ),
-                            ),
-                          ),
-                        ]),
-                  );
-                }).toList(),
-              ),
-            ],
+                          ]),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     ),
+    firstPadding: MediaQuery.of(context).size.height / 15,
+    secondPadding: MediaQuery.of(context).size.height / 15,
+    gradientFrom: Color(0xff461055),
+    gradientTo: Color(0xff701c18), //const Color(0xfffd8d45),
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter, //const Color(0xffe6ab10),
   );
 }

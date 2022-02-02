@@ -5,9 +5,7 @@ Container createSezioneEventi(
     BuildContext context, PageController _pageController) {
   return createPageContainer(
       context,
-      const Color(0xff640135), //gradient from
-      MediaQuery.of(context).size.height / 15, //first padding
-      MediaQuery.of(context).size.height / 5, //second padding
+      const Color(0xff640135),
       createButton(
         _pageController,
         const AssetImage("lib/assets/event_icon.png"),
@@ -16,5 +14,9 @@ Container createSezioneEventi(
         0,
         const Duration(milliseconds: 600),
       ),
-      const SizedBox());
+      const SizedBox(),
+      firstPadding: MediaQuery.of(context).size.height / 15,
+      secondPadding: MediaQuery.of(context).size.height / 5,
+      gradientFrom: Color(0xff33a284),
+      gradientTo: Color(0xff1a5643));
 }

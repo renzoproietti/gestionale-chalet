@@ -17,22 +17,23 @@ class Bevanda {
 Container createSezioneBar(
     BuildContext context, PageController _pageController) {
   return createPageContainer(
-    context,
-    const Color(0xff356968), //gradient from
-    MediaQuery.of(context).size.height / 15, //first padding
-    MediaQuery.of(context).size.height / 5, //second padding
-    createButton(_pageController, const AssetImage("lib/assets/bar_icon.png"),
-        48, 18, 0, const Duration(milliseconds: 500)),
-    FittedBox(
-      fit: BoxFit.contain,
-      child: Container(
-        width: MediaQuery.of(context).size.width - 65,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          border: Border.all(
-            width: 2,
-            color: Colors.white,
+      context,
+      const Color(0xff3eb489),
+      createButton(_pageController, const AssetImage("lib/assets/bar_icon.png"),
+          48, 18, 0, const Duration(milliseconds: 500)),
+      FittedBox(
+        fit: BoxFit.contain,
+        child: Container(
+          width: MediaQuery.of(context).size.width - 65,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            border: Border.all(
+              width: 2,
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.circular(5),
           ),
+<<<<<<< Updated upstream
           borderRadius: BorderRadius.circular(5),
         ),
         child: Scrollbar(
@@ -61,9 +62,24 @@ Container createSezioneBar(
                 ],
               ),
             ],
+=======
+          child: Scrollbar(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [],
+                ),
+              ],
+            ),
+>>>>>>> Stashed changes
           ),
         ),
       ),
-    ),
-  );
+      firstPadding: MediaQuery.of(context).size.height / 15,
+      secondPadding: MediaQuery.of(context).size.height / 5,
+      gradientFrom: Color(0xffffb643),
+      gradientTo: Color(0xff33a284));
 }

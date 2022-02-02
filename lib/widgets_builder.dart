@@ -39,59 +39,22 @@ ElevatedButton createButton(
   );
 }
 
-///metodo per la creazione dei container a pagina 2 (Sezione lettini).
-AnimatedContainer createCustomSelectContainer(
-    BuildContext context, Icon icon, String text, double arrowPadding,
-    [double firstPadding = 0,
-    double secondPadding = 0,
-    Image image = empty_image]) {
-  return AnimatedContainer(
-    duration: const Duration(milliseconds: 0),
-    curve: Curves.easeInOut,
-    color: Colors.white,
-    padding: EdgeInsets.symmetric(
-        vertical: 20, horizontal: MediaQuery.of(context).size.width / 25),
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      image,
-      Padding(padding: EdgeInsets.only(left: firstPadding)),
-      icon,
-      Padding(padding: EdgeInsets.only(left: secondPadding)),
-      Text(
-        text,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontFamily: 'Raleway',
-          fontWeight: FontWeight.normal,
-          letterSpacing: 1,
-          fontSize: 14,
-        ),
-      ),
-      Padding(padding: EdgeInsets.only(left: arrowPadding)),
-      const Icon(Icons.arrow_forward_ios_rounded),
-    ]),
-  );
-}
-
 ///crea container che occupa tutta la pagina visibile nel contesto.
 Container createPageContainer(
-  BuildContext context,
-  Color background,
-  double firstPadding,
-  double secondPadding,
-  ElevatedButton button,
-  Widget child,
-) {
+    BuildContext context, Color background, ElevatedButton button, Widget child,
+    {double firstPadding = 0,
+    double secondPadding = 0,
+    Color gradientFrom = Colors.transparent,
+    Color gradientTo = Colors.transparent,
+    Alignment begin = Alignment.topCenter,
+    Alignment end = Alignment.bottomCenter}) {
   return Container(
-    constraints: BoxConstraints.expand(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height),
+    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 11),
     alignment: Alignment.center,
     decoration: BoxDecoration(
+      gradient: LinearGradient(
+          colors: [gradientFrom, gradientTo], begin: begin, end: end),
       color: background,
-      border: Border.all(
-        style: BorderStyle.solid,
-      ),
-      shape: BoxShape.rectangle,
     ),
     child: Column(
       mainAxisSize: MainAxisSize.max,
@@ -111,7 +74,7 @@ Text createText(String text,
     FontWeight weight = FontWeight.normal,
     double letterSpacing = 1.0,
     double size = 24,
-    Color color = Colors.white]) {
+    Color color = Colors.black26]) {
   return Text(
     text,
     textAlign: alignment,
@@ -119,28 +82,25 @@ Text createText(String text,
         fontFamily: 'Raleway',
         fontWeight: weight,
         fontSize: size,
-        color: color != Colors.white ? color : Colors.black),
+        letterSpacing: letterSpacing,
+        color: color != Colors.black26 ? color : Colors.black),
   );
 }
 
-///Mostra il carrello come dialog.
-///Hero permette la transizione da floating button a un altro widget.(guarda main per tag).
-Hero showCart(BuildContext context, Color currentColor) {
-  return Hero(
-      tag: 'cartpopup',
-      child: Dialog(
-        insetAnimationDuration: Duration(milliseconds: 300),
-        backgroundColor: Colors.white,
-        child: Container(
-            alignment: Alignment.center,
-            //color: Colors.white10,
-            width: MediaQuery.of(context).size.width / 3,
-            height: MediaQuery.of(context).size.height / 3,
-            child: Column(
-              children: [
-                createText(
-                    'Carrello', TextAlign.center, FontWeight.normal, 1.2, 20),
-              ],
-            )),
-      ));
+Route createRoute(Widget loginPage) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => loginPage,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(-1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }

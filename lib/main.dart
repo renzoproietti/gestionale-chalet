@@ -8,6 +8,7 @@ import 'package:fluttertest/sezione_eventi.dart';
 import 'package:fluttertest/sign_in.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/widgets_builder.dart';
+import 'package:fluttertest/cart_handler.dart';
 
 void main() => runApp(MaterialApp(
       home: CasottoHome(),
@@ -30,27 +31,30 @@ class CasottoHome extends StatefulWidget {
 
 class _CasottoState extends State<CasottoHome> {
   final _pageController = PageController(initialPage: 0);
+  final _cartKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-          elevation: 1,
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
           leading: IconButton(
             icon: Icon(Icons.portrait_outlined),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignInDemo()));
+              Navigator.of(context).push(createRoute(SignInDemo()));
             },
           ),
           actions: const <Widget>[Icon(Icons.more_vert_outlined)],
           centerTitle: true,
           title: createText('CASOTTO', TextAlign.center, FontWeight.bold, 1.4,
-              24, Colors.white70)),
+              24, Colors.white)),
       body: PageView(
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         controller: _pageController,
+        padEnds: false,
         children: <Widget>[
           createHomeScreen(context, _pageController), //1st page
           createSezioneOmbrelloni(context, _pageController, //2nd page
@@ -72,16 +76,15 @@ class _CasottoState extends State<CasottoHome> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'cartpopup',
-        elevation: 2.0,
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (context) => showCart(context, Colors.white70));
-        },
-        child: const Icon(Icons.shopping_cart_outlined),
-        mini: true,
-      ),
+          elevation: 1,
+          onPressed: () {
+            showDialog(
+                context: context, builder: (context) => CartPopup(_cartKey));
+          },
+          child: const Icon(Icons.shopping_cart_outlined),
+          backgroundColor: Colors.transparent,
+          mini: false,
+          shape: CircleBorder(side: BorderSide(color: Colors.white))),
     );
   }
 }
