@@ -38,7 +38,10 @@ class _CasottoState extends State<CasottoHome> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+<<<<<<< Updated upstream
           toolbarHeight: 70,
+=======
+>>>>>>> Stashed changes
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
@@ -49,6 +52,7 @@ class _CasottoState extends State<CasottoHome> {
           ),
           actions: const <Widget>[Icon(Icons.more_vert_outlined)],
           centerTitle: true,
+<<<<<<< Updated upstream
           title: const Text(
             'Chalet',
             style: TextStyle(
@@ -56,6 +60,10 @@ class _CasottoState extends State<CasottoHome> {
                 fontSize: 40,
                 fontWeight: FontWeight.w500),
           )),
+=======
+          title: createText('CASOTTO', TextAlign.center, FontWeight.bold, 1.4,
+              24, Colors.white)),
+>>>>>>> Stashed changes
       body: PageView(
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,

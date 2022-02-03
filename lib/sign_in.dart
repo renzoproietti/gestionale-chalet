@@ -119,6 +119,7 @@ class SignInDemoState extends State<SignInDemo> {
         ],
       );
     } else {
+<<<<<<< Updated upstream
       return
         ListView(
 
@@ -229,6 +230,17 @@ class SignInDemoState extends State<SignInDemo> {
 
 
             ),
+=======
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Card(
+            child: const Text("You are not currently signed in."),
+          ),
+          ElevatedButton(
+            child: const Text('SIGN IN'),
+            onPressed: _handleSignIn,
+>>>>>>> Stashed changes
           ),
 
     Padding(padding: EdgeInsets.only(top: 25)),

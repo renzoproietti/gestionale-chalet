@@ -65,6 +65,7 @@ Container createSezioneLettini(
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
+<<<<<<< Updated upstream
                   custom_panel.ExpansionPanelList(
                     expandedHeaderPadding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
@@ -75,6 +76,16 @@ Container createSezioneLettini(
 
                       return CustomExpansionPanel(
                         backgroundColor: Colors.white,
+=======
+                  ExpansionPanelList(
+                    expandedHeaderPadding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+                    expansionCallback: callback,
+                    children: _lettini.map((ListItem? item) {
+                      final countKey = GlobalKey<CountState>();
+
+                      return ExpansionPanel(
+>>>>>>> Stashed changes
                         canTapOnHeader: true,
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return (Container(
@@ -88,11 +99,19 @@ Container createSezioneLettini(
                                   item != null ? item.header : "-1",
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
+<<<<<<< Updated upstream
                                       fontFamily: 'Raleway',
                                       fontWeight: FontWeight.bold,
                                       letterSpacing: 1,
                                       fontSize: 18,
                                       color: Colors.black),
+=======
+                                    fontFamily: 'Raleway',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                    fontSize: 18,
+                                  ),
+>>>>>>> Stashed changes
                                 ),
                               ],
                             ),
@@ -145,11 +164,19 @@ Container createSezioneLettini(
                                   },
                                   child: createText(
                                     item != null ? item.body : "Aggiungi",
+<<<<<<< Updated upstream
                                     alignment: TextAlign.center,
                                     weight: FontWeight.w700,
                                     letterSpacing: 1,
                                     size: 18,
                                     color: Colors.blue,
+=======
+                                    TextAlign.center,
+                                    FontWeight.w700,
+                                    1,
+                                    18,
+                                    Colors.blue,
+>>>>>>> Stashed changes
                                   ),
                                 ),
                               ),

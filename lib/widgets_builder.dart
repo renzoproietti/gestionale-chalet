@@ -74,7 +74,11 @@ Text createText(String text,
     FontWeight weight = FontWeight.normal,
     double letterSpacing = 1.0,
     double size = 24,
+<<<<<<< Updated upstream
     Color color = Colors.white}) {
+=======
+    Color color = Colors.black26]) {
+>>>>>>> Stashed changes
   return Text(
     text,
     textAlign: alignment,
@@ -83,7 +87,11 @@ Text createText(String text,
         fontWeight: weight,
         fontSize: size,
         letterSpacing: letterSpacing,
+<<<<<<< Updated upstream
         color: color),
+=======
+        color: color != Colors.black26 ? color : Colors.black),
+>>>>>>> Stashed changes
   );
 }
 

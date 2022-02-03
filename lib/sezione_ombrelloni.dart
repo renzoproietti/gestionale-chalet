@@ -56,6 +56,7 @@ Container createSezioneOmbrelloni(
             child: ListView(
               shrinkWrap: false,
               children: <Widget>[
+<<<<<<< Updated upstream
                 custom_panel.ExpansionPanelList(
                   expandedHeaderPadding:
                       EdgeInsets.symmetric(vertical: 9, horizontal: 0),
@@ -64,6 +65,14 @@ Container createSezioneOmbrelloni(
                   children: _ombrelloni.map((ListItem? item) {
                     return CustomExpansionPanel(
                       backgroundColor: Colors.white,
+=======
+                ExpansionPanelList(
+                  expandedHeaderPadding:
+                      EdgeInsets.symmetric(vertical: 9, horizontal: 0),
+                  expansionCallback: callback,
+                  children: _ombrelloni.map((ListItem? item) {
+                    return ExpansionPanel(
+>>>>>>> Stashed changes
                       canTapOnHeader: true,
                       headerBuilder: (BuildContext context, bool isExpanded) {
                         return (Container(
@@ -85,6 +94,7 @@ Container createSezioneOmbrelloni(
                                 item != null ? item.header : "-1",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
+<<<<<<< Updated upstream
                                     fontFamily: 'Raleway',
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 1,
@@ -127,6 +137,51 @@ Container createSezioneOmbrelloni(
                                   color: Colors.blue,
                                 ),
                               ),
+=======
+                                  fontFamily: 'Raleway',
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width /
+                                          21)),
+                              createText(
+                                item != null ? item.infos : "n-fila",
+                                TextAlign.center,
+                                FontWeight.normal,
+                                1,
+                                16,
+                              ),
+                            ],
+                          ),
+                        ));
+                      },
+                      isExpanded: item != null ? item.isExpanded : false,
+                      body: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Flexible(
+                              child: TextButton(
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          LocalizationDatePicker());
+                                },
+                                child: createText(
+                                  item != null ? item.body : "Prenota",
+                                  TextAlign.center,
+                                  FontWeight.w700,
+                                  1,
+                                  20,
+                                  Colors.blue,
+                                ),
+                              ),
+>>>>>>> Stashed changes
                             ),
                           ]),
                     );
