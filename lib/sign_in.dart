@@ -68,12 +68,12 @@ class SignInDemoState extends State<SignInDemo> {
   String? _pickFirstNamedContact(Map<String, dynamic> data) {
     final List<dynamic>? connections = data['connections'];
     final Map<String, dynamic>? contact = connections?.firstWhere(
-          (dynamic contact) => contact['names'] != null,
+      (dynamic contact) => contact['names'] != null,
       orElse: () => null,
     );
     if (contact != null) {
       final Map<String, dynamic>? name = contact['names'].firstWhere(
-            (dynamic name) => name['displayName'] != null,
+        (dynamic name) => name['displayName'] != null,
         orElse: () => null,
       );
       if (name != null) {
@@ -119,240 +119,161 @@ class SignInDemoState extends State<SignInDemo> {
         ],
       );
     } else {
-<<<<<<< Updated upstream
-      return
-        ListView(
-
-
-            addAutomaticKeepAlives: false,
-            cacheExtent: 100.0,
-
-
-            children : [
-
-
-            InkWell(onTap: () => showDialog(
-            context: context,
-            builder: (context) =>
-                Container(
-
-
-                  child: AlertDialog(
-
-
-
-                      contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 100),
-                      elevation: 24.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(10.0))),
-
-
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
+      return ListView(
+        shrinkWrap: false,
+        addAutomaticKeepAlives: false,
+        cacheExtent: 100.0,
+        children: [
+          InkWell(
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) => Container(
+                child: AlertDialog(
+                  contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 100),
+                  elevation: 24.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Seleziona lingua \n",
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                      Text(
+                        "Select language \n \n \n \n",
+                        style: TextStyle(
+                          fontSize: 19,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-
-
-
-
-                          Text("Seleziona lingua \n",
-                            style: TextStyle(
-                              fontSize: 22,
-                            ),
-
-                          ),
-                          Text("Select language \n \n \n \n",
-                            style: TextStyle(
-                              fontSize: 19,
-
-                            ),
-
-                          ),
-                          Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children : [Image(image: AssetImage("lib/assets/united-kingdom.png"),
+                          Image(
+                            image: AssetImage("lib/assets/united-kingdom.png"),
                             width: 80,
                             height: 80,
-
-
-
-
                           ),
-                            Image(image: AssetImage("lib/assets/italy.png"),
-                              width: 80,
-                              height: 80,
-
-
-                            ),
-                          ],
+                          Image(
+                            image: AssetImage("lib/assets/italy.png"),
+                            width: 80,
+                            height: 80,
                           ),
-
                         ],
-
                       ),
-                  ),
-
+                    ],
                   ),
                 ),
-
-
+              ),
+            ),
             child: Container(
               alignment: Alignment.centerLeft,
               height: 60,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              width: MediaQuery.of(context).size.width,
               color: Colors.white,
-
-
               child: Row(
-
-
-                  children: [
-                    Padding(padding: EdgeInsets.only(left: 20.0)),
-                    Image(image: AssetImage("lib/assets/italy.png"),
-                      width: 30,
-                      height: 30,
+                children: [
+                  Padding(padding: EdgeInsets.only(left: 20.0)),
+                  Image(
+                    image: AssetImage("lib/assets/italy.png"),
+                    width: 30,
+                    height: 30,
+                  ),
+                  Padding(padding: EdgeInsets.only(left: 20.0)),
+                  Text(
+                    'Italiano',
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
-                    Padding(padding: EdgeInsets.only(left: 20.0)),
-                    Text('Italiano',
-
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-
-
-                    ),
-
-                  ],
+                  ),
+                ],
               ),
-
-
             ),
-=======
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Card(
-            child: const Text("You are not currently signed in."),
           ),
-          ElevatedButton(
-            child: const Text('SIGN IN'),
-            onPressed: _handleSignIn,
->>>>>>> Stashed changes
+          Padding(padding: EdgeInsets.only(top: 25)),
+          Container(
+            alignment: Alignment.centerLeft,
+            height: 60,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.white,
+            child: Row(children: [
+              Padding(padding: EdgeInsets.only(left: 20.0)),
+              const Icon(
+                Icons.location_on,
+                size: 30,
+              ),
+              Padding(padding: EdgeInsets.only(left: 20.0)),
+              Text(
+                'Hai uno stabilimento?',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              )
+            ]),
           ),
-
-    Padding(padding: EdgeInsets.only(top: 25)),
-
-    Container(
-    alignment: Alignment.centerLeft,
-    height: 60,
-    width: MediaQuery.of(context).size.width,
-    color: Colors.white,
-
-
-    child : Row(
-
-    children : [
-    Padding(padding: EdgeInsets.only(left: 20.0)),
-    const Icon(Icons.location_on, size: 30,),
-
-
-    Padding(padding: EdgeInsets.only(left: 20.0)),
-    Text('Hai uno stabilimento?',
-
-    style: TextStyle(
-    fontSize: 20,
-    ),
-
-
-    )]),
-    ),
-              Padding(padding: EdgeInsets.only(top: 5)),
-
-
-    InkWell(onTap: ()=> _handleSignIn(),
-
-    child : Container(
-    alignment: Alignment.centerLeft,
-    height: 60,
-    width: MediaQuery.of(context).size.width,
-    color: Colors.white,
-
-
-    child : Row(
-
-
-    children : [
-
-    Padding(padding: EdgeInsets.only(left: 20.0)),
-    const Icon(Icons.account_circle_outlined, size: 30,),
-
-
-    Padding(padding: EdgeInsets.only(left: 20.0)),
-
-
-    Text('Registrati/Accedi',
-
-    style: TextStyle(
-    fontSize: 20,
-    ),
-
-
-    )]),
-    ),
-    ),
-              Padding(padding: EdgeInsets.only(top: 5)),
-
-    InkWell(onTap: () => showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-
-    contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 100),
-    elevation: 24.0,
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.all(Radius.circular(10.0))),),),),
-
-    Container(
-      alignment: Alignment.centerLeft,
-      height: 60,
-      width: MediaQuery.of(context).size.width,
-      color: Colors.white,
-
-
-
-
-    child : Row(
-
-    children : [
-
-
-    Padding(padding: EdgeInsets.only(left: 20.0)),
-
-
-    Image(image: AssetImage("lib/assets/megaphone.png"),
-    width: 30,
-    height: 30,
-    ),
-
-    Padding(padding: EdgeInsets.only(left: 20.0)),
-
-    Text('Avvisi',
-
-    style: TextStyle(
-    fontSize: 20,
-
-    ),
-
-
-    )]),
-    ),
-              Padding(padding: EdgeInsets.only(top: 5)),
-
-    ],
-    );
-  }
+          Padding(padding: EdgeInsets.only(top: 5)),
+          InkWell(
+            onTap: () => _handleSignIn(),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              child: Row(children: [
+                Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Icon(
+                  Icons.account_circle_outlined,
+                  size: 30,
+                ),
+                Padding(padding: EdgeInsets.only(left: 20.0)),
+                Text(
+                  'Registrati/Accedi',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                )
+              ]),
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(top: 5)),
+          InkWell(
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 100),
+                elevation: 24.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              ),
+            ),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              child: Row(children: [
+                Padding(padding: EdgeInsets.only(left: 20.0)),
+                Image(
+                  image: AssetImage("lib/assets/megaphone.png"),
+                  width: 30,
+                  height: 30,
+                ),
+                Padding(padding: EdgeInsets.only(left: 20.0)),
+                Text(
+                  'Avvisi',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                )
+              ]),
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(top: 5)),
+        ],
+      );
+    }
   }
 
   @override

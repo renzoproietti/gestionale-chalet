@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class Internationalization extends Localizations {
+class AppLocalizations extends Localizations {
   late Locale _locale;
+
+  final List<Locale> _supportedLocales = <Locale>[
+    Locale('en', 'UK'),
+    Locale('it', 'IT'),
+  ];
+
   final List<LocalizationsDelegate> _delegates = <LocalizationsDelegate>[
     GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,
   ];
 
-  Internationalization(Locale _locale, List<LocalizationsDelegate> _delegates)
-      : super(locale: _locale, delegates: _delegates);
+  AppLocalizations(Locale locale, List<LocalizationsDelegate> delegates)
+      : super(locale: locale, delegates: delegates);
 
-  //Future<String> chooseLanguage(String )
+  void setLocale(Locale locale) {
+    _locale = locale;
+  }
+
+  List<Locale?> getSupportedLocales() {
+    return _supportedLocales;
+  }
 }

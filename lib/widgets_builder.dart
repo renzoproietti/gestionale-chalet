@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/country_flag_button.dart';
 import 'package:fluttertest/list_item_handler.dart';
+import 'package:fluttertest/internationalization.dart';
 
 /**File utility per la creazione dell'interfaccia base.
 Tutti i metodi riguardanti operazioni che vengono 
@@ -74,11 +76,7 @@ Text createText(String text,
     FontWeight weight = FontWeight.normal,
     double letterSpacing = 1.0,
     double size = 24,
-<<<<<<< Updated upstream
     Color color = Colors.white}) {
-=======
-    Color color = Colors.black26]) {
->>>>>>> Stashed changes
   return Text(
     text,
     textAlign: alignment,
@@ -87,11 +85,7 @@ Text createText(String text,
         fontWeight: weight,
         fontSize: size,
         letterSpacing: letterSpacing,
-<<<<<<< Updated upstream
         color: color),
-=======
-        color: color != Colors.black26 ? color : Colors.black),
->>>>>>> Stashed changes
   );
 }
 

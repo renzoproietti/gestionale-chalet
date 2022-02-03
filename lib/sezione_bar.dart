@@ -54,7 +54,6 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
             borderRadius: BorderRadius.circular(5),
           ),
           child: Scrollbar(
-<<<<<<< Updated upstream
             child: MediaQuery.removePadding(
               removeTop: true,
               context: context,
@@ -108,27 +107,12 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
                   ),
                 ],
               ),
-=======
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [],
-                ),
-              ],
->>>>>>> Stashed changes
             ),
           ),
         ),
       ),
       firstPadding: MediaQuery.of(context).size.height / 15,
-<<<<<<< Updated upstream
       secondPadding: MediaQuery.of(context).size.height / 15,
-=======
-      secondPadding: MediaQuery.of(context).size.height / 5,
->>>>>>> Stashed changes
       gradientFrom: Color(0xffffb643),
       gradientTo: Color(0xff33a284));
 }
