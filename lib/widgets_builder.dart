@@ -70,11 +70,11 @@ Container createPageContainer(
 
 ///Crea testo semplice con font Raleway e alcuni parametri esposti.
 Text createText(String text,
-    [TextAlign alignment = TextAlign.center,
+    {TextAlign alignment = TextAlign.center,
     FontWeight weight = FontWeight.normal,
     double letterSpacing = 1.0,
     double size = 24,
-    Color color = Colors.black26]) {
+    Color color = Colors.white}) {
   return Text(
     text,
     textAlign: alignment,
@@ -83,7 +83,7 @@ Text createText(String text,
         fontWeight: weight,
         fontSize: size,
         letterSpacing: letterSpacing,
-        color: color != Colors.black26 ? color : Colors.black),
+        color: color),
   );
 }
 

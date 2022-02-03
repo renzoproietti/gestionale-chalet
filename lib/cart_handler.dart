@@ -20,8 +20,12 @@ class CartPopupState extends State<CartPopup> {
           height: MediaQuery.of(context).size.height / 3,
           child: Column(
             children: [
-              createText(
-                  'Carrello', TextAlign.center, FontWeight.normal, 1.2, 20),
+              createText('Carrello',
+                  alignment: TextAlign.center,
+                  weight: FontWeight.normal,
+                  letterSpacing: 1.2,
+                  size: 20,
+                  color: Colors.black),
             ],
           )),
     );

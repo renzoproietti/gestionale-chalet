@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/datepicker_dialog.dart';
+import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
 import 'package:fluttertest/list_item_handler.dart';
+import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
 
 List<OmbrelloniItem> _ombrelloni = <OmbrelloniItem>[
   OmbrelloniItem(header: "1", body: "Prenota", infos: "prima fila"),
@@ -39,7 +41,7 @@ Container createSezioneOmbrelloni(
       width: MediaQuery.of(context).size.width / 1.2,
       height: MediaQuery.of(context).size.height / 2,
       decoration: BoxDecoration(
-        color: const Color(0xffe6ab10),
+        color: Colors.transparent,
         border: Border.all(
           width: 2,
           color: Colors.white,
@@ -54,12 +56,14 @@ Container createSezioneOmbrelloni(
             child: ListView(
               shrinkWrap: false,
               children: <Widget>[
-                ExpansionPanelList(
+                custom_panel.ExpansionPanelList(
                   expandedHeaderPadding:
                       EdgeInsets.symmetric(vertical: 9, horizontal: 0),
                   expansionCallback: callback,
+                  inBetweenPadding: 0.5,
                   children: _ombrelloni.map((ListItem? item) {
-                    return ExpansionPanel(
+                    return CustomExpansionPanel(
+                      backgroundColor: Colors.white,
                       canTapOnHeader: true,
                       headerBuilder: (BuildContext context, bool isExpanded) {
                         return (Container(
@@ -81,23 +85,22 @@ Container createSezioneOmbrelloni(
                                 item != null ? item.header : "-1",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                  fontSize: 16,
-                                ),
+                                    fontFamily: 'Raleway',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                    fontSize: 16,
+                                    color: Colors.black),
                               ),
                               Padding(
                                   padding: EdgeInsets.only(
                                       left: MediaQuery.of(context).size.width /
                                           21)),
-                              createText(
-                                item != null ? item.infos : "n-fila",
-                                TextAlign.center,
-                                FontWeight.normal,
-                                1,
-                                16,
-                              ),
+                              createText(item != null ? item.infos : "n-fila",
+                                  alignment: TextAlign.center,
+                                  weight: FontWeight.normal,
+                                  letterSpacing: 1,
+                                  size: 16,
+                                  color: Colors.black),
                             ],
                           ),
                         ));
@@ -117,11 +120,11 @@ Container createSezioneOmbrelloni(
                                 },
                                 child: createText(
                                   item != null ? item.body : "Prenota",
-                                  TextAlign.center,
-                                  FontWeight.w700,
-                                  1,
-                                  20,
-                                  Colors.blue,
+                                  alignment: TextAlign.center,
+                                  weight: FontWeight.w700,
+                                  letterSpacing: 1,
+                                  size: 20,
+                                  color: Colors.blue,
                                 ),
                               ),
                             ),

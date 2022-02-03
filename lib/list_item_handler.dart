@@ -87,7 +87,7 @@ class CountState extends State<Count> {
 
   @override
   Widget build(BuildContext context) {
-    return createText('$counter');
+    return createText('$counter', color: Colors.black);
   }
 
   void decrement() {

@@ -73,11 +73,15 @@ class _CasottoState extends State<CasottoHome> {
           createSezioneLettini(context, _pageController,
               (int index, bool isExpanded) {
             setState(() {
-              List<LettiniItem> _lettini = getLettini();
-              _lettini[index].isExpanded = !_lettini[index].isExpanded;
+              getLettini()[index].isExpanded = !getLettini()[index].isExpanded;
             });
           }), //3rd page
-          createSezioneBar(context, _pageController), //4th page
+          createSezioneBar(context, _pageController,
+              (int index, bool isExpanded) {
+            setState(() {
+              getMenu()[index].isExpanded = !getMenu()[index].isExpanded;
+            });
+          }), //4th page
           createSezioneEventi(context, _pageController) //5th page
         ],
       ),

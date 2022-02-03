@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/datepicker_dialog.dart';
+import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
 import 'package:fluttertest/list_item_handler.dart';
+import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
 
 List<LettiniItem> _lettini = <LettiniItem>[
   LettiniItem(
@@ -47,7 +49,7 @@ Container createSezioneLettini(
       ),
       Container(
         decoration: BoxDecoration(
-          color: const Color(0xff800c18),
+          color: Colors.transparent,
           border: Border.all(
             width: 2,
             color: Colors.white,
@@ -63,14 +65,16 @@ Container createSezioneLettini(
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  ExpansionPanelList(
+                  custom_panel.ExpansionPanelList(
                     expandedHeaderPadding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                     expansionCallback: callback,
+                    inBetweenPadding: 0.5,
                     children: _lettini.map((ListItem? item) {
                       final countKey = GlobalKey<CountState>();
 
-                      return ExpansionPanel(
+                      return CustomExpansionPanel(
+                        backgroundColor: Colors.white,
                         canTapOnHeader: true,
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return (Container(
@@ -84,11 +88,11 @@ Container createSezioneLettini(
                                   item != null ? item.header : "-1",
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1,
-                                    fontSize: 18,
-                                  ),
+                                      fontFamily: 'Raleway',
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1,
+                                      fontSize: 18,
+                                      color: Colors.black),
                                 ),
                               ],
                             ),
@@ -141,11 +145,11 @@ Container createSezioneLettini(
                                   },
                                   child: createText(
                                     item != null ? item.body : "Aggiungi",
-                                    TextAlign.center,
-                                    FontWeight.w700,
-                                    1,
-                                    18,
-                                    Colors.blue,
+                                    alignment: TextAlign.center,
+                                    weight: FontWeight.w700,
+                                    letterSpacing: 1,
+                                    size: 18,
+                                    color: Colors.blue,
                                   ),
                                 ),
                               ),
