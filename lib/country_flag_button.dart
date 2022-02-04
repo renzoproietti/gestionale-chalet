@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/internationalization.dart';
 
 class CountryFlagButton extends ElevatedButton {
-  late Locale locale;
+  final Locale locale;
+  static const Locale dummy = Locale('it');
+  final ButtonStyle buttonStyle;
+  static const styleDummy = ButtonStyle();
 
-  CountryFlagButton(Function()? onPressed, Widget? child, Locale? locale)
-      : super(onPressed: onPressed, child: child);
-
-  void bindIcon() {
-    this.locale = locale;
-  }
+  CountryFlagButton({
+    Function()? onPressed,
+    Widget? child,
+    this.locale = dummy,
+    this.buttonStyle = styleDummy,
+  }) : super(onPressed: onPressed, child: child, style: buttonStyle);
 }

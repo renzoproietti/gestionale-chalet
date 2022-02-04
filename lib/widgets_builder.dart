@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertest/main.dart';
 import 'package:fluttertest/country_flag_button.dart';
-import 'package:fluttertest/list_item_handler.dart';
-import 'package:fluttertest/internationalization.dart';
 
 /**File utility per la creazione dell'interfaccia base.
 Tutti i metodi riguardanti operazioni che vengono 
@@ -105,4 +106,19 @@ Route createRoute(Widget loginPage) {
       );
     },
   );
+}
+
+final Localizations localizations = Localizations(
+  locale: Locale('it'),
+  delegates: const <LocalizationsDelegate>[
+    AppLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+);
+
+///Cambia il locale associato al MaterialApp principale.
+void changeLocale(BuildContext context, Locale locale) {
+  CasottoHome.of(context)?.setLocale(locale);
 }

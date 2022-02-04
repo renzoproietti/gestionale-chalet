@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertest/home.dart';
 import 'package:fluttertest/sezione_bar.dart';
 import 'package:fluttertest/sezione_lettini.dart';
@@ -10,28 +9,35 @@ import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/widgets_builder.dart';
 import 'package:fluttertest/cart_handler.dart';
 
+Locale _locale = Locale('it');
+
 void main() => runApp(MaterialApp(
       home: CasottoHome(),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('it', 'IT'),
-      ],
-      locale: const Locale('it', 'IT'),
+      localizationsDelegates: localizations.delegates,
+      supportedLocales: const <Locale>[Locale('it'), Locale('en', 'UK')],
+      locale: _locale,
     ));
 
 class CasottoHome extends StatefulWidget {
   @override
-  _CasottoState createState() => _CasottoState();
+  CasottoState createState() => CasottoState();
+
+  static CasottoState? of(BuildContext context) =>
+      context.findAncestorStateOfType<CasottoState>();
 }
 
-class _CasottoState extends State<CasottoHome> {
+class CasottoState extends State<CasottoHome> {
   final _pageController = PageController(initialPage: 0);
   final _cartKey = GlobalKey();
+  List<Locale> locales = <Locale>[Locale('it'), Locale('en', 'UK')];
+
+  List<Locale> supportedLocales = <Locale>[Locale('it'), Locale('en', 'UK')];
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

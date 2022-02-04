@@ -40,6 +40,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^19.4.47
   google_sign_in: ^5.2.3
   http: ^0.13.4
+  intl: ^0.17.0
 
 
 dev_dependencies:
@@ -58,6 +59,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

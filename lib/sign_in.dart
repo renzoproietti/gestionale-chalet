@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'dart:convert' show json;
+import 'package:fluttertest/country_flag_button.dart';
+import 'package:fluttertest/main.dart';
+
 import 'widgets_builder.dart';
 import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
@@ -151,11 +154,21 @@ class SignInDemoState extends State<SignInDemo> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Image(
-                            image: AssetImage("lib/assets/united-kingdom.png"),
-                            width: 80,
-                            height: 80,
-                          ),
+                          CountryFlagButton(
+                              onPressed: () {
+                                //todo
+                                changeLocale(context, const Locale('en', 'UK'));
+                              },
+                              child: Image(
+                                image:
+                                    AssetImage("lib/assets/united-kingdom.png"),
+                                width: 80,
+                                height: 80,
+                              ),
+                              locale: Locale('en', 'UK'),
+                              buttonStyle: ElevatedButton.styleFrom(
+                                  shape: CircleBorder(
+                                      side: BorderSide(color: Colors.white)))),
                           Image(
                             image: AssetImage("lib/assets/italy.png"),
                             width: 80,
