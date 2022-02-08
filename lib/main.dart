@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertest/home.dart';
 import 'package:fluttertest/sezione_bar.dart';
 import 'package:fluttertest/sezione_lettini.dart';
@@ -8,36 +9,73 @@ import 'package:fluttertest/sign_in.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/widgets_builder.dart';
 import 'package:fluttertest/cart_handler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Locale _locale = Locale('it');
+///Il main lancia CasottoHome, che altro non è che un
+void main() => runApp(const Casotto());
 
-void main() => runApp(MaterialApp(
-      home: CasottoHome(),
-      localizationsDelegates: localizations.delegates,
-      supportedLocales: const <Locale>[Locale('it'), Locale('en', 'UK')],
-      locale: _locale,
-    ));
+class Casotto extends StatefulWidget {
+  const Casotto({Key? key}) : super(key: key);
 
-class CasottoHome extends StatefulWidget {
   @override
-  CasottoState createState() => CasottoState();
+  _CasottoState createState() => _CasottoState();
 
-  static CasottoState? of(BuildContext context) =>
-      context.findAncestorStateOfType<CasottoState>();
+  static _CasottoState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_CasottoState>();
+
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    _CasottoState? state = context.findAncestorStateOfType<_CasottoState>();
+    state!.changeLanguage(newLocale);
+  }
 }
 
-class CasottoState extends State<CasottoHome> {
-  final _pageController = PageController(initialPage: 0);
-  final _cartKey = GlobalKey();
-  List<Locale> locales = <Locale>[Locale('it'), Locale('en', 'UK')];
+class _CasottoState extends State<Casotto> {
+  Locale _locale = Locale('it', 'IT');
 
-  List<Locale> supportedLocales = <Locale>[Locale('it'), Locale('en', 'UK')];
-
-  void setLocale(Locale locale) {
+  void changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
     });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+      supportedLocales: const [
+        Locale('it', 'IT'),
+        Locale('en', 'UK'),
+      ],
+      locale: _locale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale?.languageCode &&
+              supportedLocale.countryCode == locale?.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _pageController = PageController(initialPage: 0);
+  final _cartKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +86,7 @@ class CasottoState extends State<CasottoHome> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
-            icon: Icon(Icons.portrait_outlined),
+            icon: const Icon(Icons.portrait_outlined),
             onPressed: () {
               Navigator.of(context).push(createRoute(SignInDemo()));
             },
@@ -100,7 +138,7 @@ class CasottoState extends State<CasottoHome> {
           child: const Icon(Icons.shopping_cart_outlined),
           backgroundColor: Colors.transparent,
           mini: false,
-          shape: CircleBorder(side: BorderSide(color: Colors.white))),
+          shape: const CircleBorder(side: BorderSide(color: Colors.white))),
     );
   }
 }

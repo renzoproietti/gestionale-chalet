@@ -1,6 +1,8 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
-    }
+    "language": "English",
+    "chaletDesc": "Got a chalet?",
+    "signin": "Sign in/Sign up",
+    "avvisi": "Notifications",
+    "profilo": "Account"
+    
 }

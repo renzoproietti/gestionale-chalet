@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert' show json;
-import 'package:fluttertest/country_flag_button.dart';
 import 'package:fluttertest/main.dart';
 
-import 'widgets_builder.dart';
 import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
@@ -25,6 +24,7 @@ class SignInDemo extends StatefulWidget {
 class SignInDemoState extends State<SignInDemo> {
   GoogleSignInAccount? _currentUser;
   String _contactText = '';
+  Locale _locale = Locale('it', 'IT');
 
   @override
   void initState() {
@@ -154,26 +154,35 @@ class SignInDemoState extends State<SignInDemo> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          CountryFlagButton(
+                          ElevatedButton(
                               onPressed: () {
-                                //todo
-                                changeLocale(context, const Locale('en', 'UK'));
+                                _locale = Locale('en', 'UK');
+                                Casotto.setLocale(context, _locale);
+                                Navigator.of(context).pop();
                               },
-                              child: Image(
+                              child: const Image(
                                 image:
                                     AssetImage("lib/assets/united-kingdom.png"),
                                 width: 80,
                                 height: 80,
                               ),
-                              locale: Locale('en', 'UK'),
-                              buttonStyle: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(
+                              style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder(
                                       side: BorderSide(color: Colors.white)))),
-                          Image(
-                            image: AssetImage("lib/assets/italy.png"),
-                            width: 80,
-                            height: 80,
-                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                _locale = Locale('it', 'IT');
+                                Casotto.setLocale(context, _locale);
+                                Navigator.of(context).pop();
+                              },
+                              child: const Image(
+                                image: AssetImage("lib/assets/italy.png"),
+                                width: 80,
+                                height: 80,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder(
+                                      side: BorderSide(color: Colors.white))))
                         ],
                       ),
                     ],
@@ -190,13 +199,13 @@ class SignInDemoState extends State<SignInDemo> {
                 children: [
                   Padding(padding: EdgeInsets.only(left: 20.0)),
                   Image(
-                    image: AssetImage("lib/assets/italy.png"),
+                    image: pickFromLocale(_locale.languageCode),
                     width: 30,
                     height: 30,
                   ),
                   Padding(padding: EdgeInsets.only(left: 20.0)),
                   Text(
-                    'Italiano',
+                    AppLocalizations.of(context)!.language,
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -219,7 +228,7 @@ class SignInDemoState extends State<SignInDemo> {
               ),
               Padding(padding: EdgeInsets.only(left: 20.0)),
               Text(
-                'Hai uno stabilimento?',
+                AppLocalizations.of(context)!.chaletDesc,
                 style: TextStyle(
                   fontSize: 20,
                 ),
@@ -242,7 +251,7 @@ class SignInDemoState extends State<SignInDemo> {
                 ),
                 Padding(padding: EdgeInsets.only(left: 20.0)),
                 Text(
-                  'Registrati/Accedi',
+                  AppLocalizations.of(context)!.signin,
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -275,7 +284,7 @@ class SignInDemoState extends State<SignInDemo> {
                 ),
                 Padding(padding: EdgeInsets.only(left: 20.0)),
                 Text(
-                  'Avvisi',
+                  AppLocalizations.of(context)!.avvisi,
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -293,7 +302,7 @@ class SignInDemoState extends State<SignInDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Profilo",
+          title: Text(AppLocalizations.of(context)!.profilo,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 22,
@@ -306,5 +315,16 @@ class SignInDemoState extends State<SignInDemo> {
           ),
           constraints: const BoxConstraints.expand(),
         ));
+  }
+}
+
+AssetImage pickFromLocale(String language) {
+  switch (language) {
+    case 'it':
+      return AssetImage("lib/assets/italy.png");
+    case 'en':
+      return AssetImage("lib/assets/united-kingdom.png");
+    default:
+      return AssetImage("lib/assets/italy.png");
   }
 }

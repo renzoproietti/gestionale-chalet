@@ -1,3 +1,7 @@
 {
-    "helloWorld": "¡Ciao Mondo!"
+    "language": "Italiano",
+    "chaletDesc": "Hai uno stabilimento?",
+    "signin": "Registrati/Accedi",
+    "avvisi": "Avvisi",
+    "profilo": "Profilo"
 }
