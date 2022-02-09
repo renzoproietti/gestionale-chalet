@@ -6,6 +6,7 @@ import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'widgets_builder.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
@@ -86,7 +87,7 @@ class SignInDemoState extends State<SignInDemo> {
     return null;
   }
 
-  Future<void> _handleSignIn() async {
+  Future<void> handleSignIn() async {
     try {
       await _googleSignIn.signIn();
     } catch (error) {
@@ -122,209 +123,22 @@ class SignInDemoState extends State<SignInDemo> {
         ],
       );
     } else {
-      return ListView(
-        shrinkWrap: false,
-        addAutomaticKeepAlives: false,
-        cacheExtent: 100.0,
-        children: [
-          InkWell(
-            onTap: () => showDialog(
-              context: context,
-              builder: (context) => Container(
-                child: AlertDialog(
-                  contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 100),
-                  elevation: 24.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Seleziona lingua \n",
-                        style: TextStyle(
-                          fontSize: 22,
-                        ),
-                      ),
-                      Text(
-                        "Select language \n \n \n \n",
-                        style: TextStyle(
-                          fontSize: 19,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton(
-                              onPressed: () {
-                                _locale = Locale('en', 'UK');
-                                Casotto.setLocale(context, _locale);
-                                Navigator.of(context).pop();
-                              },
-                              child: const Image(
-                                image:
-                                    AssetImage("lib/assets/united-kingdom.png"),
-                                width: 80,
-                                height: 80,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(
-                                      side: BorderSide(color: Colors.white)))),
-                          ElevatedButton(
-                              onPressed: () {
-                                _locale = Locale('it', 'IT');
-                                Casotto.setLocale(context, _locale);
-                                Navigator.of(context).pop();
-                              },
-                              child: const Image(
-                                image: AssetImage("lib/assets/italy.png"),
-                                width: 80,
-                                height: 80,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(
-                                      side: BorderSide(color: Colors.white))))
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Padding(padding: EdgeInsets.only(left: 20.0)),
-                  Image(
-                    image: pickFromLocale(_locale.languageCode),
-                    width: 30,
-                    height: 30,
-                  ),
-                  Padding(padding: EdgeInsets.only(left: 20.0)),
-                  Text(
-                    AppLocalizations.of(context)!.language,
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(top: 25)),
-          Container(
-            alignment: Alignment.centerLeft,
-            height: 60,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.white,
-            child: Row(children: [
-              Padding(padding: EdgeInsets.only(left: 20.0)),
-              const Icon(
-                Icons.location_on,
-                size: 30,
-              ),
-              Padding(padding: EdgeInsets.only(left: 20.0)),
-              Text(
-                AppLocalizations.of(context)!.chaletDesc,
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              )
-            ]),
-          ),
-          Padding(padding: EdgeInsets.only(top: 5)),
-          InkWell(
-            onTap: () => _handleSignIn(),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.white,
-              child: Row(children: [
-                Padding(padding: EdgeInsets.only(left: 20.0)),
-                const Icon(
-                  Icons.account_circle_outlined,
-                  size: 30,
-                ),
-                Padding(padding: EdgeInsets.only(left: 20.0)),
-                Text(
-                  AppLocalizations.of(context)!.signin,
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                )
-              ]),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(top: 5)),
-          InkWell(
-            onTap: () => showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 100),
-                elevation: 24.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              ),
-            ),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.white,
-              child: Row(children: [
-                Padding(padding: EdgeInsets.only(left: 20.0)),
-                Image(
-                  image: AssetImage("lib/assets/megaphone.png"),
-                  width: 30,
-                  height: 30,
-                ),
-                Padding(padding: EdgeInsets.only(left: 20.0)),
-                Text(
-                  AppLocalizations.of(context)!.avvisi,
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                )
-              ]),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(top: 5)),
-        ],
-      );
+      //TODO
+      handleSignIn();
+      return SizedBox();
     }
+  }
+
+  Function getSignInHandler() {
+    return handleSignIn;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.profilo,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 22,
-              )),
-        ),
-        body: ConstrainedBox(
-          child: Container(
-            child: _buildBody(),
-            color: Color(0xff161055),
-          ),
-          constraints: const BoxConstraints.expand(),
-        ));
-  }
-}
-
-AssetImage pickFromLocale(String language) {
-  switch (language) {
-    case 'it':
-      return AssetImage("lib/assets/italy.png");
-    case 'en':
-      return AssetImage("lib/assets/united-kingdom.png");
-    default:
-      return AssetImage("lib/assets/italy.png");
+    return Container(
+      child: _buildBody(),
+      color: Color(0xff161055),
+      //constraints: const BoxConstraints.expand(),
+    );
   }
 }

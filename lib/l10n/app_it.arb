@@ -3,5 +3,23 @@
     "chaletDesc": "Hai uno stabilimento?",
     "signin": "Registrati/Accedi",
     "avvisi": "Avvisi",
-    "profilo": "Profilo"
+    "profilo": "Profilo",
+
+
+    "fila": "fila",
+    "ombrelloni": "Ombrelloni",
+    "lettini": "Lettini",
+    "sdraio": "Sdraio",
+    "sedie": "Sedie",
+
+    "prima": "Prima",
+    "seconda": "Seconda",
+    "terza": "Terza",
+    "quarta": "Quarta",
+    "quinta": "Quinta",
+    "sesta": "Sesta",
+    "settima": "Settima",
+    "ottava": "Ottava",
+    "nona": "Nona",
+    "decima": "Decima"
 }

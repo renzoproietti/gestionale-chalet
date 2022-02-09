@@ -26,11 +26,10 @@ Container createHomeScreen(
                 _pageController, //controller
                 const AssetImage("lib/assets/umbrella_icon.png"),
                 64, //size
-                24,
-//padding
+                24, //padding
                 1, //scrolla fino a questa pagina
                 const Duration(milliseconds: 300), //durata della transizione
-              ), //Bottone Sezione Ombrelloni
+              ),
               Padding(
                   padding:
                       EdgeInsets.all(MediaQuery.of(context).size.width) / 30),

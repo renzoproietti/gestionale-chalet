@@ -4,17 +4,21 @@ import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 List<OmbrelloniItem> _ombrelloni = <OmbrelloniItem>[
   OmbrelloniItem(header: "1", body: "Prenota", infos: "prima fila"),
   OmbrelloniItem(header: "2", body: "Prenota", infos: "prima fila"),
   OmbrelloniItem(header: "3", body: "Prenota", infos: "prima fila"),
   OmbrelloniItem(header: "4", body: "Prenota", infos: "prima fila"),
-  OmbrelloniItem(header: "5", body: "Prenota", infos: "prima fila"),
+  OmbrelloniItem(header: "5", body: "Prenota", infos: "seconda fila"),
   OmbrelloniItem(header: "6", body: "Prenota", infos: "seconda fila"),
   OmbrelloniItem(header: "7", body: "Prenota", infos: "seconda fila"),
   OmbrelloniItem(header: "8", body: "Prenota", infos: "terza fila"),
-  OmbrelloniItem(header: "9", body: "Prenota", infos: "quarta fila"),
+  OmbrelloniItem(header: "9", body: "Prenota", infos: "terza fila"),
+  OmbrelloniItem(header: "10", body: "Prenota", infos: "terza fila"),
+  OmbrelloniItem(header: "11", body: "Prenota", infos: "quarta fila"),
+  OmbrelloniItem(header: "12", body: "Prenota", infos: "quarta fila"),
 ];
 
 List<OmbrelloniItem> getOmbrelloni() {
@@ -37,6 +41,7 @@ Container createSezioneOmbrelloni(
       0,
       Duration(milliseconds: 300),
     ),
+
     Container(
       width: MediaQuery.of(context).size.width / 1.2,
       height: MediaQuery.of(context).size.height / 2,
@@ -50,6 +55,8 @@ Container createSezioneOmbrelloni(
       ),
       child: Scrollbar(
         child: Center(
+          //necessario rimuovere il padding quando
+          //l'appBar è transparente o rimossa.
           child: MediaQuery.removePadding(
             removeTop: true,
             context: context,
@@ -60,7 +67,7 @@ Container createSezioneOmbrelloni(
                   expandedHeaderPadding:
                       EdgeInsets.symmetric(vertical: 9, horizontal: 0),
                   expansionCallback: callback,
-                  inBetweenPadding: 0.5,
+                  inBetweenPadding: 0.2,
                   children: _ombrelloni.map((ListItem? item) {
                     return CustomExpansionPanel(
                       backgroundColor: Colors.white,
@@ -105,7 +112,7 @@ Container createSezioneOmbrelloni(
                           ),
                         ));
                       },
-                      isExpanded: item != null ? item.isExpanded : false,
+                      isExpanded: item!.isExpanded,
                       body: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           mainAxisSize: MainAxisSize.max,
@@ -115,11 +122,10 @@ Container createSezioneOmbrelloni(
                                 onPressed: () {
                                   showDialog(
                                       context: context,
-                                      builder: (context) =>
-                                          LocalizationDatePicker());
+                                      builder: (context) => CustomDatePicker());
                                 },
                                 child: createText(
-                                  item != null ? item.body : "Prenota",
+                                  item.body,
                                   alignment: TextAlign.center,
                                   weight: FontWeight.w700,
                                   letterSpacing: 1,

@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Locale _locale = Locale('it');
+List<Locale> supportedLocales = const <Locale>[
+  Locale('it', 'IT'),
+  Locale('en', 'UK'),
+];
 
-void setLocale(Locale locale) {
-  _locale = locale;
-}
+List<LocalizationsDelegate> delegates = const [
+  AppLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate
+];
 
-Locale getLocale() {
-  return _locale;
-}
-
-Localizations localizations() {
-  return Localizations(
-      locale: _locale,
-      delegates: const <LocalizationsDelegate>[
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ]);
+Locale? localeResolutionCallback(
+    Locale? locale, Iterable<Locale?> supportedLocales) {
+  for (var supportedLocale in supportedLocales) {
+    if (supportedLocale!.languageCode == locale!.languageCode &&
+        supportedLocale.countryCode == locale.countryCode) {
+      return supportedLocale;
+    }
+  }
+  return supportedLocales.first;
 }

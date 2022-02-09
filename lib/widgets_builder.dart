@@ -88,6 +88,7 @@ Text createText(String text,
   );
 }
 
+//Transizione dalla sezione home alla sezione profilo.
 Route createRoute(Widget loginPage) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => loginPage,
@@ -104,13 +105,4 @@ Route createRoute(Widget loginPage) {
       );
     },
   );
-}
-
-Localizations initLocalizations(Locale locale) {
-  return Localizations(locale: locale, delegates: const <LocalizationsDelegate>[
-    AppLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ]);
 }

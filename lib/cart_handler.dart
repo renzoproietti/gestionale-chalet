@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertest/widgets_builder.dart';
 
 class CartPopup extends StatefulWidget {
+  @override
   CartPopupState createState() => CartPopupState();
 
   const CartPopup(Key key) : super(key: key);

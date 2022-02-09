@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class LocalizationDatePicker extends StatefulWidget {
+class CustomDatePicker extends StatefulWidget {
   @override
-  LocalizationDatePickerState createState() => LocalizationDatePickerState();
+  CustomDatePickerState createState() => CustomDatePickerState();
 }
 
-class LocalizationDatePickerState extends State<LocalizationDatePicker> {
+class CustomDatePickerState extends State<CustomDatePicker> {
   final DateRangePickerController _controller = DateRangePickerController();
 
   @override

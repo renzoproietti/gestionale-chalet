@@ -3,6 +3,24 @@
     "chaletDesc": "Got a chalet?",
     "signin": "Sign in/Sign up",
     "avvisi": "Notifications",
-    "profilo": "Account"
+    "profilo": "Account",
+
+    
+    "fila": "row",
+    "ombrelloni": "Beach umbrellas",
+    "lettini": "Sunbeds",
+    "sdraio": "Deckchairs",
+    "sedie": "Chairs",
+
+    "prima": "First",
+    "seconda": "Second",
+    "terza": "Third",
+    "quarta": "Fourth",
+    "quinta": "Fifth",
+    "sesta": "Sixth",
+    "settima": "Seventh",
+    "ottava": "Eighth",
+    "nona": "Ninth",
+    "decima": "Tithe"
     
 }

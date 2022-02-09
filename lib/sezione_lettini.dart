@@ -4,6 +4,7 @@ import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 List<LettiniItem> _lettini = <LettiniItem>[
   LettiniItem(
@@ -67,9 +68,9 @@ Container createSezioneLettini(
                 children: <Widget>[
                   custom_panel.ExpansionPanelList(
                     expandedHeaderPadding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
                     expansionCallback: callback,
-                    inBetweenPadding: 0.5,
+                    inBetweenPadding: 0.2,
                     children: _lettini.map((ListItem? item) {
                       final countKey = GlobalKey<CountState>();
 
@@ -78,10 +79,9 @@ Container createSezioneLettini(
                         canTapOnHeader: true,
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return (Container(
-                            padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 25),
+                            padding: EdgeInsets.only(left: 40),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
@@ -141,7 +141,7 @@ Container createSezioneLettini(
                                     showDialog(
                                         context: context,
                                         builder: (context) =>
-                                            LocalizationDatePicker());
+                                            CustomDatePicker());
                                   },
                                   child: createText(
                                     item != null ? item.body : "Aggiungi",
@@ -165,6 +165,6 @@ Container createSezioneLettini(
       ),
       firstPadding: MediaQuery.of(context).size.height / 15,
       secondPadding: MediaQuery.of(context).size.height / 7,
-      gradientFrom: Color(0xff701c18),
-      gradientTo: Color(0xffffb643));
+      gradientFrom: const Color(0xff701c18),
+      gradientTo: const Color(0xffffb643));
 }
