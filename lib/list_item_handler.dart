@@ -49,6 +49,37 @@ class LettiniItem extends ListItem {
         );
 }
 
+class MultipleCounter {
+  Map<ListItem, int> countMap = {};
+
+  void updateMap(ListItem item, bool increment) {
+    countMap.update(item, (value) => increment ? value++ : value--);
+  }
+
+  void addEntry(MapEntry<ListItem, int> entry) {
+    countMap.addEntries([entry]);
+  }
+
+  void clear() {
+    for (ListItem item in countMap.keys) {
+      item.number = 0;
+    }
+  }
+
+  void resetItem(ListItem item) {
+    for (ListItem e in countMap.keys) {
+      if (e == item) e.number = 0;
+    }
+  }
+
+  int getCounterFromItem(ListItem item) {
+    for (ListItem e in countMap.keys) {
+      if (e == item) return item.number;
+    }
+    throw Exception("No items found");
+  }
+}
+
 const Image empty_image = Image(
   image: AssetImage("lib/assets/green_circle.png"),
   width: 0,
@@ -68,41 +99,3 @@ const Image red_light = Image(
   width: 24,
   height: 24,
 );
-
-//Widget contatore che permette di aggiornare lo stato quando cambia il counter.
-//Lo stato mette a disposizione metodi per l'aggiornamento al di fuori della classe.
-class Count extends StatefulWidget {
-  final int counter;
-
-  const Count(Key key, this.counter) : super(key: key);
-
-  @override
-  CountState createState() => CountState();
-}
-
-class CountState extends State<Count> {
-  int counter;
-
-  CountState({this.counter = 0});
-
-  @override
-  Widget build(BuildContext context) {
-    return createText('$counter', color: Colors.black);
-  }
-
-  void decrement() {
-    setState(() {
-      counter--;
-    });
-  }
-
-  void increment() {
-    setState(() {
-      counter++;
-    });
-  }
-
-  bool checkPositive() {
-    return counter > 0;
-  }
-}

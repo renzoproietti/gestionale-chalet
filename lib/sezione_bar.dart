@@ -39,8 +39,14 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
   return createPageContainer(
       context,
       const Color(0xff3eb489),
-      createButton(_pageController, const AssetImage("lib/assets/bar_icon.png"),
-          48, 18, 0, const Duration(milliseconds: 500)),
+      CustomHomeButton(
+        pageController: _pageController,
+        buttonIcon: AssetImage("lib/assets/bar_icon.png"),
+        size: 48,
+        innerPadding: EdgeInsets.all(18),
+        page: 0,
+        animationTime: Duration(milliseconds: 500),
+      ),
       FittedBox(
         fit: BoxFit.contain,
         child: Container(

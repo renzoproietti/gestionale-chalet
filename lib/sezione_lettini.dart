@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertest/datepicker_dialog.dart';
 import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
+import 'main.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -37,16 +38,18 @@ Container createSezioneLettini(
   PageController _pageController,
   Function(int, bool) callback,
 ) {
+  final lettiniMapKey = GlobalKey();
+  MultipleCounter counter = MultipleCounter();
   return createPageContainer(
       context,
       const Color(0xffa00c18),
-      createButton(
-        _pageController,
-        AssetImage("lib/assets/sunbed_icon.png"),
-        48,
-        18,
-        0,
-        Duration(milliseconds: 400),
+      CustomHomeButton(
+        pageController: _pageController,
+        buttonIcon: AssetImage("lib/assets/sunbed_icon.png"),
+        size: 48,
+        innerPadding: EdgeInsets.all(18),
+        page: 0,
+        animationTime: Duration(milliseconds: 400),
       ),
       Container(
         decoration: BoxDecoration(
@@ -71,9 +74,8 @@ Container createSezioneLettini(
                         const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
                     expansionCallback: callback,
                     inBetweenPadding: 0.2,
-                    children: _lettini.map((ListItem? item) {
-                      final countKey = GlobalKey<CountState>();
-
+                    children: _lettini.map((ListItem item) {
+                      counter.addEntry(MapEntry(item, item.number));
                       return CustomExpansionPanel(
                         backgroundColor: Colors.white,
                         canTapOnHeader: true,
@@ -84,23 +86,18 @@ Container createSezioneLettini(
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  item != null ? item.header : "-1",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontFamily: 'Raleway',
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1,
-                                      fontSize: 18,
-                                      color: Colors.black),
-                                ),
+                                createText(item.header,
+                                    alignment: TextAlign.center,
+                                    weight: FontWeight.bold,
+                                    size: 20,
+                                    color: Colors.black),
                               ],
                             ),
                           ));
                         },
-                        isExpanded: item != null ? item.isExpanded : false,
+                        isExpanded: item.isExpanded,
                         body: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Flexible(
@@ -110,10 +107,10 @@ Container createSezioneLettini(
                                       onTap: () {
                                         //if the counter is positive then
                                         //decrease it on tap of remove icon.
-                                        if (countKey.currentState
-                                                ?.checkPositive() ==
-                                            true) {
-                                          countKey.currentState?.decrement();
+                                        if (item.number > 0) {
+                                          item.number--;
+                                          counter.updateMap(item, false);
+                                          Chalet.of(context)!.setState(() {});
                                         }
                                       },
                                       child: const Icon(
@@ -121,11 +118,17 @@ Container createSezioneLettini(
                                         color: Colors.blue,
                                       ),
                                     ),
-                                    Count(countKey,
-                                        item != null ? item.number : 0),
+                                    createText(
+                                        counter
+                                            .getCounterFromItem(item)
+                                            .toString(),
+                                        size: 26,
+                                        color: Colors.black),
                                     InkWell(
                                       onTap: () {
-                                        countKey.currentState?.increment();
+                                        item.number++;
+                                        counter.updateMap(item, true);
+                                        Chalet.of(context)!.setState(() {});
                                       },
                                       child: const Icon(
                                         Icons.add,
@@ -144,7 +147,7 @@ Container createSezioneLettini(
                                             CustomDatePicker());
                                   },
                                   child: createText(
-                                    item != null ? item.body : "Aggiungi",
+                                    AppLocalizations.of(context)!.aggiungi,
                                     alignment: TextAlign.center,
                                     weight: FontWeight.w700,
                                     letterSpacing: 1,

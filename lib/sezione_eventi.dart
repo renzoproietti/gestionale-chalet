@@ -6,13 +6,13 @@ Container createSezioneEventi(
   return createPageContainer(
       context,
       const Color(0xff640135),
-      createButton(
-        _pageController,
-        const AssetImage("lib/assets/event_icon.png"),
-        48,
-        18,
-        0,
-        const Duration(milliseconds: 600),
+      CustomHomeButton(
+        pageController: _pageController,
+        buttonIcon: AssetImage("lib/assets/event_icon.png"),
+        size: 48,
+        innerPadding: EdgeInsets.all(18),
+        page: 0,
+        animationTime: Duration(milliseconds: 600),
       ),
       const SizedBox(),
       firstPadding: MediaQuery.of(context).size.height / 15,

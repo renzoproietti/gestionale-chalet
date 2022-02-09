@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /**File utility per la creazione dell'interfaccia base.
@@ -9,40 +8,63 @@ effettuate più volte vanno inseriti qui.*/
 ///Crea bottone di default con un'icona e altri parametri esposti.
 ///Il bottone è collegato ad un _pageController e può o meno
 ///effettuare una transizione ad una pagina se desiderato.
-ElevatedButton createButton(
-    PageController _pageController,
-    AssetImage buttonIcon,
-    double size,
-    double innerPadding,
-    int page,
-    Duration animationTime) {
-  return ElevatedButton(
-    onPressed: () {
-      if (_pageController.hasClients) {
-        _pageController.animateToPage(page,
-            duration: animationTime, curve: Curves.linearToEaseOut);
-      }
-    },
-    child: Image(
-      image: buttonIcon,
-      width: size,
-      height: size,
-    ),
-    style: ElevatedButton.styleFrom(
-      primary: Colors.white10,
-      shape: const CircleBorder(
-        side: BorderSide(
-            style: BorderStyle.solid, color: Colors.white, width: 2.0),
+class CustomHomeButton extends Container {
+  PageController? _pageController;
+  int? _page;
+  Duration? _animationTime;
+  double? _size;
+  ImageProvider? _buttonIcon;
+  EdgeInsets? _innerPadding;
+
+  CustomHomeButton(
+      {Widget? child,
+      Function()? onPressed,
+      Key? key,
+      PageController? pageController,
+      int? page,
+      Duration? animationTime,
+      double? size,
+      ImageProvider? buttonIcon,
+      EdgeInsets? innerPadding})
+      : super(child: child, key: key) {
+    _pageController = pageController;
+    _page = page;
+    _animationTime = animationTime;
+    _size = size;
+    _buttonIcon = buttonIcon;
+    _innerPadding = innerPadding;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        if (_pageController!.hasClients) {
+          _pageController!.animateToPage(_page!,
+              duration: _animationTime!, curve: Curves.linearToEaseOut);
+        }
+      },
+      child: Image(
+        image: _buttonIcon!,
+        width: _size,
+        height: _size,
       ),
-      padding: EdgeInsets.all(innerPadding),
-      elevation: 4.0,
-    ),
-  );
+      style: ElevatedButton.styleFrom(
+        primary: Colors.white10,
+        shape: const CircleBorder(
+          side: BorderSide(
+              style: BorderStyle.solid, color: Colors.white, width: 2.0),
+        ),
+        padding: _innerPadding!,
+        elevation: 4.0,
+      ),
+    );
+  }
 }
 
 ///crea container che occupa tutta la pagina visibile nel contesto.
 Container createPageContainer(
-    BuildContext context, Color background, ElevatedButton button, Widget child,
+    BuildContext context, Color background, Container button, Widget child,
     {double firstPadding = 0,
     double secondPadding = 0,
     Color gradientFrom = Colors.transparent,
@@ -67,6 +89,30 @@ Container createPageContainer(
       ],
     ),
   );
+}
+
+class PageContainer extends Container {
+  List<Color>? _gradients;
+
+  PageContainer(
+      {Key? key, required Widget child, required List<Color> gradients})
+      : super(key: key, child: child) {
+    _gradients = gradients;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: child,
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 11),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: _gradients!,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter),
+        ));
+  }
 }
 
 ///Crea testo semplice con font Raleway e alcuni parametri esposti.

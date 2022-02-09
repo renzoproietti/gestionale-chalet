@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertest/internationalization.dart';
 import 'home_page.dart';
 
-///Il main lancia CasottoHome, che altro non è che un
 void main() => runApp(const Chalet());
 
+//Probabilmente si potrebbero gestire le varie istanze
+//del locale con un notifier, invece di aggiornarle manualmente? (@filippo)
 class Chalet extends StatefulWidget {
   const Chalet({Key? key}) : super(key: key);
 
@@ -15,18 +16,17 @@ class Chalet extends StatefulWidget {
       context.findAncestorStateOfType<_ChaletState>();
 
   static void setLocale(BuildContext context, Locale newLocale) async {
-    _ChaletState? state = context.findAncestorStateOfType<_ChaletState>();
+    _ChaletState? state = of(context);
     state!.changeLanguage(newLocale);
   }
 
   static Locale getLocale(BuildContext context) {
-    _ChaletState? state = context.findAncestorStateOfType<_ChaletState>();
-    return state!._locale;
+    return of(context)!._locale;
   }
 }
 
 class _ChaletState extends State<Chalet> {
-  Locale _locale = const Locale('it', 'IT');
+  Locale _locale = supportedLocales.first;
 
   void changeLanguage(Locale locale) {
     setState(() {
