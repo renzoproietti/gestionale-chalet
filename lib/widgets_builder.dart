@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /**File utility per la creazione dell'interfaccia base.
 Tutti i metodi riguardanti operazioni che vengono 
@@ -7,48 +6,42 @@ effettuate più volte vanno inseriti qui.*/
 
 ///Crea bottone di default con un'icona e altri parametri esposti.
 ///Il bottone è collegato ad un _pageController e può o meno
-///effettuare una transizione ad una pagina se desiderato.
+///effettuare una transition ad una pagina se desiderato.
 class CustomHomeButton extends Container {
   PageController? _pageController;
+  Function()? _onPressed;
   int? _page;
   Duration? _animationTime;
   double? _size;
-  ImageProvider? _buttonIcon;
   EdgeInsets? _innerPadding;
 
   CustomHomeButton(
-      {Widget? child,
+      {required Widget? child,
       Function()? onPressed,
       Key? key,
       PageController? pageController,
       int? page,
       Duration? animationTime,
-      double? size,
-      ImageProvider? buttonIcon,
-      EdgeInsets? innerPadding})
+      required EdgeInsets? innerPadding})
       : super(child: child, key: key) {
     _pageController = pageController;
     _page = page;
     _animationTime = animationTime;
-    _size = size;
-    _buttonIcon = buttonIcon;
     _innerPadding = innerPadding;
+    _onPressed = onPressed;
   }
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        if (_pageController!.hasClients) {
-          _pageController!.animateToPage(_page!,
-              duration: _animationTime!, curve: Curves.linearToEaseOut);
-        }
-      },
-      child: Image(
-        image: _buttonIcon!,
-        width: _size,
-        height: _size,
-      ),
+      onPressed: _onPressed ??
+          () {
+            if (_pageController!.hasClients) {
+              _pageController!.animateToPage(_page!,
+                  duration: _animationTime!, curve: Curves.linearToEaseOut);
+            }
+          },
+      child: child,
       style: ElevatedButton.styleFrom(
         primary: Colors.white10,
         shape: const CircleBorder(
@@ -63,34 +56,6 @@ class CustomHomeButton extends Container {
 }
 
 ///crea container che occupa tutta la pagina visibile nel contesto.
-Container createPageContainer(
-    BuildContext context, Color background, Container button, Widget child,
-    {double firstPadding = 0,
-    double secondPadding = 0,
-    Color gradientFrom = Colors.transparent,
-    Color gradientTo = Colors.transparent,
-    Alignment begin = Alignment.topCenter,
-    Alignment end = Alignment.bottomCenter}) {
-  return Container(
-    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 11),
-    alignment: Alignment.center,
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-          colors: [gradientFrom, gradientTo], begin: begin, end: end),
-      color: background,
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Padding(padding: EdgeInsets.only(top: firstPadding)),
-        button,
-        Padding(padding: EdgeInsets.only(top: secondPadding)),
-        child,
-      ],
-    ),
-  );
-}
-
 class PageContainer extends Container {
   List<Color>? _gradients;
 

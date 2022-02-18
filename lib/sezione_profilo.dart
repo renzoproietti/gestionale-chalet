@@ -13,7 +13,7 @@ class Profile extends StatefulWidget {
 }
 
 class _StateProfile extends State<Profile> {
-  Locale _locale = supportedLocales.first;
+  Locale _locale = getSupportedLocales().first;
 
   void updateLocale(Locale locale) {
     setState(() {

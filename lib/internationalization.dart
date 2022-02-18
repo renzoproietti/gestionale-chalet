@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-List<Locale> supportedLocales = const <Locale>[
+List<Locale> _supportedLocales = const <Locale>[
   Locale('it', 'IT'),
   Locale('en', 'UK'),
 ];
 
-List<LocalizationsDelegate> delegates = const [
+List<LocalizationsDelegate> _delegates = const [
   AppLocalizations.delegate,
   GlobalCupertinoLocalizations.delegate,
   GlobalMaterialLocalizations.delegate,
@@ -23,4 +23,12 @@ Locale? localeResolutionCallback(
     }
   }
   return supportedLocales.first;
+}
+
+List<Locale> getSupportedLocales() {
+  return _supportedLocales;
+}
+
+List<LocalizationsDelegate> getDelegates() {
+  return _delegates;
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/widgets_builder.dart';
 
 abstract class ListItem {
   Icon icon;
@@ -85,6 +84,8 @@ const Image empty_image = Image(
   width: 0,
   height: 0,
 );
+const ImageProvider<Object> empty_image_provider = AssetImage("");
+
 const Icon empty_icon = Icon(
   Icons.ac_unit,
   size: 0,

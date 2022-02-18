@@ -26,7 +26,7 @@ class Chalet extends StatefulWidget {
 }
 
 class _ChaletState extends State<Chalet> {
-  Locale _locale = supportedLocales.first;
+  Locale _locale = getSupportedLocales().first;
 
   void changeLanguage(Locale locale) {
     setState(() {
@@ -39,8 +39,8 @@ class _ChaletState extends State<Chalet> {
     return MaterialApp(
       home: HomePage(),
       locale: _locale,
-      supportedLocales: supportedLocales,
-      localizationsDelegates: delegates,
+      supportedLocales: getSupportedLocales(),
+      localizationsDelegates: getDelegates(),
       localeResolutionCallback: localeResolutionCallback,
     );
   }
