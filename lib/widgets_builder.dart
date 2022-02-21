@@ -6,7 +6,7 @@ effettuate più volte vanno inseriti qui.*/
 
 ///Crea bottone di default con un'icona e altri parametri esposti.
 ///Il bottone è collegato ad un _pageController e può o meno
-///effettuare una transizione ad una pagina se desiderato.
+///effettuare una transition ad una pagina se desiderato.
 class CustomHomeButton extends Container {
   PageController? _pageController;
   Function()? _onPressed;
