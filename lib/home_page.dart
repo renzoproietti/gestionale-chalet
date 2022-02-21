@@ -7,6 +7,7 @@ import 'package:fluttertest/sezione_eventi.dart';
 import 'package:fluttertest/widgets_builder.dart';
 import 'package:fluttertest/cart_handler.dart';
 import 'sezione_profilo.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 ///Classe responsabile per la home page in generale,
 ///definisce ciò che si vede scrollando.
@@ -23,6 +24,14 @@ class _HomePageState extends State<HomePage> {
   final _pageController = PageController(initialPage: 0);
   final _cartKey = GlobalKey();
 
+  List<PopupMenuEntry> menu = [
+    PopupMenuItem(child: createText('Impostazioni', color: Colors.black)),
+    PopupMenuItem(
+        child: createText('Offrici un caffè', color: Colors.black),
+        onTap: () => _launchURL()),
+    PopupMenuItem(child: createText('Informazioni legali', color: Colors.black))
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +46,16 @@ class _HomePageState extends State<HomePage> {
               Navigator.of(context).push(createRoute(Profile()));
             },
           ),
-          actions: const <Widget>[Icon(Icons.more_vert_outlined)],
+          actions: <Widget>[
+            InkWell(
+              onTap: () => showMenu(
+                  context: context,
+                  position: RelativeRect.fromLTRB(
+                      MediaQuery.of(context).size.width, 0, 0, 0),
+                  items: menu),
+              child: Icon(Icons.more_vert_outlined),
+            )
+          ],
           centerTitle: true,
           title: const Text(
             'Chalet',
@@ -88,4 +106,10 @@ class _HomePageState extends State<HomePage> {
           shape: const CircleBorder(side: BorderSide(color: Colors.white))),
     );
   }
+}
+
+const String _url = "https://github.com/filippofracascia/gestionale-chalet";
+
+void _launchURL() async {
+  if (!await launch(_url)) throw 'Could not launch $_url';
 }

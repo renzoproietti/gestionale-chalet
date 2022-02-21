@@ -4,6 +4,7 @@ import 'main.dart';
 import 'sign_in.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets_builder.dart';
+import 'visualizza_prenotazioni.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -158,15 +159,32 @@ class _StateProfile extends State<Profile> {
           ),
           Padding(padding: EdgeInsets.only(top: 5)),
           InkWell(
-            onTap: () => showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 100),
-                elevation: 24.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              ),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (buildContext) => VisualizzaPrenotazioni())),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              child: Row(children: [
+                Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Image(
+                  image: AssetImage("lib/assets/booking_2.png"),
+                  width: 30,
+                  height: 30,
+                ),
+                Padding(padding: EdgeInsets.only(left: 20.0)),
+                createText(AppLocalizations.of(context)!.visualizzaprenotazioni,
+                    color: Colors.black, size: 20),
+              ]),
             ),
+          ),
+          Padding(padding: EdgeInsets.only(top: 5)),
+          InkWell(
+            onTap: () => showDialog(
+                context: context, builder: (buildContext) => Container()),
             child: Container(
               alignment: Alignment.centerLeft,
               height: 60,

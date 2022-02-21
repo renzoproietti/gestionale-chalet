@@ -55,7 +55,7 @@ class CustomHomeButton extends Container {
   }
 }
 
-///crea container che occupa tutta la pagina visibile nel contesto.
+///container che occupa tutta la pagina visibile nel contesto.
 class PageContainer extends Container {
   List<Color>? _gradients;
 
