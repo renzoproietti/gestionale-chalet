@@ -4,7 +4,6 @@ import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 List<OmbrelloniItem> _ombrelloni = <OmbrelloniItem>[
   OmbrelloniItem(header: "1", body: "Prenota", infos: "prima fila"),
@@ -43,9 +42,11 @@ Container createSezioneOmbrelloni(
               EdgeInsets.only(top: MediaQuery.of(context).size.height / 15),
         ),
         CustomHomeButton(
-          buttonIcon: AssetImage("lib/assets/umbrella_icon.png"),
+          child: const Image(
+              image: AssetImage("lib/assets/umbrella_icon.png"),
+              width: 48,
+              height: 48),
           pageController: _pageController,
-          size: 48,
           page: 0,
           animationTime: Duration(milliseconds: 300),
           innerPadding: EdgeInsets.all(18),
@@ -165,11 +166,5 @@ Container createSezioneOmbrelloni(
         ),
       ],
     ),
-    /*firstPadding: MediaQuery.of(context).size.height / 15,
-    secondPadding: MediaQuery.of(context).size.height / 15,
-    gradientFrom: Color(0xff461055),
-    gradientTo: Color(0xff701c18), //const Color(0xfffd8d45),
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,*/ //const Color(0xffe6ab10),
   );
 }

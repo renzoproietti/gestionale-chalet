@@ -4,7 +4,6 @@ import 'package:fluttertest/sezione_bar.dart';
 import 'package:fluttertest/sezione_lettini.dart';
 import 'package:fluttertest/sezione_ombrelloni.dart';
 import 'package:fluttertest/sezione_eventi.dart';
-import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/widgets_builder.dart';
 import 'package:fluttertest/cart_handler.dart';
 import 'sezione_profilo.dart';
@@ -77,13 +76,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          elevation: 1,
+          elevation: 0,
           onPressed: () {
             showDialog(
                 context: context, builder: (context) => CartPopup(_cartKey));
           },
           child: const Icon(Icons.shopping_cart_outlined),
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.blueGrey[600],
+          foregroundColor: Colors.white,
           mini: false,
           shape: const CircleBorder(side: BorderSide(color: Colors.white))),
     );

@@ -39,135 +39,152 @@ Container createSezioneLettini(
   Function(int, bool) callback,
 ) {
   final lettiniMapKey = GlobalKey();
+  final CustomDatePicker datePicker = CustomDatePicker();
   MultipleCounter counter = MultipleCounter();
-  return createPageContainer(
-      context,
-      const Color(0xffa00c18),
-      CustomHomeButton(
-        pageController: _pageController,
-        buttonIcon: AssetImage("lib/assets/sunbed_icon.png"),
-        size: 48,
-        innerPadding: EdgeInsets.all(18),
-        page: 0,
-        animationTime: Duration(milliseconds: 400),
-      ),
-      Container(
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border.all(
-            width: 2,
-            color: Colors.white,
-          ),
-          borderRadius: BorderRadius.circular(5),
+  return PageContainer(
+    gradients: const <Color>[
+      Color(0xff701c18),
+      Color(0xffffb643),
+    ],
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Padding(
+          padding:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height / 15),
         ),
-        width: MediaQuery.of(context).size.width - 65,
-        child: Scrollbar(
-          child: Center(
-            child: MediaQuery.removePadding(
-              removeTop: true,
-              context: context,
-              child: ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  custom_panel.ExpansionPanelList(
-                    expandedHeaderPadding:
-                        const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-                    expansionCallback: callback,
-                    inBetweenPadding: 0.2,
-                    children: _lettini.map((ListItem item) {
-                      counter.addEntry(MapEntry(item, item.number));
-                      return CustomExpansionPanel(
-                        backgroundColor: Colors.white,
-                        canTapOnHeader: true,
-                        headerBuilder: (BuildContext context, bool isExpanded) {
-                          return (Container(
-                            padding: EdgeInsets.only(left: 40),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                createText(item.header,
-                                    alignment: TextAlign.center,
-                                    weight: FontWeight.bold,
-                                    size: 20,
-                                    color: Colors.black),
-                              ],
-                            ),
-                          ));
-                        },
-                        isExpanded: item.isExpanded,
-                        body: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Flexible(
-                                child: Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        //if the counter is positive then
-                                        //decrease it on tap of remove icon.
-                                        if (item.number > 0) {
-                                          item.number--;
-                                          counter.updateMap(item, false);
-                                          Chalet.of(context)!.setState(() {});
-                                        }
-                                      },
-                                      child: const Icon(
-                                        Icons.remove,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                    createText(
-                                        counter
-                                            .getCounterFromItem(item)
-                                            .toString(),
-                                        size: 26,
-                                        color: Colors.black),
-                                    InkWell(
-                                      onTap: () {
-                                        item.number++;
-                                        counter.updateMap(item, true);
-                                        Chalet.of(context)!.setState(() {});
-                                      },
-                                      child: const Icon(
-                                        Icons.add,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+        CustomHomeButton(
+          pageController: _pageController,
+          child: const Image(
+              image: AssetImage("lib/assets/sunbed_icon.png"),
+              width: 48,
+              height: 48),
+          innerPadding: EdgeInsets.all(18),
+          page: 0,
+          animationTime: Duration(milliseconds: 400),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 8),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            border: Border.all(
+              width: 2,
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          width: MediaQuery.of(context).size.width - 65,
+          child: Scrollbar(
+            child: Center(
+              child: MediaQuery.removePadding(
+                removeTop: true,
+                context: context,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    custom_panel.ExpansionPanelList(
+                      expandedHeaderPadding:
+                          EdgeInsets.symmetric(vertical: 9, horizontal: 0),
+                      expansionCallback: callback,
+                      inBetweenPadding: 0.2,
+                      children: _lettini.map((ListItem item) {
+                        counter.addEntry(MapEntry(item, item.number));
+                        return CustomExpansionPanel(
+                          backgroundColor: Colors.white,
+                          canTapOnHeader: true,
+                          headerBuilder:
+                              (BuildContext context, bool isExpanded) {
+                            return (Container(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width / 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  createText(item.header,
+                                      alignment: TextAlign.center,
+                                      weight: FontWeight.bold,
+                                      size: 20,
+                                      color: Colors.black),
+                                ],
                               ),
-                              Flexible(
-                                child: TextButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) =>
-                                            CustomDatePicker());
-                                  },
-                                  child: createText(
-                                    AppLocalizations.of(context)!.aggiungi,
-                                    alignment: TextAlign.center,
-                                    weight: FontWeight.w700,
-                                    letterSpacing: 1,
-                                    size: 18,
-                                    color: Colors.blue,
+                            ));
+                          },
+                          isExpanded: item.isExpanded,
+                          body: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width /
+                                          10),
+                                ),
+                                Flexible(
+                                  child: InkWell(
+                                    onTap: () {
+                                      //if the counter is positive then
+                                      //decrease it on tap of remove icon.
+                                      if (item.number > 0) {
+                                        item.number--;
+                                        counter.updateMap(item, false);
+                                        Chalet.of(context)!.setState(() {});
+                                      }
+                                    },
+                                    child: const Icon(
+                                      Icons.remove,
+                                      color: Colors.blue,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ]),
-                      );
-                    }).toList(),
-                  ),
-                ],
+                                Flexible(
+                                  child: createText(
+                                      counter
+                                          .getCounterFromItem(item)
+                                          .toString(),
+                                      size: 26,
+                                      color: Colors.black),
+                                ),
+                                Flexible(
+                                  child: InkWell(
+                                    onTap: () {
+                                      item.number++;
+                                      counter.updateMap(item, true);
+                                      Chalet.of(context)!.setState(() {});
+                                    },
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),
-      firstPadding: MediaQuery.of(context).size.height / 15,
-      secondPadding: MediaQuery.of(context).size.height / 7,
-      gradientFrom: const Color(0xff701c18),
-      gradientTo: const Color(0xffffb643));
+        Padding(
+          padding:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
+        ),
+        CustomHomeButton(
+          child: const Image(
+            image: AssetImage("lib/assets/booking.png"),
+            width: 36,
+            height: 36,
+          ),
+          innerPadding: EdgeInsets.all(15),
+          onPressed: () {
+            showDialog(context: context, builder: (context) => datePicker);
+          },
+        ),
+      ],
+    ),
+  );
 }

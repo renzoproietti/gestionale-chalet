@@ -6,7 +6,6 @@
 // This was necessary because flutter adds a default padding between two
 // expansion panels which is unwanted inside the application.
 // A parameter [inBetweenPadding] has been added to [ExpansionPanelList],
-// at the following lines: 262,370,454.
 // Also, the newly created [CustomExpansionPanel] now extends [ExpansionPanel].
 // This was necessary both to avoid conflicts with flutter/material package
 // and since the expansion panel list only accepts an ExpansionPanel type.
@@ -74,39 +73,21 @@ class CustomExpansionPanel extends ExpansionPanel {
   ///
   /// The [headerBuilder], [body], and [isExpanded] arguments must not be null.
   CustomExpansionPanel({
-    required this.headerBuilder,
-    required this.body,
-    this.isExpanded = false,
-    this.canTapOnHeader = false,
-    this.backgroundColor,
+    required headerBuilder,
+    required body,
+    isExpanded = false,
+    canTapOnHeader = false,
+    backgroundColor,
   })  : assert(headerBuilder != null),
         assert(body != null),
         assert(isExpanded != null),
         assert(canTapOnHeader != null),
-        super(headerBuilder: headerBuilder, body: body);
-
-  /// The widget builder that builds the expansion panels' header.
-  final ExpansionPanelHeaderBuilder headerBuilder;
-
-  /// The body of the expansion panel that's displayed below the header.
-  ///
-  /// This widget is visible only when the panel is expanded.
-  final Widget body;
-
-  /// Whether the panel is expanded.
-  ///
-  /// Defaults to false.
-  final bool isExpanded;
-
-  /// Whether tapping on the panel's header will expand/collapse it.
-  ///
-  /// Defaults to false.
-  final bool canTapOnHeader;
-
-  /// Defines the background color of the panel.
-  ///
-  /// Defaults to [ThemeData.cardColor].
-  final Color? backgroundColor;
+        super(
+            headerBuilder: headerBuilder,
+            body: body,
+            isExpanded: isExpanded,
+            canTapOnHeader: canTapOnHeader,
+            backgroundColor: backgroundColor);
 }
 
 /// An expansion panel that allows for radio-like functionality.
