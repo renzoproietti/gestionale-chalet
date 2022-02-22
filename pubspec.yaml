@@ -84,6 +84,8 @@ flutter:
     - lib/assets/green_circle.png
     - lib/assets/booking.png
     - lib/assets/booking_2.png
+    - lib/assets/delete.png
+    - lib/assets/pencil.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

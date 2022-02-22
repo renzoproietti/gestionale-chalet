@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/cart_handler.dart';
 import 'package:fluttertest/datepicker_dialog.dart';
 import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
@@ -142,7 +143,8 @@ Container createSezioneOmbrelloni(
                                       showDialog(
                                           context: context,
                                           builder: (context) =>
-                                              CustomDatePicker());
+                                              CustomDatePicker()).then(
+                                          (value) => loadItemOnCart(item));
                                     },
                                     child: createText(
                                       item.body,

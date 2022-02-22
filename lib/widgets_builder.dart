@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'list_item_handler.dart';
 
 /**File utility per la creazione dell'interfaccia base.
 Tutti i metodi riguardanti operazioni che vengono 
@@ -115,5 +116,53 @@ Route createRoute(Widget loginPage) {
         child: child,
       );
     },
+  );
+}
+
+Container listContainer(MenuItem item, int counter, Function? onRemoveTap(),
+    Function? onAddTap(), BuildContext context) {
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+    decoration: const BoxDecoration(
+        color: Colors.white,
+        backgroundBlendMode: BlendMode.multiply,
+        border: Border.symmetric(
+            horizontal: BorderSide(color: Colors.black26, width: 0.3),
+            vertical: BorderSide(color: Colors.black26, width: 0.3))),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SizedBox(
+          child: createText(item.header,
+              color: Colors.black, size: 14, alignment: TextAlign.left),
+          width: MediaQuery.of(context).size.width / 2.5,
+        ),
+        SizedBox(
+          child: createText(item.prezzo.toString() + '0€',
+              color: Colors.black, size: 14, alignment: TextAlign.left),
+          width: MediaQuery.of(context).size.width / 5,
+        ),
+        Row(
+          children: [
+            InkWell(
+              child: const Icon(
+                Icons.remove,
+                color: Colors.blue,
+                size: 18,
+              ),
+              onTap: onRemoveTap,
+            ),
+            createText('$counter', color: Colors.black, size: 18),
+            InkWell(
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.blue,
+                  size: 18,
+                ),
+                onTap: onAddTap),
+          ],
+        )
+      ],
+    ),
   );
 }

@@ -1,41 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/list_item_handler.dart';
+import 'cart_handler.dart';
+import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
-
-class MenuItem extends ListItem {
-  MenuItem({isExpanded, this.nome = '\t', this.prezzo = 0, this.id = 42});
-
-  final String nome;
-  final double prezzo;
-  final double id;
-}
-
-final List<MenuItem> _menuSection = <MenuItem>[
-  MenuItem(nome: 'Menù'),
-  MenuItem(nome: 'Ordina'),
-];
-
-final List<MenuItem> _menu = <MenuItem>[
-  MenuItem(nome: 'Antipasti'),
-  MenuItem(nome: 'Primi'),
-  MenuItem(nome: 'Secondi'),
-  MenuItem(nome: 'Contorni'),
-  MenuItem(nome: 'Dolci'),
-  MenuItem(nome: 'Bevande'),
-  MenuItem(nome: 'Vini'),
-  MenuItem(nome: 'Digestivi/Amari')
-];
-
-List<MenuItem> getMenu() {
-  return _menu;
-}
-
-List<MenuItem> getMenuSection() {
-  return _menuSection;
-}
+import 'custom_expansion_panel.dart' as custom_panel;
+import 'main.dart';
 
 Container createSezioneBar(BuildContext context, PageController _pageController,
     Function(int, bool) callback) {
+  MultipleCounter counter = MultipleCounter();
   return PageContainer(
     gradients: const <Color>[Color(0xffffb643), Color(0xff33a284)],
     child: Column(
@@ -58,31 +31,32 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
         Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height / 15)),
-        FittedBox(
-          fit: BoxFit.contain,
-          child: Container(
-            width: MediaQuery.of(context).size.width - 65,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(
-                width: 2,
-                color: Colors.white,
-              ),
-              borderRadius: BorderRadius.circular(5),
+        Container(
+          width: MediaQuery.of(context).size.width / 1.2,
+          height: MediaQuery.of(context).size.height / 2,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            border: Border.all(
+              width: 2,
+              color: Colors.white,
             ),
-            child: Scrollbar(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Scrollbar(
+            child: Center(
               child: MediaQuery.removePadding(
                 removeTop: true,
                 context: context,
                 child: ListView(
-                  shrinkWrap: true,
+                  shrinkWrap: false,
                   children: <Widget>[
-                    ExpansionPanelList(
+                    custom_panel.ExpansionPanelList(
+                      inBetweenPadding: 0.2,
                       expandedHeaderPadding: const EdgeInsets.symmetric(
                           vertical: 4, horizontal: 0),
                       expansionCallback: callback,
-                      children: _menuSection.map((MenuItem? section) {
-                        return ExpansionPanel(
+                      children: getMenu().map((MenuItem? section) {
+                        return CustomExpansionPanel(
                             canTapOnHeader: true,
                             headerBuilder:
                                 (BuildContext context, bool isExpanded) {
@@ -94,9 +68,9 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
                                                   .size
                                                   .width /
                                               20)),
-                                  createText(section!.nome,
+                                  createText(section!.header,
                                       alignment: TextAlign.left,
-                                      weight: FontWeight.normal,
+                                      weight: FontWeight.bold,
                                       letterSpacing: 1.2,
                                       size: 20,
                                       color: Colors.black),
@@ -104,23 +78,22 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
                               );
                             },
                             isExpanded: section!.isExpanded,
-                            body: Container(
-                                child: ExpansionPanelList(
-                              expandedHeaderPadding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 0),
-                              expansionCallback: callback,
-                              children: _menu.map((MenuItem? item) {
-                                return ExpansionPanel(
-                                    canTapOnHeader: true,
-                                    headerBuilder: (BuildContext context,
-                                        bool isExpanded) {
-                                      return Container(
-                                        child: createText(item!.nome),
-                                      );
-                                    },
-                                    body: Text('ciao'));
-                              }).toList(),
-                            )));
+                            body: ListView(
+                                shrinkWrap: true,
+                                children: _pickItem(section.header)
+                                    .map((MenuItem pietanza) {
+                                  counter.addEntry(
+                                      MapEntry(pietanza, pietanza.number));
+
+                                  return listContainer(pietanza,
+                                      counter.getCounterFromItem(pietanza), () {
+                                    removeItem(pietanza, counter,
+                                        Chalet.of(context) as State);
+                                  }, () {
+                                    addItem(pietanza, counter,
+                                        Chalet.of(context) as State);
+                                  }, context);
+                                }).toList()));
                       }).toList(),
                     ),
                   ],
@@ -129,7 +102,43 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
             ),
           ),
         ),
+        Padding(padding: EdgeInsets.only(top: 20)),
+        CustomHomeButton(
+          child: const Image(
+            image: AssetImage("lib/assets/booking.png"),
+            width: 36,
+            height: 36,
+          ),
+          innerPadding: EdgeInsets.all(15),
+          onPressed: () {
+            showTimePicker(context: context, initialTime: TimeOfDay.now())
+                .then((value) => loadItemsOnCart(counter));
+          },
+        ),
       ],
     ),
   );
+}
+
+List<MenuItem> _pickItem(String item) {
+  switch (item) {
+    case 'Antipasti':
+      return getAntipasti();
+    case 'Primi':
+      return getPrimi();
+    case 'Secondi':
+      return getSecondi();
+    case 'Contorni':
+      return getContorni();
+    case 'Dolci':
+      return getDolci();
+    case 'Bevande':
+      return getBevande();
+    case 'Vini':
+      return getVini();
+    case 'Amari/Digestivi':
+      return getAmari();
+    default:
+      return getPrimi();
+  }
 }

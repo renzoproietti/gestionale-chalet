@@ -48,6 +48,109 @@ class LettiniItem extends ListItem {
         );
 }
 
+class MenuItem extends ListItem {
+  MenuItem(
+      {header, isExpanded, this.nome = '\t', this.prezzo = 0, this.id = 42})
+      : super(header: header);
+
+  final String nome;
+  final double prezzo;
+  final double id;
+}
+
+final List<MenuItem> _menu = <MenuItem>[
+  MenuItem(header: 'Antipasti'),
+  MenuItem(header: 'Primi'),
+  MenuItem(header: 'Secondi'),
+  MenuItem(header: 'Contorni'),
+  MenuItem(header: 'Dolci'),
+  MenuItem(header: 'Bevande'),
+  MenuItem(header: 'Vini'),
+  MenuItem(header: 'Digestivi/Amari')
+];
+final List<MenuItem> _antipasti = <MenuItem>[
+  MenuItem(header: 'Melone', prezzo: 5),
+  MenuItem(header: 'Salmone', prezzo: 7),
+  MenuItem(header: 'Patatine', prezzo: 2),
+  MenuItem(header: 'Olive', prezzo: 5),
+];
+final List<MenuItem> _primi = <MenuItem>[
+  MenuItem(header: 'Spaghetti', prezzo: 11),
+  MenuItem(header: 'Strozzapreti', prezzo: 9),
+  MenuItem(header: 'Lasagne', prezzo: 10),
+  MenuItem(header: 'Gnocchi', prezzo: 8),
+];
+final List<MenuItem> _secondi = <MenuItem>[
+  MenuItem(header: 'Grigliata mista', prezzo: 15),
+  MenuItem(header: 'Fritto Misto', prezzo: 13),
+  MenuItem(header: 'Fritto gamberi/calamari', prezzo: 11),
+];
+final List<MenuItem> _contorni = <MenuItem>[
+  MenuItem(header: 'Patatine', prezzo: 5),
+  MenuItem(header: 'Olive Ascolane', prezzo: 5),
+  MenuItem(header: 'Crocchette', prezzo: 5),
+  MenuItem(header: 'Cozze', prezzo: 7),
+  MenuItem(header: 'Insalata', prezzo: 6),
+];
+final List<MenuItem> _dolci = <MenuItem>[
+  MenuItem(header: 'Tiramisù', prezzo: 4),
+  MenuItem(header: 'Panna cotta', prezzo: 4),
+  MenuItem(header: 'Sorbetto', prezzo: 3),
+  MenuItem(header: 'Gelato', prezzo: 2.50),
+];
+final List<MenuItem> _bevande = <MenuItem>[
+  MenuItem(header: 'Acqua naturale', prezzo: 1),
+  MenuItem(header: 'Acqua frizzante', prezzo: 1),
+  MenuItem(header: 'Coca-Cola', prezzo: 2.50),
+  MenuItem(header: 'Fanta', prezzo: 2.50),
+  MenuItem(header: 'Sprite', prezzo: 2.50),
+  MenuItem(header: 'Birra', prezzo: 3.50),
+];
+final List<MenuItem> _vini = <MenuItem>[
+  MenuItem(header: 'Rosso', prezzo: 4),
+  MenuItem(header: 'Bianco', prezzo: 4),
+];
+final List<MenuItem> _amari = <MenuItem>[
+  MenuItem(header: 'Rosso', prezzo: 4),
+  MenuItem(header: 'Bianco', prezzo: 4),
+];
+
+List<MenuItem> getMenu() {
+  return _menu;
+}
+
+List<MenuItem> getAntipasti() {
+  return _antipasti;
+}
+
+List<MenuItem> getPrimi() {
+  return _primi;
+}
+
+List<MenuItem> getSecondi() {
+  return _secondi;
+}
+
+List<MenuItem> getContorni() {
+  return _contorni;
+}
+
+List<MenuItem> getDolci() {
+  return _dolci;
+}
+
+List<MenuItem> getBevande() {
+  return _bevande;
+}
+
+List<MenuItem> getVini() {
+  return _vini;
+}
+
+List<MenuItem> getAmari() {
+  return _amari;
+}
+
 class MultipleCounter {
   Map<ListItem, int> countMap = {};
 
@@ -76,6 +179,20 @@ class MultipleCounter {
       if (e == item) return item.number;
     }
     throw Exception("No items found");
+  }
+}
+
+void addItem(ListItem item, MultipleCounter counter, State state) {
+  item.number++;
+  counter.updateMap(item, true);
+  state.setState(() {});
+}
+
+void removeItem(ListItem item, MultipleCounter counter, State state) {
+  if (item.number > 0) {
+    item.number--;
+    counter.updateMap(item, false);
+    state.setState(() {});
   }
 }
 

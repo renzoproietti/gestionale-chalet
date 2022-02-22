@@ -6,6 +6,7 @@ import 'package:fluttertest/sezione_ombrelloni.dart';
 import 'package:fluttertest/sezione_eventi.dart';
 import 'package:fluttertest/widgets_builder.dart';
 import 'package:fluttertest/cart_handler.dart';
+import 'list_item_handler.dart';
 import 'sezione_profilo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,7 +29,8 @@ class _HomePageState extends State<HomePage> {
     PopupMenuItem(child: createText('Impostazioni', color: Colors.black)),
     PopupMenuItem(
         child: createText('Offrici un caffè', color: Colors.black),
-        onTap: () => _launchURL()),
+        onTap: () => _launchURL(
+            "https://github.com/filippofracascia/gestionale-chalet")),
     PopupMenuItem(child: createText('Informazioni legali', color: Colors.black))
   ];
 
@@ -100,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                 context: context, builder: (context) => CartPopup(_cartKey));
           },
           child: const Icon(Icons.shopping_cart_outlined),
-          backgroundColor: Colors.blueGrey[600],
+          backgroundColor: Colors.black26,
           foregroundColor: Colors.white,
           mini: false,
           shape: const CircleBorder(side: BorderSide(color: Colors.white))),
@@ -108,8 +110,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-const String _url = "https://github.com/filippofracascia/gestionale-chalet";
-
-void _launchURL() async {
-  if (!await launch(_url)) throw 'Could not launch $_url';
+void _launchURL(String url) async {
+  if (!await launch(url)) throw 'Could not launch $url';
 }

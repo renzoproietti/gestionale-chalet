@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/cart_handler.dart';
 import 'package:fluttertest/datepicker_dialog.dart';
 import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
@@ -38,8 +39,6 @@ Container createSezioneLettini(
   PageController _pageController,
   Function(int, bool) callback,
 ) {
-  final lettiniMapKey = GlobalKey();
-  final CustomDatePicker datePicker = CustomDatePicker();
   MultipleCounter counter = MultipleCounter();
   return PageContainer(
     gradients: const <Color>[
@@ -126,11 +125,8 @@ Container createSezioneLettini(
                                     onTap: () {
                                       //if the counter is positive then
                                       //decrease it on tap of remove icon.
-                                      if (item.number > 0) {
-                                        item.number--;
-                                        counter.updateMap(item, false);
-                                        Chalet.of(context)!.setState(() {});
-                                      }
+                                      removeItem(item, counter,
+                                          Chalet.of(context) as State);
                                     },
                                     child: const Icon(
                                       Icons.remove,
@@ -149,9 +145,8 @@ Container createSezioneLettini(
                                 Flexible(
                                   child: InkWell(
                                     onTap: () {
-                                      item.number++;
-                                      counter.updateMap(item, true);
-                                      Chalet.of(context)!.setState(() {});
+                                      addItem(item, counter,
+                                          Chalet.of(context) as State);
                                     },
                                     child: const Icon(
                                       Icons.add,
@@ -181,7 +176,9 @@ Container createSezioneLettini(
           ),
           innerPadding: EdgeInsets.all(15),
           onPressed: () {
-            showDialog(context: context, builder: (context) => datePicker);
+            showDialog(
+                    context: context, builder: (context) => CustomDatePicker())
+                .then((value) => loadItemsOnCart(counter));
           },
         ),
       ],
