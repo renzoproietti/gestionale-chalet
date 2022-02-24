@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/internationalization.dart';
+import 'Database/sqlite.dart';
 import 'home_page.dart';
 
-void main() => runApp(const Chalet());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  /// Initialize sq-lite
+  final db = SqliteDB();
+ db.createClientTable();
+  db.countTable();
+
+  runApp(const Chalet());
+}
 
 //Probabilmente si potrebbero gestire le varie istanze
 //del locale con un notifier, invece di aggiornarle manualmente? (@filippo)

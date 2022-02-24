@@ -82,7 +82,7 @@ List<Widget> cartList(BuildContext context) {
         SizedBox(
           child: createText(item.header,
               color: Colors.black, size: 18, alignment: TextAlign.left),
-          width: MediaQuery.of(context).size.width / 4,
+          width: MediaQuery.of(context).size.width / 4.5,
         ),
         SizedBox(
           child: createText('x' + item.number.toString(),
@@ -96,8 +96,49 @@ List<Widget> cartList(BuildContext context) {
             width: 32,
             height: 32,
           ),
-          onTap: () {},
-        ),
+          onTap : () => showDialog(
+            context: context,
+            builder: (context)=> Dialog(
+              child: Container(
+              width: MediaQuery.of(context).size.width / 3,
+              height: MediaQuery.of(context).size.height / 3,
+              color: Colors.white,
+                child: Column(
+                    children: [
+
+                const Padding(
+                padding: EdgeInsets.only(top: 30),
+              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children :[
+                  Padding(
+                    padding: EdgeInsets.only(left:30),
+                    child: createText(
+                    item.header,
+                    alignment: TextAlign.left,
+                    weight: FontWeight.normal,
+                      letterSpacing: 1.1,
+                      size: 20,
+                      color: Colors.black),
+
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(right:50),
+                      child: createText(
+                          item.number.toString(),
+                          alignment: TextAlign.right,
+                          weight: FontWeight.normal,
+                          letterSpacing: 1.1,
+                          size: 20,
+                          color: Colors.black),)]
+
+                )]),),
+          ),
+          ),
+            ),
+
+
         Padding(padding: EdgeInsets.only(left: 5)),
         InkWell(
           child: Image(

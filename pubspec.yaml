@@ -31,8 +31,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  sqflite:
-  path:
+  sqflite: ^2.0.2
+  path_provider: ^2.0.9
 
 
 
