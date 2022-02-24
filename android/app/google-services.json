@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "557656269415",
+    "firebase_url": "https://casottoapp-f7068-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "casottoapp-f7068",
+    "storage_bucket": "casottoapp-f7068.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557656269415:android:3b3573fb5e691cf6bfeac2",
+        "android_client_info": {
+          "package_name": "com.pawm2122.app.fluttertest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557656269415-pu8bbago8tmgnh3jqf2qricq0cpfrmdg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pawm2122.app.fluttertest ",
+            "certificate_hash": "49307d53923c99adf70bbde7677eec0d5860e758"
+          }
+        },
+        {
+          "client_id": "557656269415-fgqdtfncl3atbo48oa92p5likpsd3r79.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAhDomiZ92EwPWkR-wKlHwFnTq0RsK9_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557656269415-fgqdtfncl3atbo48oa92p5likpsd3r79.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
