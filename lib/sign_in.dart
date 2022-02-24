@@ -84,7 +84,7 @@ class SignInDemoState extends State<SignInDemo> {
     return null;
   }
 
-  Future<void> handleSignIn() async {
+  Future<void> _handleSignIn() async {
     try {
       await _googleSignIn.signIn();
     } catch (error) {
@@ -120,14 +120,25 @@ class SignInDemoState extends State<SignInDemo> {
         ],
       );
     } else {
-      //TODO
-      handleSignIn();
-      return SizedBox();
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            const Text('You are not currently signed in.'),
+            ElevatedButton(
+              child: const Text('SIGN IN'),
+              onPressed: _handleSignIn,
+            ),
+          ],
+        ),
+      );
     }
   }
 
   Function getSignInHandler() {
-    return handleSignIn;
+    return _handleSignIn;
   }
 
   @override
