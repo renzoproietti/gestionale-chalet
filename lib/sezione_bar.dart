@@ -8,7 +8,8 @@ import 'main.dart';
 
 Container createSezioneBar(BuildContext context, PageController _pageController,
     Function(int, bool) callback) {
-  MultipleCounter counter = MultipleCounter();
+  MultipleCounter counter = MultipleCounter(key: 2);
+  globalCounters.putIfAbsent(2, () => counter);
   return PageContainer(
     gradients: const <Color>[Color(0xffffb643), Color(0xff33a284)],
     child: Column(
@@ -112,7 +113,7 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
           innerPadding: EdgeInsets.all(15),
           onPressed: () {
             showTimePicker(context: context, initialTime: TimeOfDay.now())
-                .then((value) => loadItemsOnCart(counter));
+                .then((value) => updateOrders(counter, "Ristorante"));
           },
         ),
       ],

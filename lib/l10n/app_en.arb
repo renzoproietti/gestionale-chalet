@@ -24,6 +24,23 @@
     "settima": "Seventh",
     "ottava": "Eighth",
     "nona": "Ninth",
-    "decima": "Tithe"
+    "decima": "Tithe",
+
+    "noaccesso": "You are not currently signed in.",
+    "accedi": "Log in",
+    "registrati": "Sign in",
+
+    "nomeutente": "Username",
+    "password": "Password",
+
+    "accedicon": "Log in with",
+    "registraticon": "Sign in with",
+
+    "passdimenticata": "Forgot password?",
+
+    "oppure": "Or",
+
+    "accessoeffettuato": "Login succesful!"
+
     
 }

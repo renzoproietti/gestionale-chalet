@@ -39,7 +39,8 @@ Container createSezioneLettini(
   PageController _pageController,
   Function(int, bool) callback,
 ) {
-  MultipleCounter counter = MultipleCounter();
+  MultipleCounter counter = MultipleCounter(key: 1);
+  globalCounters.putIfAbsent(1, () => counter);
   return PageContainer(
     gradients: const <Color>[
       Color(0xff701c18),
@@ -174,11 +175,11 @@ Container createSezioneLettini(
             width: 36,
             height: 36,
           ),
-          innerPadding: EdgeInsets.all(15),
+          innerPadding: const EdgeInsets.all(15),
           onPressed: () {
             showDialog(
                     context: context, builder: (context) => CustomDatePicker())
-                .then((value) => loadItemsOnCart(counter));
+                .whenComplete(() => updateOrders(counter, "Lettini"));
           },
         ),
       ],

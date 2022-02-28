@@ -24,5 +24,21 @@
     "settima": "Settima",
     "ottava": "Ottava",
     "nona": "Nona",
-    "decima": "Decima"
+    "decima": "Decima",
+
+    "noaccesso": "Non hai effettuato l'accesso.",
+    "accedi": "Accedi",
+    "registrati": "Registrati",
+
+    "nomeutente": "nome utente",
+    "password": "password",
+
+    "accedicon": "Accedi con",
+    "registraticon": "Registrati con",
+
+    "passdimenticata": "Password dimenticata?",
+
+    "oppure": "Oppure",
+
+    "accessoeffettuato": "Accesso effettuato con successo!"
 }

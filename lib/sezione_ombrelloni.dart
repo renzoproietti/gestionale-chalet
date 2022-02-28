@@ -141,10 +141,10 @@ Container createSezioneOmbrelloni(
                                   child: TextButton(
                                     onPressed: () {
                                       showDialog(
-                                          context: context,
-                                          builder: (context) =>
-                                              CustomDatePicker()).then(
-                                          (value) => loadItemOnCart(item));
+                                              context: context,
+                                              builder: (context) =>
+                                                  CustomDatePicker())
+                                          .then((value) => {});
                                     },
                                     child: createText(
                                       item.body,

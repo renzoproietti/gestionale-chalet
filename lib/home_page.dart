@@ -25,13 +25,20 @@ class _HomePageState extends State<HomePage> {
   final _pageController = PageController(initialPage: 0);
   final _cartKey = GlobalKey();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   List<PopupMenuEntry> menu = [
-    PopupMenuItem(child: createText('Impostazioni', color: Colors.black)),
     PopupMenuItem(
-        child: createText('Offrici un caffè', color: Colors.black),
+        child: createText('Impostazioni', color: Colors.black, size: 18)),
+    PopupMenuItem(
+        child: createText('Offrici un caffè', color: Colors.black, size: 18),
         onTap: () => _launchURL(
             "https://github.com/filippofracascia/gestionale-chalet")),
-    PopupMenuItem(child: createText('Informazioni legali', color: Colors.black))
+    PopupMenuItem(
+        child: createText('Informazioni legali', color: Colors.black, size: 18))
   ];
 
   @override
@@ -43,7 +50,10 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
-            icon: const Icon(Icons.portrait_outlined),
+            icon: const Icon(
+              Icons.table_rows_rounded,
+              size: 32,
+            ),
             onPressed: () {
               Navigator.of(context).push(createRoute(Profile()));
             },
@@ -55,7 +65,10 @@ class _HomePageState extends State<HomePage> {
                   position: RelativeRect.fromLTRB(
                       MediaQuery.of(context).size.width, 0, 0, 0),
                   items: menu),
-              child: Icon(Icons.more_vert_outlined),
+              child: const Icon(
+                Icons.more_vert_outlined,
+                size: 32,
+              ),
             )
           ],
           centerTitle: true,
@@ -98,6 +111,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
           elevation: 0,
           onPressed: () {
+            initCart();
             showDialog(
                 context: context, builder: (context) => CartPopup(_cartKey));
           },

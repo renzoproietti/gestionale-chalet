@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-abstract class ListItem {
+class ListItem {
   Icon icon;
 
   bool isExpanded;
   String header;
   String body;
   String infos;
+  String category;
   int number;
 
   ListItem({
@@ -14,18 +15,21 @@ abstract class ListItem {
     this.header = '\t',
     this.body = '\t',
     this.infos = '\t',
+    this.category = '\t',
     this.icon = empty_icon,
     this.number = 0,
   });
 }
 
 class OmbrelloniItem extends ListItem {
-  OmbrelloniItem({isExpanded, header, body, infos, icon})
+  OmbrelloniItem(
+      {isExpanded, header, body, infos, icon, category = 'Ombrelloni'})
       : super(
           isExpanded: false,
           header: header,
           body: body,
           infos: infos,
+          category: category,
           icon: const Icon(Icons.beach_access_rounded),
         );
 }
@@ -36,6 +40,7 @@ class LettiniItem extends ListItem {
     header,
     body,
     infos,
+    category = 'Lettini',
     icon,
     number,
   }) : super(
@@ -43,6 +48,7 @@ class LettiniItem extends ListItem {
           header: header,
           body: body,
           infos: infos,
+          category: category,
           icon: empty_icon,
           number: number,
         );
@@ -50,8 +56,13 @@ class LettiniItem extends ListItem {
 
 class MenuItem extends ListItem {
   MenuItem(
-      {header, isExpanded, this.nome = '\t', this.prezzo = 0, this.id = 42})
-      : super(header: header);
+      {header,
+      isExpanded,
+      this.nome = '\t',
+      this.prezzo = 0,
+      this.id = 42,
+      category = 'Ristorante'})
+      : super(header: header, category: category);
 
   final String nome;
   final double prezzo;
@@ -153,6 +164,9 @@ List<MenuItem> getAmari() {
 
 class MultipleCounter {
   Map<ListItem, int> countMap = {};
+  int? key;
+
+  MultipleCounter({this.key});
 
   void updateMap(ListItem item, bool increment) {
     countMap.update(item, (value) => increment ? value++ : value--);

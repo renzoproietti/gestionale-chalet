@@ -41,10 +41,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   scrollable_positioned_list: ^0.2.3
   syncfusion_flutter_datepicker: ^19.4.47
-  google_sign_in: ^5.2.3
+  google_sign_in: ^5.2.4
   http: ^0.13.4
   intl: ^0.17.0
   url_launcher: ^6.0.20
+  flutter_signin_button: ^2.0.0
 
 
 dev_dependencies:
@@ -86,6 +87,9 @@ flutter:
     - lib/assets/booking_2.png
     - lib/assets/delete.png
     - lib/assets/pencil.png
+    - lib/assets/btn_google_dark.png
+    - lib/assets/btn_google_dark_normal.png
+    - lib/assets/google_signin.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -106,6 +110,9 @@ flutter:
     - family: DancingScript
       fonts:
         - asset: lib/fonts/DancingScript-VariableFont_wght.ttf
+    - family: Roboto
+      fonts:
+        - asset: lib/fonts/Roboto-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
