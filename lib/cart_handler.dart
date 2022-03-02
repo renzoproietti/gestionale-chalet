@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/datepicker_dialog.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/widgets_builder.dart';
 
@@ -13,9 +14,9 @@ class CartPopupState extends State<CartPopup> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetAnimationDuration: Duration(milliseconds: 300),
+      insetAnimationDuration: const Duration(milliseconds: 300),
       backgroundColor: Colors.white,
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width / 3,
         height: MediaQuery.of(context).size.height / 3,
         child: Column(
@@ -24,10 +25,38 @@ class CartPopupState extends State<CartPopup> {
               padding: EdgeInsets.only(top: 10),
             ),
             SizedBox(
-              child: ListView(
-                  children:
-                      _children), //child: ListView(shrinkWrap: false, children: _items.map((key, value) => createText(key))),
+              child: ListView(children: _children),
               height: MediaQuery.of(context).size.height / 4,
+            ),
+            const Padding(padding: EdgeInsets.only(top: 5)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                OutlinedButton(
+                    child: const Icon(Icons.settings_rounded),
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      primary: Colors.blueGrey,
+                    )),
+                OutlinedButton(
+                    child: const Icon(Icons.date_range_rounded),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => CustomDatePicker());
+                    },
+                    style: OutlinedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      primary: Colors.blueGrey,
+                    )),
+                OutlinedButton(
+                  child: const Icon(Icons.payments_rounded),
+                  onPressed: null,
+                  style: OutlinedButton.styleFrom(
+                      shape: const CircleBorder(), primary: Colors.blueGrey),
+                )
+              ],
             )
           ],
         ),
@@ -36,23 +65,26 @@ class CartPopupState extends State<CartPopup> {
   }
 }
 
-List<String> _categories = ["Ombrelloni", "Lettini", "Ristorante"];
+const List<String> _categories = ["Ombrelloni", "Lettini", "Ristorante"];
 List<Widget> _children = [];
-Map<int, List<Widget>> _subChildren = {};
+Map<String, List<Widget>> _subChildren = {};
 
+/// Carica gli ordini se non sono presenti
 void _loadOrders(MultipleCounter counter, String category) {
   _clearOrders();
   _subChildren.putIfAbsent(
-      counter.key!, () => _subChildrenToWidget(counter, category));
+      counter.category!, () => _subChildrenToWidget(counter, category));
 }
 
+/// Aggiunge gli ordini non presenti e aggiorna quelli già presenti
 void updateOrders(MultipleCounter counter, String category) {
   _clearOrders();
   _loadOrders(counter, category);
   _subChildren.update(
-      counter.key!, (value) => _subChildrenToWidget(counter, category));
+      counter.category!, (value) => _subChildrenToWidget(counter, category));
 }
 
+/// Pulisce gli ordini
 void _clearOrders() {
   _subChildren.clear();
 }
@@ -69,7 +101,7 @@ void initCart() {
 
 /// Initializza una categoria.
 /// Il titolo è applicato in base al nome della categoria,
-/// A fine titolo attacco un'altra lista che è proprio quella degli ordini.
+/// A fine titolo è attaccata un'altra lista che è proprio quella degli ordini.
 List<Widget> _initCategoryList(MultipleCounter counter, String category) {
   return <Widget>[
         createText(category,

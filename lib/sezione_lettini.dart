@@ -6,28 +6,29 @@ import 'widgets_builder.dart';
 import 'main.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 List<LettiniItem> _lettini = <LettiniItem>[
   LettiniItem(
       header: "Lettini",
       body: 'Aggiungi',
       infos: '\t',
-      icon: Icons.bedroom_child_outlined,
-      number: 0),
+      number: 0,
+      prezzo: 6.0,
+      isExpanded: false),
   LettiniItem(
       header: "Sdraio",
       body: 'Aggiungi',
       infos: '\t',
-      icon: Icons.king_bed_outlined,
-      number: 0),
+      number: 0,
+      prezzo: 5.0,
+      isExpanded: false),
   LettiniItem(
-    header: "Sedie",
-    body: 'Aggiungi',
-    infos: '\t',
-    icon: Icons.chair_alt_outlined,
-    number: 0,
-  ),
+      header: "Sedie",
+      body: 'Aggiungi',
+      infos: '\t',
+      number: 0,
+      prezzo: 4.0,
+      isExpanded: false),
 ];
 
 List<LettiniItem> getLettini() {
@@ -39,7 +40,7 @@ Container createSezioneLettini(
   PageController _pageController,
   Function(int, bool) callback,
 ) {
-  MultipleCounter counter = MultipleCounter(key: 1);
+  MultipleCounter counter = MultipleCounter(category: "Lettini");
   globalCounters.putIfAbsent(1, () => counter);
   return PageContainer(
     gradients: const <Color>[
@@ -59,9 +60,9 @@ Container createSezioneLettini(
               image: AssetImage("lib/assets/sunbed_icon.png"),
               width: 48,
               height: 48),
-          innerPadding: EdgeInsets.all(18),
+          innerPadding: const EdgeInsets.all(18),
           page: 0,
-          animationTime: Duration(milliseconds: 400),
+          animationTime: const Duration(milliseconds: 400),
         ),
         Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 8),
@@ -76,17 +77,17 @@ Container createSezioneLettini(
             borderRadius: BorderRadius.circular(5),
           ),
           width: MediaQuery.of(context).size.width - 65,
-          child: Scrollbar(
-            child: Center(
-              child: MediaQuery.removePadding(
-                removeTop: true,
-                context: context,
+          child: MediaQuery.removePadding(
+            removeTop: true,
+            context: context,
+            child: Scrollbar(
+              child: Center(
                 child: ListView(
                   shrinkWrap: true,
                   children: <Widget>[
                     custom_panel.ExpansionPanelList(
-                      expandedHeaderPadding:
-                          EdgeInsets.symmetric(vertical: 9, horizontal: 0),
+                      expandedHeaderPadding: const EdgeInsets.symmetric(
+                          vertical: 9, horizontal: 0),
                       expansionCallback: callback,
                       inBetweenPadding: 0.2,
                       children: _lettini.map((ListItem item) {

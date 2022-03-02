@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 
 class ListItem {
-  Icon icon;
-
+  double prezzo = 0.0;
+  String header = '\t';
+  String body = '\t';
+  String? infos;
+  String category = '\t';
   bool isExpanded;
-  String header;
-  String body;
-  String infos;
-  String category;
   int number;
 
   ListItem({
+    required this.prezzo,
+    required this.header,
+    required this.body,
     this.isExpanded = false,
-    this.header = '\t',
-    this.body = '\t',
     this.infos = '\t',
     this.category = '\t',
-    this.icon = empty_icon,
     this.number = 0,
   });
 }
 
 class OmbrelloniItem extends ListItem {
   OmbrelloniItem(
-      {isExpanded, header, body, infos, icon, category = 'Ombrelloni'})
+      {isExpanded,
+      header,
+      body = '\t',
+      infos,
+      prezzo = 0.0,
+      category = 'Ombrelloni'})
       : super(
-          isExpanded: false,
+          isExpanded: isExpanded!,
           header: header,
           body: body,
           infos: infos,
           category: category,
-          icon: const Icon(Icons.beach_access_rounded),
+          prezzo: prezzo,
         );
 }
 
@@ -41,16 +45,16 @@ class LettiniItem extends ListItem {
     body,
     infos,
     category = 'Lettini',
-    icon,
+    prezzo,
     number,
   }) : super(
-          isExpanded: false,
+          isExpanded: isExpanded!,
           header: header,
           body: body,
           infos: infos,
           category: category,
-          icon: empty_icon,
           number: number,
+          prezzo: prezzo,
         );
 }
 
@@ -58,11 +62,17 @@ class MenuItem extends ListItem {
   MenuItem(
       {header,
       isExpanded,
+      body = '\t',
       this.nome = '\t',
       this.prezzo = 0,
       this.id = 42,
       category = 'Ristorante'})
-      : super(header: header, category: category);
+      : super(
+            body: body,
+            header: header,
+            category: category,
+            prezzo: prezzo,
+            isExpanded: isExpanded!);
 
   final String nome;
   final double prezzo;
@@ -70,60 +80,60 @@ class MenuItem extends ListItem {
 }
 
 final List<MenuItem> _menu = <MenuItem>[
-  MenuItem(header: 'Antipasti'),
-  MenuItem(header: 'Primi'),
-  MenuItem(header: 'Secondi'),
-  MenuItem(header: 'Contorni'),
-  MenuItem(header: 'Dolci'),
-  MenuItem(header: 'Bevande'),
-  MenuItem(header: 'Vini'),
-  MenuItem(header: 'Digestivi/Amari')
+  MenuItem(header: 'Antipasti', isExpanded: false),
+  MenuItem(header: 'Primi', isExpanded: false),
+  MenuItem(header: 'Secondi', isExpanded: false),
+  MenuItem(header: 'Contorni', isExpanded: false),
+  MenuItem(header: 'Dolci', isExpanded: false),
+  MenuItem(header: 'Bevande', isExpanded: false),
+  MenuItem(header: 'Vini', isExpanded: false),
+  MenuItem(header: 'Digestivi/Amari', isExpanded: false)
 ];
 final List<MenuItem> _antipasti = <MenuItem>[
-  MenuItem(header: 'Melone', prezzo: 5),
-  MenuItem(header: 'Salmone', prezzo: 7),
-  MenuItem(header: 'Patatine', prezzo: 2),
-  MenuItem(header: 'Olive', prezzo: 5),
+  MenuItem(header: 'Melone', prezzo: 5, isExpanded: false),
+  MenuItem(header: 'Salmone', prezzo: 7, isExpanded: false),
+  MenuItem(header: 'Patatine', prezzo: 2, isExpanded: false),
+  MenuItem(header: 'Olive', prezzo: 5, isExpanded: false),
 ];
 final List<MenuItem> _primi = <MenuItem>[
-  MenuItem(header: 'Spaghetti', prezzo: 11),
-  MenuItem(header: 'Strozzapreti', prezzo: 9),
-  MenuItem(header: 'Lasagne', prezzo: 10),
-  MenuItem(header: 'Gnocchi', prezzo: 8),
+  MenuItem(header: 'Spaghetti', prezzo: 11, isExpanded: false),
+  MenuItem(header: 'Strozzapreti', prezzo: 9, isExpanded: false),
+  MenuItem(header: 'Lasagne', prezzo: 10, isExpanded: false),
+  MenuItem(header: 'Gnocchi', prezzo: 8, isExpanded: false),
 ];
 final List<MenuItem> _secondi = <MenuItem>[
-  MenuItem(header: 'Grigliata mista', prezzo: 15),
-  MenuItem(header: 'Fritto Misto', prezzo: 13),
-  MenuItem(header: 'Fritto gamberi/calamari', prezzo: 11),
+  MenuItem(header: 'Grigliata mista', prezzo: 15, isExpanded: false),
+  MenuItem(header: 'Fritto Misto', prezzo: 13, isExpanded: false),
+  MenuItem(header: 'Fritto gamberi/calamari', prezzo: 11, isExpanded: false),
 ];
 final List<MenuItem> _contorni = <MenuItem>[
-  MenuItem(header: 'Patatine', prezzo: 5),
-  MenuItem(header: 'Olive Ascolane', prezzo: 5),
-  MenuItem(header: 'Crocchette', prezzo: 5),
-  MenuItem(header: 'Cozze', prezzo: 7),
-  MenuItem(header: 'Insalata', prezzo: 6),
+  MenuItem(header: 'Patatine', prezzo: 5, isExpanded: false),
+  MenuItem(header: 'Olive Ascolane', prezzo: 5, isExpanded: false),
+  MenuItem(header: 'Crocchette', prezzo: 5, isExpanded: false),
+  MenuItem(header: 'Cozze', prezzo: 7, isExpanded: false),
+  MenuItem(header: 'Insalata', prezzo: 6, isExpanded: false),
 ];
 final List<MenuItem> _dolci = <MenuItem>[
-  MenuItem(header: 'Tiramisù', prezzo: 4),
-  MenuItem(header: 'Panna cotta', prezzo: 4),
-  MenuItem(header: 'Sorbetto', prezzo: 3),
-  MenuItem(header: 'Gelato', prezzo: 2.50),
+  MenuItem(header: 'Tiramisù', prezzo: 4, isExpanded: false),
+  MenuItem(header: 'Panna cotta', prezzo: 4, isExpanded: false),
+  MenuItem(header: 'Sorbetto', prezzo: 3, isExpanded: false),
+  MenuItem(header: 'Gelato', prezzo: 2.50, isExpanded: false),
 ];
 final List<MenuItem> _bevande = <MenuItem>[
-  MenuItem(header: 'Acqua naturale', prezzo: 1),
-  MenuItem(header: 'Acqua frizzante', prezzo: 1),
-  MenuItem(header: 'Coca-Cola', prezzo: 2.50),
-  MenuItem(header: 'Fanta', prezzo: 2.50),
-  MenuItem(header: 'Sprite', prezzo: 2.50),
-  MenuItem(header: 'Birra', prezzo: 3.50),
+  MenuItem(header: 'Acqua naturale', prezzo: 1, isExpanded: false),
+  MenuItem(header: 'Acqua frizzante', prezzo: 1, isExpanded: false),
+  MenuItem(header: 'Coca-Cola', prezzo: 2.50, isExpanded: false),
+  MenuItem(header: 'Fanta', prezzo: 2.50, isExpanded: false),
+  MenuItem(header: 'Sprite', prezzo: 2.50, isExpanded: false),
+  MenuItem(header: 'Birra', prezzo: 3.50, isExpanded: false),
 ];
 final List<MenuItem> _vini = <MenuItem>[
-  MenuItem(header: 'Rosso', prezzo: 4),
-  MenuItem(header: 'Bianco', prezzo: 4),
+  MenuItem(header: 'Rosso', prezzo: 4, isExpanded: false),
+  MenuItem(header: 'Bianco', prezzo: 4, isExpanded: false),
 ];
 final List<MenuItem> _amari = <MenuItem>[
-  MenuItem(header: 'Rosso', prezzo: 4),
-  MenuItem(header: 'Bianco', prezzo: 4),
+  MenuItem(header: 'Rosso', prezzo: 4, isExpanded: false),
+  MenuItem(header: 'Bianco', prezzo: 4, isExpanded: false),
 ];
 
 List<MenuItem> getMenu() {
@@ -164,9 +174,9 @@ List<MenuItem> getAmari() {
 
 class MultipleCounter {
   Map<ListItem, int> countMap = {};
-  int? key;
+  String? category;
 
-  MultipleCounter({this.key});
+  MultipleCounter({this.category});
 
   void updateMap(ListItem item, bool increment) {
     countMap.update(item, (value) => increment ? value++ : value--);

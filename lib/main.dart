@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertest/cart_handler.dart';
 import 'package:fluttertest/internationalization.dart';
 import 'Database/sqlite.dart';
 import 'home_page.dart';

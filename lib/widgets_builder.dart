@@ -122,7 +122,7 @@ Route createRoute(Widget loginPage) {
   );
 }
 
-Container listContainer(MenuItem item, int counter, Function? onRemoveTap(),
+Container listContainer(ListItem item, int counter, Function? onRemoveTap(),
     Function? onAddTap(), BuildContext context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),

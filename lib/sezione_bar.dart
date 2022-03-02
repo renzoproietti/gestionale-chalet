@@ -8,7 +8,7 @@ import 'main.dart';
 
 Container createSezioneBar(BuildContext context, PageController _pageController,
     Function(int, bool) callback) {
-  MultipleCounter counter = MultipleCounter(key: 2);
+  MultipleCounter counter = MultipleCounter(category: "Bar");
   globalCounters.putIfAbsent(2, () => counter);
   return PageContainer(
     gradients: const <Color>[Color(0xffffb643), Color(0xff33a284)],
@@ -43,11 +43,11 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
             ),
             borderRadius: BorderRadius.circular(5),
           ),
-          child: Scrollbar(
-            child: Center(
-              child: MediaQuery.removePadding(
-                removeTop: true,
-                context: context,
+          child: MediaQuery.removePadding(
+            removeTop: true,
+            context: context,
+            child: Scrollbar(
+              child: Center(
                 child: ListView(
                   shrinkWrap: false,
                   children: <Widget>[
@@ -81,6 +81,7 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
                             isExpanded: section!.isExpanded,
                             body: ListView(
                                 shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
                                 children: _pickItem(section.header)
                                     .map((MenuItem pietanza) {
                                   counter.addEntry(

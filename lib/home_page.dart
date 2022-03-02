@@ -89,8 +89,7 @@ class _HomePageState extends State<HomePage> {
           createSezioneOmbrelloni(context, _pageController, //2nd page
               (int index, bool isExpanded) {
             setState(() {
-              getOmbrelloni()[index].isExpanded =
-                  !getOmbrelloni()[index].isExpanded;
+              getFile()[index].isExpanded = !getFile()[index].isExpanded;
             });
           }),
           createSezioneLettini(context, _pageController,
