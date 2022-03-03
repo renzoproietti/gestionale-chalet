@@ -21,13 +21,16 @@ class ListItem {
 }
 
 class OmbrelloniItem extends ListItem {
+  Image? busyIcon;
+
   OmbrelloniItem(
       {isExpanded,
       header,
       body = '\t',
       infos,
       prezzo = 0.0,
-      category = 'Ombrelloni'})
+      category = 'Ombrelloni',
+      this.busyIcon})
       : super(
           isExpanded: isExpanded!,
           header: header,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/datepicker_dialog.dart';
 import 'list_item_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -138,10 +139,10 @@ Container listContainer(ListItem item, int counter, Function? onRemoveTap(),
         SizedBox(
           child: createText(item.header,
               color: Colors.black, size: 14, alignment: TextAlign.left),
-          width: MediaQuery.of(context).size.width / 2.5,
+          width: MediaQuery.of(context).size.width / 2.75,
         ),
         SizedBox(
-          child: createText(item.prezzo.toString() + '0€',
+          child: createText(item.prezzo.toString() + '€',
               color: Colors.black, size: 14, alignment: TextAlign.left),
           width: MediaQuery.of(context).size.width / 5,
         ),
@@ -163,6 +164,44 @@ Container listContainer(ListItem item, int counter, Function? onRemoveTap(),
                   size: 18,
                 ),
                 onTap: onAddTap),
+          ],
+        )
+      ],
+    ),
+  );
+}
+
+Container listContainerOmbrelloni(ListItem item, BuildContext context) {
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+    decoration: const BoxDecoration(
+        color: Colors.white,
+        backgroundBlendMode: BlendMode.multiply,
+        border: Border.symmetric(
+            horizontal: BorderSide(color: Colors.black26, width: 0.3),
+            vertical: BorderSide(color: Colors.black26, width: 0.3))),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SizedBox(
+          child: createText(item.header,
+              color: Colors.black, size: 14, alignment: TextAlign.left),
+          width: MediaQuery.of(context).size.width / 3.5,
+        ),
+        SizedBox(
+          child: createText(item.prezzo.toString() + '0€',
+              color: Colors.black, size: 14, alignment: TextAlign.left),
+          width: MediaQuery.of(context).size.width / 5,
+        ),
+        Row(
+          children: [
+            TextButton(
+              onPressed: () {
+                showDialog(
+                    context: context, builder: (context) => CustomDatePicker());
+              },
+              child: createText(item.body, color: Colors.blue, size: 18),
+            ),
           ],
         )
       ],

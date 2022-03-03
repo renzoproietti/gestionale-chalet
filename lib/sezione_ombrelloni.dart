@@ -6,10 +6,26 @@ import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/custom_expansion_panel.dart' as custom_panel;
 
 List<OmbrelloniItem> _file = <OmbrelloniItem>[
-  OmbrelloniItem(header: "Prima fila", isExpanded: false),
-  OmbrelloniItem(header: "Seconda fila", isExpanded: false),
-  OmbrelloniItem(header: "Terza fila", isExpanded: false),
-  OmbrelloniItem(header: "Quarta fila", isExpanded: false),
+  OmbrelloniItem(
+      header: "Prima fila",
+      isExpanded: false,
+      busyIcon: green_light,
+      prezzo: 15.00),
+  OmbrelloniItem(
+      header: "Seconda fila",
+      isExpanded: false,
+      busyIcon: red_light,
+      prezzo: 12.00),
+  OmbrelloniItem(
+      header: "Terza fila",
+      isExpanded: false,
+      busyIcon: green_light,
+      prezzo: 9.00),
+  OmbrelloniItem(
+      header: "Quarta fila",
+      isExpanded: false,
+      busyIcon: green_light,
+      prezzo: 6.00),
 ];
 const int ombrelloniPerFila = 10;
 
@@ -62,9 +78,9 @@ Container createSezioneOmbrelloni(
               EdgeInsets.only(top: MediaQuery.of(context).size.height / 11),
         ),
         Container(
-          width: MediaQuery.of(context).size.width / 1.2,
-          height: MediaQuery.of(context).size.height / 3.39,
-
+          width: MediaQuery.of(context).size.width * 80 / 100,
+          //height: MediaQuery.of(context).size.height * 60 / 100,
+          constraints: expanded ? BoxConstraints(maxHeight: 400) : null,
           decoration: BoxDecoration(
             color: Colors.transparent,
             border: Border.all(
@@ -78,69 +94,74 @@ Container createSezioneOmbrelloni(
           child: MediaQuery.removePadding(
             removeTop: true,
             context: context,
-            child: Scrollbar(
-              isAlwaysShown: true,
-              interactive: true,
-              child: Center(
-                child: ListView(
-                  shrinkWrap: false,
-                  children: <Widget>[
-                    custom_panel.ExpansionPanelList(
-                      inBetweenPadding: 0.2,
-                      expandedHeaderPadding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 0),
-                      expansionCallback: callback,
-                      children: getFile().map((OmbrelloniItem fila) {
-                        initFila(fila);
-                        return CustomExpansionPanel(
-                            canTapOnHeader: true,
-                            headerBuilder:
-                                (BuildContext context, bool isExpanded) {
-                              return Row(
-                                children: <Widget>[
-                                  Padding(
-                                      padding: EdgeInsets.only(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              20)),
-                                  createText(fila.header,
-                                      alignment: TextAlign.left,
-                                      weight: FontWeight.bold,
-                                      letterSpacing: 1.2,
-                                      size: 20,
-                                      color: Colors.black),
-                                ],
-                              );
-                            },
-                            isExpanded: fila.isExpanded,
-                            body: ListView(
-                                physics: BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                children:
-                                    initFila(fila).map((ListItem ombrellone) {
-                                  counter.addEntry(
-                                      MapEntry(ombrellone, ombrellone.number));
+            child: Center(
+              //child: Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  custom_panel.ExpansionPanelList(
+                    inBetweenPadding: 0.2,
+                    expandedHeaderPadding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+                    expansionCallback: callback,
+                    children: getFile().map((OmbrelloniItem fila) {
+                      expanded = getIsExpanded(getFile());
+                      return CustomExpansionPanel(
+                          canTapOnHeader: true,
+                          headerBuilder:
+                              (BuildContext context, bool isExpanded) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                ),
+                                fila.busyIcon!,
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                ),
+                                createText(fila.header,
+                                    alignment: TextAlign.left,
+                                    weight: FontWeight.bold,
+                                    letterSpacing: 1.2,
+                                    size: 20,
+                                    color: Colors.black),
+                              ],
+                            );
+                          },
+                          isExpanded: fila.isExpanded,
+                          body: ListView(
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
+                              children:
+                                  initFila(fila).map((ListItem ombrellone) {
+                                counter.addEntry(
+                                    MapEntry(ombrellone, ombrellone.number));
 
-                                  return listContainer(ombrellone,
-                                      counter.getCounterFromItem(ombrellone),
-                                      () {
-                                    removeItem(ombrellone, counter,
-                                        Chalet.of(context) as State);
-                                  }, () {
-                                    addItem(ombrellone, counter,
-                                        Chalet.of(context) as State);
-                                  }, context);
-                                }).toList()));
-                      }).toList(),
-                    ),
-                  ],
-                ),
+                                return listContainerOmbrelloni(
+                                  ombrellone,
+                                  context,
+                                );
+                              }).toList()));
+                    }).toList(),
+                  ),
+                ],
               ),
             ),
           ),
         ),
+        //),
       ],
     ),
   );
+}
+
+bool expanded = false;
+
+bool getIsExpanded(List<OmbrelloniItem> items) {
+  bool isExpanded = false;
+  for (var v in items) {
+    if (v.isExpanded) isExpanded = true;
+  }
+  return isExpanded;
 }
