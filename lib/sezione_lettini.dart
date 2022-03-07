@@ -127,8 +127,8 @@ Container createSezioneLettini(
                                     onTap: () {
                                       //if the counter is positive then
                                       //decrease it on tap of remove icon.
-                                      removeItem(item, counter,
-                                          Chalet.of(context) as State);
+                                      removeItem(item, counter);
+                                      Chalet.of(context)!.setState(() {});
                                     },
                                     child: const Icon(
                                       Icons.remove,
@@ -147,8 +147,8 @@ Container createSezioneLettini(
                                 Flexible(
                                   child: InkWell(
                                     onTap: () {
-                                      addItem(item, counter,
-                                          Chalet.of(context) as State);
+                                      addItem(item, counter);
+                                      Chalet.of(context)!.setState(() {});
                                     },
                                     child: const Icon(
                                       Icons.add,

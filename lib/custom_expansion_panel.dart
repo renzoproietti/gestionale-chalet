@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// IMPORTANT!!
+
 // This file is an override of the file located inside flutter's source code.
 // This was necessary because flutter adds a default padding between two
 // expansion panels which is unwanted inside the application.

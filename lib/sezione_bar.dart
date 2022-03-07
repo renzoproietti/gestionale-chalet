@@ -25,9 +25,9 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
             width: 48,
             height: 48,
           ),
-          innerPadding: EdgeInsets.all(18),
+          innerPadding: const EdgeInsets.all(18),
           page: 0,
-          animationTime: Duration(milliseconds: 500),
+          animationTime: const Duration(milliseconds: 500),
         ),
         Padding(
             padding:
@@ -81,7 +81,7 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
                             isExpanded: section!.isExpanded,
                             body: ListView(
                                 shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 children: _pickItem(section.header)
                                     .map((MenuItem pietanza) {
                                   counter.addEntry(
@@ -89,11 +89,11 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
 
                                   return listContainer(pietanza,
                                       counter.getCounterFromItem(pietanza), () {
-                                    removeItem(pietanza, counter,
-                                        Chalet.of(context) as State);
+                                    removeItem(pietanza, counter);
+                                    Chalet.of(context)!.setState(() {});
                                   }, () {
-                                    addItem(pietanza, counter,
-                                        Chalet.of(context) as State);
+                                    addItem(pietanza, counter);
+                                    Chalet.of(context)!.setState(() {});
                                   }, context);
                                 }).toList()));
                       }).toList(),
@@ -104,14 +104,14 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
             ),
           ),
         ),
-        Padding(padding: EdgeInsets.only(top: 20)),
+        const Padding(padding: EdgeInsets.only(top: 20)),
         CustomHomeButton(
           child: const Image(
             image: AssetImage("lib/assets/booking.png"),
             width: 36,
             height: 36,
           ),
-          innerPadding: EdgeInsets.all(15),
+          innerPadding: const EdgeInsets.all(15),
           onPressed: () {
             showTimePicker(context: context, initialTime: TimeOfDay.now())
                 .then((value) => updateOrders(counter, "Ristorante"));

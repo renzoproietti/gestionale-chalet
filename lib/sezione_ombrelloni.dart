@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/main.dart';
 import 'custom_expansion_panel.dart';
 import 'widgets_builder.dart';
 import 'package:fluttertest/list_item_handler.dart';
@@ -9,23 +8,33 @@ List<OmbrelloniItem> _file = <OmbrelloniItem>[
   OmbrelloniItem(
       header: "Prima fila",
       isExpanded: false,
-      busyIcon: green_light,
+      busyIcon: greenLight,
       prezzo: 15.00),
   OmbrelloniItem(
       header: "Seconda fila",
       isExpanded: false,
-      busyIcon: red_light,
-      prezzo: 12.00),
+      busyIcon: redLight,
+      prezzo: 13.00),
   OmbrelloniItem(
       header: "Terza fila",
       isExpanded: false,
-      busyIcon: green_light,
-      prezzo: 9.00),
+      busyIcon: greenLight,
+      prezzo: 11.00),
   OmbrelloniItem(
       header: "Quarta fila",
       isExpanded: false,
-      busyIcon: green_light,
-      prezzo: 6.00),
+      busyIcon: greenLight,
+      prezzo: 9.00),
+  OmbrelloniItem(
+      header: "Quinta fila",
+      isExpanded: false,
+      busyIcon: redLight,
+      prezzo: 7.00),
+  OmbrelloniItem(
+      header: "Sesta fila",
+      isExpanded: false,
+      busyIcon: greenLight,
+      prezzo: 5.00),
 ];
 const int ombrelloniPerFila = 10;
 
@@ -79,8 +88,8 @@ Container createSezioneOmbrelloni(
         ),
         Container(
           width: MediaQuery.of(context).size.width * 80 / 100,
-          //height: MediaQuery.of(context).size.height * 60 / 100,
-          constraints: expanded ? BoxConstraints(maxHeight: 400) : null,
+          height: MediaQuery.of(context).size.height * 45 / 100,
+
           decoration: BoxDecoration(
             color: Colors.transparent,
             border: Border.all(
@@ -97,7 +106,7 @@ Container createSezioneOmbrelloni(
             child: Center(
               //child: Expanded(
               child: ListView(
-                shrinkWrap: true,
+                shrinkWrap: false,
                 children: <Widget>[
                   custom_panel.ExpansionPanelList(
                     inBetweenPadding: 0.2,
@@ -105,7 +114,6 @@ Container createSezioneOmbrelloni(
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                     expansionCallback: callback,
                     children: getFile().map((OmbrelloniItem fila) {
-                      expanded = getIsExpanded(getFile());
                       return CustomExpansionPanel(
                           canTapOnHeader: true,
                           headerBuilder:
@@ -149,19 +157,8 @@ Container createSezioneOmbrelloni(
               ),
             ),
           ),
-        ),
-        //),
+        ), //),
       ],
     ),
   );
-}
-
-bool expanded = false;
-
-bool getIsExpanded(List<OmbrelloniItem> items) {
-  bool isExpanded = false;
-  for (var v in items) {
-    if (v.isExpanded) isExpanded = true;
-  }
-  return isExpanded;
 }
