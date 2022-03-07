@@ -1,30 +1,29 @@
 
 class Clienti{
 
-  final int _id;
-  String _nome;
-  String _email;
-  final int _eta;
+  final int id;
+  final String nome;
+  final String email;
+  final int eta;
 
-  Clienti(this._id, this._nome, this._email, this._eta);
+  Clienti({required this.id, required this.nome, required this.email, required this.eta});
+
+
   Map<String, dynamic> toMap() {
     return {
-      'id': _id,
-      'nome': _nome,
-      'email' : _email,
-      'eta' : _eta
+      'id': id,
+      'nome': nome,
+      'email' : email,
+      'eta' : eta,
 
     };
   }
-  Clienti.fromMapObject(Map<String, dynamic> clientiMap)
-      : _id = clientiMap['id'],
-        _nome = clientiMap['title'],
-        _email = clientiMap['email'],
-        _eta = clientiMap['eta'];
+  factory Clienti.fromMap(Map<String, dynamic> json) => Clienti(
+        id: json['id'],
+        nome: json['nome'],
+        email: json['email'],
+        eta: json['eta'],
+  );
 
 
-  @override
-  String toString() {
-    return 'Clienti{id: $_id, nome: $_nome}';
-  }
 }
