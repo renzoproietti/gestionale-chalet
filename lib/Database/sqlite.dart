@@ -31,7 +31,7 @@ class SqliteDB {
   Future countTable() async {
     var dbClient = await db;
     var res =
-        await dbClient?.query("""SELECT COUNT(*) AS count FROM sqlite_master
+    await dbClient?.query("""SELECT COUNT(*) FROM *
          WHERE type = 'table' 
          AND name != 'android_metadata' 
          AND name != 'sqlite_sequence';""");
@@ -63,7 +63,26 @@ class SqliteDB {
 
     /// Adds user to table
     final dbClient = await SqliteDB().db;
-    int? res = await dbClient?.insert("Nome", user);
+    int? res = await dbClient?.insert("Clienti", user);
     return res;
   }
+
+
+
+  Future addClien1() async {
+    /// User data
+    dynamic user = {
+      "id": "mario",
+      "name": "rossi",
+      "email": "efgh@example.com",
+      "age": 15
+    };
+
+    /// Adds user to table
+    final dbClient = await SqliteDB().db;
+    int? res = await dbClient?.insert("Clienti", user);
+    return res;
+  }
+
+
 }

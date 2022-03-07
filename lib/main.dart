@@ -1,23 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/internationalization.dart';
-import 'Database/sqlite.dart';
 import 'home_page.dart';
 
-void main() async {
+Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
-  /// Initialize sq-lite
-  //final db = SqliteDB();
-  //db.createClientTable();
-  //db.countTable();
-
-  runApp(const Chalet());
+  runApp(Chalet());
 }
 
 //Probabilmente si potrebbero gestire le varie istanze
 //del locale con un notifier, invece di aggiornarle manualmente? (@filippo)
 class Chalet extends StatefulWidget {
-  const Chalet({Key? key}) : super(key: key);
+
+  Chalet({Key? key}) : super(key: key);
+
+
+
 
   @override
   _ChaletState createState() => _ChaletState();
@@ -38,6 +37,11 @@ class Chalet extends StatefulWidget {
 class _ChaletState extends State<Chalet> {
   Locale _locale = getSupportedLocales().first;
 
+  final Future<FirebaseApp> fbApp = Firebase.initializeApp();
+
+
+
+
   void changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
@@ -46,12 +50,38 @@ class _ChaletState extends State<Chalet> {
 
   @override
   Widget build(BuildContext context) {
+    //Chalet chalet = Chalet();
     return MaterialApp(
-      home: HomePage(),
-      locale: _locale,
-      supportedLocales: getSupportedLocales(),
-      localizationsDelegates: getDelegates(),
-      localeResolutionCallback: localeResolutionCallback,
+        locale: _locale,
+        supportedLocales: getSupportedLocales(),
+        localizationsDelegates: getDelegates(),
+        localeResolutionCallback: localeResolutionCallback,
+      home: FutureBuilder(
+
+        future: fbApp,
+        builder: (context, snapshot){
+          if (snapshot.hasError) {
+            print('E presente un errore! ${snapshot.error.toString()}');
+            return Text('Something went wrong!');
+          }else if (snapshot.hasData){
+            return HomePage();
+
+          }
+          else {
+            return Center(
+            child: CircularProgressIndicator(),
+            );
+          }
+
+
+      },
+      )
+
+
+
+
+
+
     );
   }
 }
