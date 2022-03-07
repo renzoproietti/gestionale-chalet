@@ -29,34 +29,11 @@ class CartPopupState extends State<CartPopup> {
               height: MediaQuery.of(context).size.height / 4,
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                OutlinedButton(
-                    child: const Icon(Icons.settings_rounded),
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      primary: Colors.blueGrey,
-                    )),
-                OutlinedButton(
-                    child: const Icon(Icons.date_range_rounded),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => CustomDatePicker());
-                    },
-                    style: OutlinedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      primary: Colors.blueGrey,
-                    )),
-                OutlinedButton(
-                  child: const Icon(Icons.payments_rounded),
-                  onPressed: null,
-                  style: OutlinedButton.styleFrom(
-                      shape: const CircleBorder(), primary: Colors.blueGrey),
-                )
-              ],
+            OutlinedButton(
+              child: const Icon(Icons.payments_rounded),
+              onPressed: null,
+              style: OutlinedButton.styleFrom(
+                  shape: const CircleBorder(), primary: Colors.blueGrey),
             )
           ],
         ),
@@ -90,22 +67,43 @@ void _clearOrders() {
 }
 
 /// Inizializza il carrello
-void initCart() {
+void initCart(BuildContext context) {
   _children.clear();
   for (MultipleCounter counter in globalCounters.values) {
     _loadOrders(counter, counter.countMap.keys.first.category);
-    _children.addAll(
-        _initCategoryList(counter, counter.countMap.keys.first.category));
+    _children.addAll(_initCategoryList(
+        context, counter, counter.countMap.keys.first.category));
   }
 }
 
 /// Initializza una categoria.
 /// Il titolo è applicato in base al nome della categoria,
 /// A fine titolo è attaccata un'altra lista che è proprio quella degli ordini.
-List<Widget> _initCategoryList(MultipleCounter counter, String category) {
+List<Widget> _initCategoryList(
+    BuildContext context, MultipleCounter counter, String category) {
   return <Widget>[
-        createText(category,
-            size: 20, weight: FontWeight.bold, color: Colors.black),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(padding: EdgeInsets.only(left: 1)),
+            createText(category,
+                size: 20, weight: FontWeight.bold, color: Colors.black),
+            OutlinedButton(
+                child: const Icon(Icons.date_range_rounded),
+                onPressed: category == "Ombrelloni"
+                    ? null
+                    : () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => CustomDatePicker());
+                      },
+                style: OutlinedButton.styleFrom(
+                  shape: const CircleBorder(),
+                  primary: Colors.blueGrey,
+                )),
+          ],
+        ),
         const Padding(padding: EdgeInsets.only(top: 5)),
         const Divider(height: 2.5, indent: 25, endIndent: 25),
         const Padding(padding: EdgeInsets.only(top: 5))
@@ -127,8 +125,7 @@ List<Widget> _subChildrenToWidget(MultipleCounter counter, String category) {
       .toList();
 }
 
-/// Crea la riga che contiene le informazioni di un item (Per ora nome
-/// e quantità, da aggiungere il prezzo)
+/// Crea la riga che contiene le informazioni di un item.
 Row _createItemRow(ListItem item) {
   return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
     const Padding(padding: EdgeInsets.only(left: 20)),

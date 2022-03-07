@@ -65,7 +65,7 @@ Container createSezioneLettini(
           animationTime: const Duration(milliseconds: 400),
         ),
         Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 8),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 6),
         ),
         Container(
           decoration: BoxDecoration(
@@ -165,23 +165,6 @@ Container createSezioneLettini(
               ),
             ),
           ),
-        ),
-        Padding(
-          padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
-        ),
-        CustomHomeButton(
-          child: const Image(
-            image: AssetImage("lib/assets/booking.png"),
-            width: 36,
-            height: 36,
-          ),
-          innerPadding: const EdgeInsets.all(15),
-          onPressed: () {
-            showDialog(
-                    context: context, builder: (context) => CustomDatePicker())
-                .whenComplete(() => updateOrders(counter, "Lettini"));
-          },
         ),
       ],
     ),

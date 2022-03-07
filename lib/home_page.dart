@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
           elevation: 0,
           onPressed: () {
-            initCart();
+            initCart(context);
             showDialog(
                 context: context, builder: (context) => CartPopup(_cartKey));
           },

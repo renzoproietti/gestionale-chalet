@@ -35,6 +35,11 @@ List<OmbrelloniItem> _file = <OmbrelloniItem>[
       isExpanded: false,
       busyIcon: greenLight,
       prezzo: 5.00),
+  OmbrelloniItem(
+      header: "Settima fila",
+      isExpanded: false,
+      busyIcon: greenLight,
+      prezzo: 4.00),
 ];
 const int ombrelloniPerFila = 10;
 

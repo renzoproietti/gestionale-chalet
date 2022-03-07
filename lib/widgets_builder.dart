@@ -123,8 +123,12 @@ Route createRoute(Widget loginPage) {
   );
 }
 
-Container listContainer(ListItem item, int counter, Function? onRemoveTap(),
-    Function? onAddTap(), BuildContext context) {
+Container listContainer(
+    ListItem item,
+    int counter,
+    Function? Function() onRemoveTap,
+    Function? Function() onAddTap,
+    BuildContext context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
     decoration: const BoxDecoration(
@@ -185,12 +189,12 @@ Container listContainerOmbrelloni(ListItem item, BuildContext context) {
       children: [
         SizedBox(
           child: createText(item.header,
-              color: Colors.black, size: 14, alignment: TextAlign.left),
-          width: MediaQuery.of(context).size.width / 3.5,
+              color: Colors.black, size: 16, alignment: TextAlign.left),
+          width: MediaQuery.of(context).size.width / 4,
         ),
         SizedBox(
           child: createText(item.prezzo.toString() + '0€',
-              color: Colors.black, size: 14, alignment: TextAlign.left),
+              color: Colors.black, size: 16, alignment: TextAlign.left),
           width: MediaQuery.of(context).size.width / 5,
         ),
         Row(
@@ -311,5 +315,3 @@ class _LogInScreenState extends State<StatefulWidget> {
     );
   }
 }
-
-final Map<int, MultipleCounter> globalCounters = {};

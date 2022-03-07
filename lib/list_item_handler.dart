@@ -220,6 +220,8 @@ void removeItem(ListItem item, MultipleCounter counter) {
   }
 }
 
+final Map<int, MultipleCounter> globalCounters = {};
+
 const Image greenLight = Image(
   image: AssetImage("lib/assets/green_circle.png"),
   width: 24,

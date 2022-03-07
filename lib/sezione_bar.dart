@@ -104,19 +104,6 @@ Container createSezioneBar(BuildContext context, PageController _pageController,
             ),
           ),
         ),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        CustomHomeButton(
-          child: const Image(
-            image: AssetImage("lib/assets/booking.png"),
-            width: 36,
-            height: 36,
-          ),
-          innerPadding: const EdgeInsets.all(15),
-          onPressed: () {
-            showTimePicker(context: context, initialTime: TimeOfDay.now())
-                .then((value) => updateOrders(counter, "Ristorante"));
-          },
-        ),
       ],
     ),
   );
