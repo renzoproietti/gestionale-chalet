@@ -152,9 +152,7 @@ Container createSezioneOmbrelloni(
                                     MapEntry(ombrellone, ombrellone.number));
 
                                 return listContainerOmbrelloni(
-                                  ombrellone,
-                                  context,
-                                );
+                                    ombrellone, context, counter);
                               }).toList()));
                     }).toList(),
                   ),

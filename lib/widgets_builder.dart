@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/cart_handler.dart';
 import 'package:fluttertest/datepicker_dialog.dart';
 import 'list_item_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -175,7 +176,8 @@ Container listContainer(
   );
 }
 
-Container listContainerOmbrelloni(ListItem item, BuildContext context) {
+Container listContainerOmbrelloni(
+    ListItem item, BuildContext context, MultipleCounter counter) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
     decoration: const BoxDecoration(
@@ -201,6 +203,7 @@ Container listContainerOmbrelloni(ListItem item, BuildContext context) {
           children: [
             TextButton(
               onPressed: () {
+                addItem(item, counter);
                 showDialog(
                     context: context, builder: (context) => CustomDatePicker());
               },

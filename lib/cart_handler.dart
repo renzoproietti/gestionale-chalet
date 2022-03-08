@@ -86,7 +86,7 @@ List<Widget> _initCategoryList(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(padding: EdgeInsets.only(left: 1)),
+            const Padding(padding: EdgeInsets.only(left: 1)),
             createText(category,
                 size: 20, weight: FontWeight.bold, color: Colors.black),
             OutlinedButton(
