@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/internationalization.dart';
-import 'home_page.dart';
-
+import 'package:fluttertest/services/auth.dart';
+import 'package:fluttertest/wrapper.dart';
+import 'package:provider/provider.dart';
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(Chalet());
 }
@@ -37,7 +40,7 @@ class Chalet extends StatefulWidget {
 class _ChaletState extends State<Chalet> {
   Locale _locale = getSupportedLocales().first;
 
-  final Future<FirebaseApp> fbApp = Firebase.initializeApp();
+
 
 
 
@@ -51,37 +54,22 @@ class _ChaletState extends State<Chalet> {
   @override
   Widget build(BuildContext context) {
     //Chalet chalet = Chalet();
-    return MaterialApp(
-        locale: _locale,
-        supportedLocales: getSupportedLocales(),
-        localizationsDelegates: getDelegates(),
-        localeResolutionCallback: localeResolutionCallback,
-      home: FutureBuilder(
-
-        future: fbApp,
-        builder: (context, snapshot){
-          if (snapshot.hasError) {
-            print('E presente un errore! ${snapshot.error.toString()}');
-            return Text('Something went wrong!');
-          }else if (snapshot.hasData){
-            return HomePage();
-
-          }
-          else {
-            return Center(
-            child: CircularProgressIndicator(),
-            );
-          }
-
-
-      },
-      )
+    return StreamProvider.value(
+      initialData: null,
+      value: AuthService().user,
+      child: MaterialApp(
+          locale: _locale,
+          supportedLocales: getSupportedLocales(),
+          localizationsDelegates: getDelegates(),
+          localeResolutionCallback: localeResolutionCallback,
+        home: Wrapper(),
 
 
 
 
 
 
+      ),
     );
   }
 }

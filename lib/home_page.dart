@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/landing_section.dart';
+import 'package:fluttertest/services/auth.dart';
 import 'package:fluttertest/sezione_bar.dart';
 import 'package:fluttertest/sezione_lettini.dart';
 import 'package:fluttertest/sezione_ombrelloni.dart';
@@ -8,6 +9,7 @@ import 'package:fluttertest/widgets_builder.dart';
 import 'package:fluttertest/cart_handler.dart';
 import 'list_item_handler.dart';
 import 'sezione_profilo.dart';
+import 'services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 ///Classe responsabile per la home page in generale,
@@ -15,7 +17,9 @@ import 'package:url_launcher/url_launcher.dart';
 ///E' composta da: sezione landing, sezione
 ///ombrelloni, sezione lettini, sezione bar e sezione eventi.
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+   const HomePage({Key? key}) : super(key: key);
+
+
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -24,6 +28,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _pageController = PageController(initialPage: 0);
   final _cartKey = GlobalKey();
+  final AuthService _auth = AuthService();
+
 
   @override
   void initState() {
@@ -59,6 +65,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           actions: <Widget>[
+            IconButton(onPressed: () async {
+              await _auth.signOut() ;
+            },
+                icon: Icon(Icons.person),
+              tooltip: 'Logout',
+            ),
+
             InkWell(
               onTap: () => showMenu(
                   context: context,
