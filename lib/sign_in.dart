@@ -1,8 +1,8 @@
 import 'dart:async';
+import 'package:fluttertest/services/auth.dart';
 import 'dart:convert' show json;
-
-import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
+import "package:http/http.dart" as http;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets_builder.dart';
@@ -49,7 +49,9 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
               size: 15),
           action: SnackBarAction(
             label: 'Undo',
-            onPressed: () {},
+            onPressed: () {
+
+            },
           ),
         ));
       }
@@ -64,7 +66,7 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
     }
   }
 
-  Future<void> _handleSignOut() async {
+  Future<void> handleSignOut() async {
     await _googleSignIn.disconnect();
   }
 
@@ -77,6 +79,7 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
     }
   }
 
+
   Function getSignInHandler() {
     return _handleSignIn;
   }
@@ -88,6 +91,7 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: createText(AppLocalizations.of(context)!.signin),
@@ -111,6 +115,8 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
             child: _buildBody(),
             color: Color(0xff161055),
           ),
+
+
         ],
       ),
       //constraints: const BoxConstraints.expand(),

@@ -138,8 +138,11 @@ class _StateProfile extends State<Profile> {
           ),
           Padding(padding: EdgeInsets.only(top: 5)),
           InkWell(
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (buildContext) => SignInDemo())),
+            onTap: () async {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (buildContext) => SignInDemo()));
+            }/*Navigator.push(context,
+                MaterialPageRoute(builder: (buildContext) => SignInDemo()))*/,
             child: Container(
               alignment: Alignment.centerLeft,
               height: 60,

@@ -32,6 +32,10 @@
 
     "nomeutente": "nome utente",
     "password": "password",
+    "nome": "nome",
+    "cognome": "cognome",
+    "email": "email",
+
 
     "accedicon": "Accedi con",
     "registraticon": "Registrati con",

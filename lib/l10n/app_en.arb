@@ -31,7 +31,10 @@
     "registrati": "Sign in",
 
     "nomeutente": "Username",
+    "nome": "Name",
+    "cognome": "Surname",
     "password": "Password",
+    "email": "email",
 
     "accedicon": "Log in with",
     "registraticon": "Sign in with",
