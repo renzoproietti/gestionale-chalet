@@ -37,7 +37,7 @@ Sono stati necessari alcuni packages esterni, primo tra questi il widget per il 
 ##
 # Implementazioni future
 <ul>
-    <li>Visualizzazione in tempo reale dello stato delle prenotazioni</li>;
+    <li>Visualizzazione in tempo reale dello stato delle prenotazioni;</li>
     <li>Possibilità lato gestore di aggiungere/rimuovere/modificare le categorie e le varie voci da cui sono composte.</li>
 </ul>
 
