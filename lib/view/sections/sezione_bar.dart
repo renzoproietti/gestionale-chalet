@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/controller/list_item_handler.dart';
+import 'package:Chalet/controller/list_item_handler.dart';
 import '../external/custom_expansion_panel.dart';
 import '../core/widgets_builder.dart';
 import '../external/custom_expansion_panel.dart' as custom_panel;
@@ -35,7 +35,7 @@ class _SezioneBarState extends State<SezioneBar> {
           CustomHomeButton(
             pageController: widget.pageController,
             child: const Image(
-              image: AssetImage("lib/assets/bar_icon.png"),
+              image: AssetImage("lib/assets/images/bar_icon.png"),
               width: 48,
               height: 48,
             ),

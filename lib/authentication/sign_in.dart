@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:fluttertest/authentication/services/auth.dart';
-import 'package:fluttertest/view/core/widgets_builder.dart';
+import 'package:Chalet/authentication/services/auth.dart';
+import 'package:Chalet/view/core/widgets_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 

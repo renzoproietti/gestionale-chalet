@@ -1,8 +1,9 @@
+import 'package:Chalet/view/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertest/controller/internationalization/internationalization.dart';
-import 'package:fluttertest/authentication/services/auth.dart';
-import 'package:fluttertest/wrapper.dart';
+import 'package:Chalet/controller/internationalization/internationalization.dart';
+import 'package:Chalet/authentication/services/auth.dart';
+import 'package:Chalet/wrapper.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -52,7 +53,7 @@ class _ChaletState extends State<Chalet> {
         supportedLocales: getSupportedLocales(),
         localizationsDelegates: getDelegates(),
         localeResolutionCallback: localeResolutionCallback,
-        home: const Wrapper(),
+        home: const HomePage(),
       ),
     );
   }

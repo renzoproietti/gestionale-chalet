@@ -17,7 +17,7 @@ Container createHomeScreen(
             children: [
               CustomHomeButton(
                 child: const Image(
-                    image: AssetImage("lib/assets/umbrella_icon.png"),
+                    image: AssetImage("lib/assets/images/umbrella_icon.png"),
                     width: 64,
                     height: 64),
                 pageController: _pageController,
@@ -30,7 +30,7 @@ Container createHomeScreen(
                       EdgeInsets.all(MediaQuery.of(context).size.width) / 30),
               CustomHomeButton(
                 child: const Image(
-                    image: AssetImage("lib/assets/sunbed_icon.png"),
+                    image: AssetImage("lib/assets/images/sunbed_icon.png"),
                     width: 64,
                     height: 64),
                 pageController: _pageController,
@@ -48,7 +48,7 @@ Container createHomeScreen(
             children: [
               CustomHomeButton(
                 child: const Image(
-                  image: AssetImage("lib/assets/bar_icon.png"),
+                  image: AssetImage("lib/assets/images/bar_icon.png"),
                   width: 64,
                   height: 64,
                 ),
@@ -62,7 +62,7 @@ Container createHomeScreen(
                       EdgeInsets.all(MediaQuery.of(context).size.width) / 30),
               CustomHomeButton(
                 child: const Image(
-                    image: AssetImage("lib/assets/event_icon.png"),
+                    image: AssetImage("lib/assets/images/event_icon.png"),
                     width: 64,
                     height: 64),
                 pageController: _pageController,

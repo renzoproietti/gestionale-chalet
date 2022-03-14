@@ -1,4 +1,4 @@
-package com.pawm2122.app.fluttertest
+package com.pawm2122.app.Chalet
 
 import io.flutter.embedding.android.FlutterActivity
 

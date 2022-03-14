@@ -12,7 +12,7 @@ Container createSezioneEventi(
         CustomHomeButton(
           pageController: _pageController,
           child: const Image(
-              image: AssetImage("lib/assets/event_icon.png"),
+              image: AssetImage("lib/assets/images/event_icon.png"),
               width: 48,
               height: 48),
           innerPadding: EdgeInsets.all(18),

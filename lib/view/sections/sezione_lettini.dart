@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../external/custom_expansion_panel.dart';
 import '../core/widgets_builder.dart';
-import 'package:fluttertest/controller/list_item_handler.dart';
-import 'package:fluttertest/view/external/custom_expansion_panel.dart'
+import 'package:Chalet/controller/list_item_handler.dart';
+import 'package:Chalet/view/external/custom_expansion_panel.dart'
     as custom_panel;
 
 List<LettiniItem> _lettini = <LettiniItem>[
@@ -68,7 +68,7 @@ class _SezioneLettiniState extends State<SezioneLettini> {
           CustomHomeButton(
             pageController: widget.pageController,
             child: const Image(
-                image: AssetImage("lib/assets/sunbed_icon.png"),
+                image: AssetImage("lib/assets/images/sunbed_icon.png"),
                 width: 48,
                 height: 48),
             innerPadding: const EdgeInsets.all(18),

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pawm2122.app.fluttertest">
+    package="com.pawm2122.app.Chalet">
    <application
-        android:label="fluttertest"
+        android:label="Chalet"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

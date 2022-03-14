@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/authentication/services/auth.dart';
+import 'package:Chalet/authentication/services/auth.dart';
 
 
 

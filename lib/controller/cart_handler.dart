@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/view/external/datepicker_dialog.dart';
-import 'package:fluttertest/controller/list_item_handler.dart';
-import 'package:fluttertest/view/core/widgets_builder.dart';
+import 'package:Chalet/view/external/datepicker_dialog.dart';
+import 'package:Chalet/controller/list_item_handler.dart';
+import 'package:Chalet/view/core/widgets_builder.dart';
 
 class Cart extends StatefulWidget {
   @override
@@ -144,7 +144,7 @@ Row _createItemRow(ListItem item) {
     InkWell(
       onTap: () {},
       child: const Image(
-        image: AssetImage("lib/assets/pencil.png"),
+        image: AssetImage("lib/assets/images/pencil.png"),
         width: 24,
         height: 24,
       ),
@@ -153,7 +153,7 @@ Row _createItemRow(ListItem item) {
     InkWell(
       onTap: () {},
       child: const Image(
-        image: AssetImage("lib/assets/delete.png"),
+        image: AssetImage("lib/assets/images/delete.png"),
         width: 24,
         height: 24,
       ),

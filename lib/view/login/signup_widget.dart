@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/assets/theme.dart';
+import 'package:Chalet/assets/theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../core/widgets_builder.dart';
 import '../../assets/theme.dart';

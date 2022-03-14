@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/view/external/datepicker_dialog.dart';
 import '../../controller/list_item_handler.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 /**File utility per la creazione dell'interfaccia base.
 Tutti i metodi riguardanti operazioni che vengono 

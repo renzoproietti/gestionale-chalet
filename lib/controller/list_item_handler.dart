@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/main.dart';
 
 class ListItem {
   double prezzo = 0.0;
@@ -235,12 +234,12 @@ void removeOnlyItem(ListItem item) {
 final Map<int, MultipleCounter> globalCounters = {};
 
 const Image greenLight = Image(
-  image: AssetImage("lib/assets/green_circle.png"),
+  image: AssetImage("lib/assets/images/green_circle.png"),
   width: 24,
   height: 24,
 );
 const Image redLight = Image(
-  image: AssetImage("lib/assets/red_circle.png"),
+  image: AssetImage("lib/assets/images/red_circle.png"),
   width: 24,
   height: 24,
 );

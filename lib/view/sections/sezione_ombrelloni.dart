@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../external/custom_expansion_panel.dart';
 import '../core/widgets_builder.dart';
-import 'package:fluttertest/controller/list_item_handler.dart';
-import 'package:fluttertest/view/external/custom_expansion_panel.dart' as custom_panel;
+import 'package:Chalet/controller/list_item_handler.dart';
+import 'package:Chalet/view/external/custom_expansion_panel.dart'
+    as custom_panel;
 
 List<OmbrelloniItem> _file = <OmbrelloniItem>[
   OmbrelloniItem(
@@ -95,7 +96,7 @@ class _SezioneOmbrelloniState extends State<SezioneOmbrelloni> {
           ),
           CustomHomeButton(
             child: const Image(
-                image: AssetImage("lib/assets/umbrella_icon.png"),
+                image: AssetImage("lib/assets/images/umbrella_icon.png"),
                 width: 48,
                 height: 48),
             pageController: widget.pageController,

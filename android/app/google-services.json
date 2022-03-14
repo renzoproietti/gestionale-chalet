@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:233799355459:android:41f661b7cd50efc87558f6",
         "android_client_info": {
-          "package_name": "com.pawm2122.app.fluttertest"
+          "package_name": "com.pawm2122.app.Chalet"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "233799355459-has49df2d98enoh0cmjn3ju9e3brqmoq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pawm2122.app.fluttertest",
+            "package_name": "com.pawm2122.app.Chalet",
             "certificate_hash": "43dda8637da0414d678eff7fe3d4c532d30c61fc"
           }
         },

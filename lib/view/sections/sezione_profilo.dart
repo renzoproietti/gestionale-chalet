@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/authentication/sign_in.dart';
+import 'package:Chalet/authentication/sign_in.dart';
 import '../../controller/internationalization/internationalization.dart';
 import '../../main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -44,7 +44,7 @@ class _StateProfile extends State<Profile> {
                 child: AlertDialog(
                   contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 80),
                   elevation: 24.0,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   content: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -70,8 +70,8 @@ class _StateProfile extends State<Profile> {
                                 Navigator.of(context).pop();
                               },
                               child: const Image(
-                                image:
-                                    AssetImage("lib/assets/united-kingdom.png"),
+                                image: AssetImage(
+                                    "lib/assets/images/united-kingdom.png"),
                                 width: 80,
                                 height: 80,
                               ),
@@ -85,7 +85,8 @@ class _StateProfile extends State<Profile> {
                                 Navigator.of(context).pop();
                               },
                               child: const Image(
-                                image: AssetImage("lib/assets/italy.png"),
+                                image:
+                                    AssetImage("lib/assets/images/italy.png"),
                                 width: 80,
                                 height: 80,
                               ),
@@ -106,37 +107,37 @@ class _StateProfile extends State<Profile> {
               color: Colors.white,
               child: Row(
                 children: [
-                  Padding(padding: EdgeInsets.only(left: 20.0)),
+                  const Padding(padding: EdgeInsets.only(left: 20.0)),
                   Image(
                     image: pickFromLocale(_locale.languageCode),
                     width: 30,
                     height: 30,
                   ),
-                  Padding(padding: EdgeInsets.only(left: 20.0)),
+                  const Padding(padding: EdgeInsets.only(left: 20.0)),
                   createText(AppLocalizations.of(context)!.language,
                       color: Colors.black, size: 20),
                 ],
               ),
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 25)),
+          const Padding(padding: EdgeInsets.only(top: 25)),
           Container(
             alignment: Alignment.centerLeft,
             height: 60,
             width: MediaQuery.of(context).size.width,
             color: Colors.white,
             child: Row(children: [
-              Padding(padding: EdgeInsets.only(left: 20.0)),
+              const Padding(padding: EdgeInsets.only(left: 20.0)),
               const Icon(
                 Icons.location_on,
                 size: 30,
               ),
-              Padding(padding: EdgeInsets.only(left: 20.0)),
+              const Padding(padding: EdgeInsets.only(left: 20.0)),
               createText(AppLocalizations.of(context)!.chaletDesc,
                   color: Colors.black, size: 20),
             ]),
           ),
-          Padding(padding: EdgeInsets.only(top: 5)),
+          const Padding(padding: EdgeInsets.only(top: 5)),
           InkWell(
             onTap: () async {
               Navigator.push(context,
@@ -150,18 +151,18 @@ class _StateProfile extends State<Profile> {
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               child: Row(children: [
-                Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Padding(padding: EdgeInsets.only(left: 20.0)),
                 const Icon(
                   Icons.account_circle_outlined,
                   size: 30,
                 ),
-                Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Padding(padding: EdgeInsets.only(left: 20.0)),
                 createText(AppLocalizations.of(context)!.signin,
                     color: Colors.black, size: 20),
               ]),
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 5)),
+          const Padding(padding: EdgeInsets.only(top: 5)),
           InkWell(
             onTap: () => Navigator.push(
                 context,
@@ -173,19 +174,19 @@ class _StateProfile extends State<Profile> {
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               child: Row(children: [
-                Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Padding(padding: EdgeInsets.only(left: 20.0)),
                 const Image(
-                  image: AssetImage("lib/assets/booking_2.png"),
+                  image: AssetImage("lib/assets/images/booking_2.png"),
                   width: 30,
                   height: 30,
                 ),
-                Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Padding(padding: EdgeInsets.only(left: 20.0)),
                 createText(AppLocalizations.of(context)!.visualizzaprenotazioni,
                     color: Colors.black, size: 20),
               ]),
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 5)),
+          const Padding(padding: EdgeInsets.only(top: 5)),
           InkWell(
             onTap: () => showDialog(
                 context: context, builder: (buildContext) => Container()),
@@ -195,19 +196,19 @@ class _StateProfile extends State<Profile> {
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               child: Row(children: [
-                Padding(padding: EdgeInsets.only(left: 20.0)),
-                Image(
-                  image: AssetImage("lib/assets/megaphone.png"),
+                const Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Image(
+                  image: AssetImage("lib/assets/images/megaphone.png"),
                   width: 30,
                   height: 30,
                 ),
-                Padding(padding: EdgeInsets.only(left: 20.0)),
+                const Padding(padding: EdgeInsets.only(left: 20.0)),
                 createText(AppLocalizations.of(context)!.avvisi,
                     color: Colors.black, size: 20),
               ]),
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 5)),
+          const Padding(padding: EdgeInsets.only(top: 5)),
         ],
       ),
     );
@@ -217,9 +218,9 @@ class _StateProfile extends State<Profile> {
 AssetImage pickFromLocale(String language) {
   switch (language) {
     case 'it':
-      return AssetImage("lib/assets/italy.png");
+      return const AssetImage("lib/assets/images/italy.png");
     case 'en':
-      return AssetImage("lib/assets/united-kingdom.png");
+      return const AssetImage("lib/assets/images/united-kingdom.png");
   }
   throw Exception("Locale not found");
 }
