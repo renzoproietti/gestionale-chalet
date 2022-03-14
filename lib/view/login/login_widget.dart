@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/signup_widget.dart';
+import 'package:fluttertest/view/login/signup_widget.dart';
 import 'package:fluttertest/assets/theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

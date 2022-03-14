@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertest/home_page.dart';
-import 'package:fluttertest/internationalization.dart';
-import 'package:fluttertest/list_item_handler.dart';
-import 'package:fluttertest/services/auth.dart';
+import 'package:fluttertest/controller/internationalization/internationalization.dart';
+import 'package:fluttertest/authentication/services/auth.dart';
 import 'package:fluttertest/wrapper.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +44,6 @@ class _ChaletState extends State<Chalet> {
 
   @override
   Widget build(BuildContext context) {
-    //Chalet chalet = Chalet();
     return StreamProvider.value(
       initialData: null,
       value: AuthService().user,
@@ -56,7 +52,7 @@ class _ChaletState extends State<Chalet> {
         supportedLocales: getSupportedLocales(),
         localizationsDelegates: getDelegates(),
         localeResolutionCallback: localeResolutionCallback,
-        home: const HomePage(),
+        home: const Wrapper(),
       ),
     );
   }

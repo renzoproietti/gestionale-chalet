@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:fluttertest/services/auth.dart';
-import 'package:fluttertest/widgets_builder.dart';
+import 'package:fluttertest/authentication/services/auth.dart';
+import 'package:fluttertest/view/core/widgets_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:intl/intl.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -42,6 +41,12 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
     } catch (error) {
       print('$error');
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override

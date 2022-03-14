@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/landing_section.dart';
-import 'package:fluttertest/services/auth.dart';
-import 'package:fluttertest/sezione_bar.dart';
-import 'package:fluttertest/sezione_lettini.dart';
-import 'package:fluttertest/sezione_ombrelloni.dart';
-import 'package:fluttertest/sezione_eventi.dart';
-import 'package:fluttertest/widgets_builder.dart';
-import 'package:fluttertest/cart_handler.dart';
-import 'list_item_handler.dart';
-import 'sezione_profilo.dart';
-import 'services/auth.dart';
+import 'package:fluttertest/view/sections/landing_section.dart';
+import 'package:fluttertest/authentication/services/auth.dart';
+import 'package:fluttertest/view/sections/sezione_bar.dart';
+import 'package:fluttertest/view/sections/sezione_lettini.dart';
+import 'package:fluttertest/view/sections/sezione_ombrelloni.dart';
+import 'package:fluttertest/view/sections/sezione_eventi.dart';
+import 'package:fluttertest/view/core/widgets_builder.dart';
+import 'package:fluttertest/controller/cart_handler.dart';
+import '../controller/list_item_handler.dart';
+import 'sections/sezione_profilo.dart';
+import '../authentication/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 ///Classe responsabile per la home page in generale,

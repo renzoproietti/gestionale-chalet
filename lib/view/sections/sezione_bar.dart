@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/list_item_handler.dart';
-import 'custom_expansion_panel.dart';
-import 'widgets_builder.dart';
-import 'custom_expansion_panel.dart' as custom_panel;
+import 'package:fluttertest/controller/list_item_handler.dart';
+import '../external/custom_expansion_panel.dart';
+import '../core/widgets_builder.dart';
+import '../external/custom_expansion_panel.dart' as custom_panel;
 
 class SezioneBar extends StatefulWidget {
   @override

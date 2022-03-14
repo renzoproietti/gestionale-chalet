@@ -77,23 +77,23 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/assets/united-kingdom.png
-    - lib/assets/megaphone.png
-    - lib/assets/italy.png
-    - lib/assets/bar_icon.png
-    - lib/assets/umbrella_icon.png
-    - lib/assets/sunbed_blue_icon.png
-    - lib/assets/sunbed_icon.png
-    - lib/assets/event_icon.png
-    - lib/assets/red_circle.png
-    - lib/assets/green_circle.png
-    - lib/assets/booking.png
-    - lib/assets/booking_2.png
-    - lib/assets/delete.png
-    - lib/assets/pencil.png
-    - lib/assets/btn_google_dark.png
-    - lib/assets/btn_google_dark_normal.png
-    - lib/assets/google_signin.png
+    - lib/assets/images/united-kingdom.png
+    - lib/assets/images/megaphone.png
+    - lib/assets/images/italy.png
+    - lib/assets/images/bar_icon.png
+    - lib/assets/images/umbrella_icon.png
+    - lib/assets/images/sunbed_blue_icon.png
+    - lib/assets/images/sunbed_icon.png
+    - lib/assets/images/event_icon.png
+    - lib/assets/images/red_circle.png
+    - lib/assets/images/green_circle.png
+    - lib/assets/images/booking.png
+    - lib/assets/images/booking_2.png
+    - lib/assets/images/delete.png
+    - lib/assets/images/pencil.png
+    - lib/assets/images/btn_google_dark.png
+    - lib/assets/images/btn_google_dark_normal.png
+    - lib/assets/images/google_signin.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -110,13 +110,13 @@ flutter:
   fonts:
     - family: Raleway
       fonts:
-        - asset: lib/fonts/Raleway-Regular.ttf
+        - asset: lib/assets/fonts/Raleway-Regular.ttf
     - family: DancingScript
       fonts:
-        - asset: lib/fonts/DancingScript-VariableFont_wght.ttf
+        - asset: lib/assets/fonts/DancingScript-VariableFont_wght.ttf
     - family: Roboto
       fonts:
-        - asset: lib/fonts/Roboto-Regular.ttf
+        - asset: lib/assets/fonts/Roboto-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

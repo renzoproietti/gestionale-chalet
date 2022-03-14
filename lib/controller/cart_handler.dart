@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/datepicker_dialog.dart';
-import 'package:fluttertest/list_item_handler.dart';
-import 'package:fluttertest/widgets_builder.dart';
+import 'package:fluttertest/view/external/datepicker_dialog.dart';
+import 'package:fluttertest/controller/list_item_handler.dart';
+import 'package:fluttertest/view/core/widgets_builder.dart';
 
 class Cart extends StatefulWidget {
   @override

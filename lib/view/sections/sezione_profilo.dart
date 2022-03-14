@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'internationalization.dart';
-import 'main.dart';
-import 'sign_in.dart';
+import 'package:fluttertest/authentication/sign_in.dart';
+import '../../controller/internationalization/internationalization.dart';
+import '../../main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'widgets_builder.dart';
-import 'visualizza_prenotazioni.dart';
+import '../core/widgets_builder.dart';
+import '../../controller/visualizza_prenotazioni.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -140,9 +140,10 @@ class _StateProfile extends State<Profile> {
           InkWell(
             onTap: () async {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (buildContext) => SignInDemo()));
-            }/*Navigator.push(context,
-                MaterialPageRoute(builder: (buildContext) => SignInDemo()))*/,
+                  MaterialPageRoute(builder: (buildContext) => SignIn()));
+            } /*Navigator.push(context,
+                MaterialPageRoute(builder: (buildContext) => SignInDemo()))*/
+            ,
             child: Container(
               alignment: Alignment.centerLeft,
               height: 60,

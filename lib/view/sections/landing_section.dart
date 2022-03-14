@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets_builder.dart';
+import '../core/widgets_builder.dart';
 
 Container createHomeScreen(
     BuildContext context, PageController _pageController) {

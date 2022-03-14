@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/datepicker_dialog.dart';
-import 'list_item_handler.dart';
+import 'package:fluttertest/view/external/datepicker_dialog.dart';
+import '../../controller/list_item_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -235,109 +235,6 @@ class _ListContainerOmbrelloniState extends State<ListContainerOmbrelloni> {
           )
         ],
       ),
-    );
-  }
-}
-
-class LogInScreen extends StatefulWidget {
-  Function? onGoogleTap;
-
-  LogInScreen({Key? key, this.onGoogleTap}) : super(key: key);
-
-  _LogInScreenState createState() => _LogInScreenState(onGoogleTap);
-}
-
-class _LogInScreenState extends State<StatefulWidget> {
-  Function? onGoogleTap;
-
-  _LogInScreenState(this.onGoogleTap);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height / 7)),
-        const Divider(
-          height: 20,
-          thickness: 2,
-          indent: 50,
-          endIndent: 50,
-        ),
-        Padding(padding: EdgeInsets.only(top: 15)),
-        createText(AppLocalizations.of(context)!.nomeutente.toUpperCase(),
-            size: 20),
-        const Padding(padding: EdgeInsets.only(top: 10)),
-        SizedBox(
-          child: const TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0))),
-                filled: true,
-                isDense: true,
-                fillColor: Colors.white12),
-            style: TextStyle(color: Colors.white),
-          ),
-          width: MediaQuery.of(context).size.width / 1.25,
-        ),
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        createText(AppLocalizations.of(context)!.password.toUpperCase(),
-            size: 20),
-        const Padding(padding: EdgeInsets.only(top: 10)),
-        Container(
-          child: const TextField(
-            autocorrect: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0))),
-                filled: true,
-                isDense: true,
-                fillColor: Colors.white12),
-            style: TextStyle(color: Colors.white),
-            obscureText: true,
-          ),
-          width: MediaQuery.of(context).size.width / 1.25,
-        ),
-        TextButton(
-            onPressed: () {},
-            child: createText(AppLocalizations.of(context)!.passdimenticata,
-                size: 14, color: Colors.blueAccent)),
-        const Divider(
-          thickness: 2,
-          indent: 50,
-          endIndent: 50,
-        ),
-        const Padding(padding: EdgeInsets.only(top: 10)),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(1)),
-                primary: Color(0xff4285F4),
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width / 4.9,
-                    vertical: 10)),
-            onPressed: () {},
-            child: createText(AppLocalizations.of(context)!.accedi,
-                size: 20, weight: FontWeight.bold)),
-        const Padding(padding: EdgeInsets.only(top: 15)),
-        createText('oppure', size: 14),
-        const Padding(padding: EdgeInsets.only(top: 15)),
-        SignInButton(
-          Buttons.GoogleDark,
-          onPressed: onGoogleTap!,
-          text: AppLocalizations.of(context)!.accedicon + ' Google',
-          padding: EdgeInsets.all(5),
-        ),
-        const Padding(padding: EdgeInsets.only(top: 10)),
-        const Divider(
-          thickness: 2,
-          indent: 50,
-          endIndent: 50,
-        )
-      ],
     );
   }
 }
