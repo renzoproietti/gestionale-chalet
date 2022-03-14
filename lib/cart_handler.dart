@@ -3,14 +3,14 @@ import 'package:fluttertest/datepicker_dialog.dart';
 import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/widgets_builder.dart';
 
-class CartPopup extends StatefulWidget {
+class Cart extends StatefulWidget {
   @override
-  CartPopupState createState() => CartPopupState();
+  _CartState createState() => _CartState();
 
-  const CartPopup(Key key) : super(key: key);
+  const Cart(Key key) : super(key: key);
 }
 
-class CartPopupState extends State<CartPopup> {
+class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Dialog(

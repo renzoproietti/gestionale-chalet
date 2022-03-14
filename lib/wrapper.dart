@@ -6,17 +6,17 @@ import 'package:fluttertest/authentication/sign_in.dart';
 import 'package:fluttertest/home_page.dart';
 import 'package:fluttertest/signup_widget.dart';
 import 'package:provider/provider.dart';
+
 class Wrapper extends StatelessWidget {
   const Wrapper({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     final user = Provider.of<User?>(context);
-    if(user == null){
-      return SignIn();
+    if (user == null) {
+      return const SignIn();
     } else {
-      return HomePage();
+      return const HomePage();
     }
   }
 }

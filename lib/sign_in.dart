@@ -26,7 +26,6 @@ class SignInDemo extends StatefulWidget {
 
 class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
   GoogleSignInAccount? _currentUser;
-  String _contactText = '';
 
   late TabController _tabController;
 
@@ -41,20 +40,15 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
       });
     });
     _googleSignIn.signInSilently().whenComplete(() {
-      for (int routes = 0; routes < 2; routes++) {
-        Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.green[400],
-          content: createText(AppLocalizations.of(context)!.accessoeffettuato,
-              size: 15),
-          action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {
-
-            },
-          ),
-        ));
-      }
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.green[400],
+        content: createText(AppLocalizations.of(context)!.accessoeffettuato,
+            size: 15),
+        /*action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {},
+        ),*/
+      ));
     });
   }
 
@@ -72,13 +66,8 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
 
   Widget _buildBody() {
     GoogleSignInAccount? user = _currentUser;
-    if (user != null) {
-      return Container();
-    } else {
-      return LogInScreen(onGoogleTap: _handleSignIn);
-    }
+    return LogInScreen(onGoogleTap: _handleSignIn);
   }
-
 
   Function getSignInHandler() {
     return _handleSignIn;
@@ -90,8 +79,8 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
       resizeToAvoidBottomInset: true,
       extendBody: true,
       extendBodyBehindAppBar: true,
+      backgroundColor: const Color(0xff161055),
       appBar: AppBar(
-
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: createText(AppLocalizations.of(context)!.signin),
@@ -109,19 +98,15 @@ class SignInDemoState extends State<SignInDemo> with TickerProviderStateMixin {
         children: [
           Container(
             child: _buildBody(),
-            color: Color(0xff161055),
+            color: const Color(0xff161055),
           ),
           Container(
             child: _buildBody(),
-            color: Color(0xff161055),
+            color: const Color(0xff161055),
           ),
-
-
         ],
       ),
       //constraints: const BoxConstraints.expand(),
     );
   }
 }
-
-void completed() async {}

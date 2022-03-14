@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/main.dart';
 
 class ListItem {
   double prezzo = 0.0;
@@ -30,15 +31,16 @@ class OmbrelloniItem extends ListItem {
       infos,
       prezzo = 0.0,
       category = 'Ombrelloni',
+      number = 0,
       this.busyIcon})
       : super(
-          isExpanded: isExpanded!,
-          header: header,
-          body: body,
-          infos: infos,
-          category: category,
-          prezzo: prezzo,
-        );
+            isExpanded: isExpanded!,
+            header: header,
+            body: body,
+            infos: infos,
+            category: category,
+            prezzo: prezzo,
+            number: number);
 }
 
 class LettiniItem extends ListItem {
@@ -196,6 +198,10 @@ class MultipleCounter {
     }
   }
 
+  void update(ListItem key) {
+    countMap.update(key, (value) => value);
+  }
+
   void resetItem(ListItem item) {
     for (ListItem e in countMap.keys) {
       if (e == item) e.number = 0;
@@ -212,12 +218,18 @@ class MultipleCounter {
 
 void addItem(ListItem item, MultipleCounter counter) {
   item.number++;
+  counter.update(item);
 }
 
 void removeItem(ListItem item, MultipleCounter counter) {
   if (item.number > 0) {
     item.number--;
+    counter.update(item);
   }
+}
+
+void removeOnlyItem(ListItem item) {
+  item.number--;
 }
 
 final Map<int, MultipleCounter> globalCounters = {};

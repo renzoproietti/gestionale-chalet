@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertest/home_page.dart';
 import 'package:fluttertest/internationalization.dart';
+import 'package:fluttertest/list_item_handler.dart';
 import 'package:fluttertest/services/auth.dart';
 import 'package:fluttertest/wrapper.dart';
 import 'package:provider/provider.dart';
-Future<void> main() async{
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -15,11 +18,7 @@ Future<void> main() async{
 //Probabilmente si potrebbero gestire le varie istanze
 //del locale con un notifier, invece di aggiornarle manualmente? (@filippo)
 class Chalet extends StatefulWidget {
-
   Chalet({Key? key}) : super(key: key);
-
-
-
 
   @override
   _ChaletState createState() => _ChaletState();
@@ -40,11 +39,6 @@ class Chalet extends StatefulWidget {
 class _ChaletState extends State<Chalet> {
   Locale _locale = getSupportedLocales().first;
 
-
-
-
-
-
   void changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
@@ -58,17 +52,11 @@ class _ChaletState extends State<Chalet> {
       initialData: null,
       value: AuthService().user,
       child: MaterialApp(
-          locale: _locale,
-          supportedLocales: getSupportedLocales(),
-          localizationsDelegates: getDelegates(),
-          localeResolutionCallback: localeResolutionCallback,
-        home: Wrapper(),
-
-
-
-
-
-
+        locale: _locale,
+        supportedLocales: getSupportedLocales(),
+        localizationsDelegates: getDelegates(),
+        localeResolutionCallback: localeResolutionCallback,
+        home: const HomePage(),
       ),
     );
   }

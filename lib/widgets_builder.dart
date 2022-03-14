@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/cart_handler.dart';
 import 'package:fluttertest/datepicker_dialog.dart';
 import 'list_item_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -124,96 +123,120 @@ Route createRoute(Widget loginPage) {
   );
 }
 
-Container listContainer(
-    ListItem item,
-    int counter,
-    Function? Function() onRemoveTap,
-    Function? Function() onAddTap,
-    BuildContext context) {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-    decoration: const BoxDecoration(
-        color: Colors.white,
-        backgroundBlendMode: BlendMode.multiply,
-        border: Border.symmetric(
-            horizontal: BorderSide(color: Colors.black26, width: 0.3),
-            vertical: BorderSide(color: Colors.black26, width: 0.3))),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(
-          child: createText(item.header,
-              color: Colors.black, size: 14, alignment: TextAlign.left),
-          width: MediaQuery.of(context).size.width / 2.75,
-        ),
-        SizedBox(
-          child: createText(item.prezzo.toString() + '0€',
-              color: Colors.black, size: 16, alignment: TextAlign.left),
-          width: MediaQuery.of(context).size.width / 5,
-        ),
-        Row(
-          children: [
-            InkWell(
-              child: const Icon(
-                Icons.remove,
-                color: Colors.blue,
-                size: 22,
-              ),
-              onTap: onRemoveTap,
-            ),
-            createText('$counter', color: Colors.black, size: 18),
-            InkWell(
+class ListContainer extends StatefulWidget with ChangeNotifier {
+  @override
+  _ListContainerState createState() => _ListContainerState();
+
+  late final ListItem item;
+  void Function()? onRemoveTap;
+  void Function()? onAddTap;
+
+  ListContainer({required this.item, this.onRemoveTap, this.onAddTap});
+}
+
+class _ListContainerState extends State<ListContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          backgroundBlendMode: BlendMode.multiply,
+          border: Border.symmetric(
+              horizontal: BorderSide(color: Colors.black26, width: 0.3),
+              vertical: BorderSide(color: Colors.black26, width: 0.3))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            child: createText(widget.item.header,
+                color: Colors.black, size: 14, alignment: TextAlign.left),
+            width: MediaQuery.of(context).size.width / 2.75,
+          ),
+          SizedBox(
+            child: createText(widget.item.prezzo.toString() + '0€',
+                color: Colors.black, size: 16, alignment: TextAlign.left),
+            width: MediaQuery.of(context).size.width / 5,
+          ),
+          Row(
+            children: [
+              InkWell(
                 child: const Icon(
-                  Icons.add,
+                  Icons.remove,
                   color: Colors.blue,
                   size: 22,
                 ),
-                onTap: onAddTap),
-          ],
-        )
-      ],
-    ),
-  );
+                onTap: widget.onRemoveTap,
+              ),
+              createText(widget.item.number.toString(),
+                  color: Colors.black, size: 18),
+              InkWell(
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.blue,
+                    size: 22,
+                  ),
+                  onTap: widget.onAddTap),
+            ],
+          )
+        ],
+      ),
+    );
+  }
 }
 
-Container listContainerOmbrelloni(
-    ListItem item, BuildContext context, MultipleCounter counter) {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-    decoration: const BoxDecoration(
-        color: Colors.white,
-        backgroundBlendMode: BlendMode.multiply,
-        border: Border.symmetric(
-            horizontal: BorderSide(color: Colors.black26, width: 0.3),
-            vertical: BorderSide(color: Colors.black26, width: 0.3))),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(
-          child: createText(item.header,
-              color: Colors.black, size: 16, alignment: TextAlign.left),
-          width: MediaQuery.of(context).size.width / 4,
-        ),
-        SizedBox(
-          child: createText(item.prezzo.toString() + '0€',
-              color: Colors.black, size: 16, alignment: TextAlign.left),
-          width: MediaQuery.of(context).size.width / 5,
-        ),
-        Row(
-          children: [
-            TextButton(
-              onPressed: () {
-                addItem(item, counter);
-                showDialog(
-                    context: context, builder: (context) => CustomDatePicker());
-              },
-              child: createText(item.body, color: Colors.blue, size: 18),
-            ),
-          ],
-        )
-      ],
-    ),
-  );
+class ListContainerOmbrelloni extends StatefulWidget with ChangeNotifier {
+  @override
+  _ListContainerOmbrelloniState createState() =>
+      _ListContainerOmbrelloniState();
+
+  late final ListItem item;
+  late final MultipleCounter counter;
+  final void Function() onPrenotaPressed;
+
+  ListContainerOmbrelloni(
+      {required this.item,
+      required this.counter,
+      required this.onPrenotaPressed});
+}
+
+class _ListContainerOmbrelloniState extends State<ListContainerOmbrelloni> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          backgroundBlendMode: BlendMode.multiply,
+          border: Border.symmetric(
+              horizontal: BorderSide(color: Colors.black26, width: 0.3),
+              vertical: BorderSide(color: Colors.black26, width: 0.3))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            child: createText(widget.item.header,
+                color: Colors.black, size: 16, alignment: TextAlign.left),
+            width: MediaQuery.of(context).size.width / 4,
+          ),
+          SizedBox(
+            child: createText(widget.item.prezzo.toString() + '0€',
+                color: Colors.black, size: 16, alignment: TextAlign.left),
+            width: MediaQuery.of(context).size.width / 5,
+          ),
+          Row(
+            children: [
+              TextButton(
+                onPressed: widget.onPrenotaPressed,
+                child:
+                    createText(widget.item.body, color: Colors.blue, size: 18),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
 }
 
 class LogInScreen extends StatefulWidget {

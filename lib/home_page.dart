@@ -17,9 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 ///E' composta da: sezione landing, sezione
 ///ombrelloni, sezione lettini, sezione bar e sezione eventi.
 class HomePage extends StatefulWidget {
-   const HomePage({Key? key}) : super(key: key);
-
-
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -29,7 +27,6 @@ class _HomePageState extends State<HomePage> {
   final _pageController = PageController(initialPage: 0);
   final _cartKey = GlobalKey();
   final AuthService _auth = AuthService();
-
 
   @override
   void initState() {
@@ -61,17 +58,17 @@ class _HomePageState extends State<HomePage> {
               size: 32,
             ),
             onPressed: () {
-              Navigator.of(context).push(createRoute(Profile()));
+              Navigator.of(context).push(createRoute(const Profile()));
             },
           ),
           actions: <Widget>[
-            IconButton(onPressed: () async {
-              await _auth.signOut() ;
-            },
-                icon: Icon(Icons.person),
+            IconButton(
+              onPressed: () async {
+                await _auth.signOut();
+              },
+              icon: const Icon(Icons.person),
               tooltip: 'Logout',
             ),
-
             InkWell(
               onTap: () => showMenu(
                   context: context,
@@ -99,24 +96,23 @@ class _HomePageState extends State<HomePage> {
         padEnds: false,
         children: <Widget>[
           createHomeScreen(context, _pageController), //1st page
-          createSezioneOmbrelloni(context, _pageController, //2nd page
-              (int index, bool isExpanded) {
-            setState(() {
-              getFile()[index].isExpanded = !getFile()[index].isExpanded;
-            });
-          }),
-          createSezioneLettini(context, _pageController,
-              (int index, bool isExpanded) {
-            setState(() {
-              getLettini()[index].isExpanded = !getLettini()[index].isExpanded;
-            });
-          }), //3rd page
-          createSezioneBar(context, _pageController,
-              (int index, bool isExpanded) {
-            setState(() {
-              getMenu()[index].isExpanded = !getMenu()[index].isExpanded;
-            });
-          }), //4th page
+          SezioneOmbrelloni(
+              pageController: _pageController,
+              callback: (int index, bool isExpanded) => setState(() {
+                    getFile()[index].isExpanded = !getFile()[index].isExpanded;
+                  })),
+          SezioneLettini(
+              pageController: _pageController,
+              callback: (int index, bool isExpanded) => setState(() {
+                    getLettini()[index].isExpanded =
+                        !getLettini()[index].isExpanded;
+                  })),
+          SezioneBar(
+              pageController: _pageController,
+              callback: (int index, bool isExpanded) => setState(() {
+                    getMenu()[index].isExpanded = !getMenu()[index].isExpanded;
+                  })), //3rd page
+          //4th page
           createSezioneEventi(context, _pageController) //5th page
         ],
       ),
@@ -124,8 +120,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           onPressed: () {
             initCart(context);
-            showDialog(
-                context: context, builder: (context) => CartPopup(_cartKey));
+            showDialog(context: context, builder: (context) => Cart(_cartKey));
           },
           child: const Icon(Icons.shopping_cart_outlined),
           backgroundColor: Colors.black26,

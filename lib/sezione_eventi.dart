@@ -22,5 +22,15 @@ Container createSezioneEventi(
         Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height / 5)),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            border: Border.all(
+              width: 2,
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
       ]));
 }
