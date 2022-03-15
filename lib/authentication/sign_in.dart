@@ -97,14 +97,14 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                   onChanged: (value) {
                     setState(() => nomeutente = value);
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(50.0))),
                       filled: true,
                       isDense: true,
                       fillColor: Colors.white12),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 width: MediaQuery.of(context).size.width / 1.25,
               ),
@@ -112,20 +112,20 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
               createText(AppLocalizations.of(context)!.password.toUpperCase(),
                   size: 20),
               const Padding(padding: EdgeInsets.only(top: 10)),
-              Container(
+              SizedBox(
                 child: TextFormField(
                   onChanged: (value) {
                     setState(() => pswlogin = value);
                   },
                   autocorrect: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(50.0))),
                       filled: true,
                       isDense: true,
                       fillColor: Colors.white12),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   obscureText: true,
                 ),
                 width: MediaQuery.of(context).size.width / 1.25,

@@ -99,18 +99,18 @@ class _HomePageState extends State<HomePage> {
           SezioneOmbrelloni(
               pageController: _pageController,
               callback: (int index, bool isExpanded) => setState(() {
-                    getFile()[index].isExpanded = !getFile()[index].isExpanded;
+                    getFile()[index].isExpanded = !getFile()[index].isExpanded!;
                   })),
           SezioneLettini(
               pageController: _pageController,
               callback: (int index, bool isExpanded) => setState(() {
                     getLettini()[index].isExpanded =
-                        !getLettini()[index].isExpanded;
+                        !getLettini()[index].isExpanded!;
                   })),
           SezioneBar(
               pageController: _pageController,
               callback: (int index, bool isExpanded) => setState(() {
-                    getMenu()[index].isExpanded = !getMenu()[index].isExpanded;
+                    getMenu()[index].isExpanded = !getMenu()[index].isExpanded!;
                   })), //3rd page
           //4th page
           createSezioneEventi(context, _pageController) //5th page

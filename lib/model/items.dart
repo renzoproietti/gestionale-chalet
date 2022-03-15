@@ -2,21 +2,21 @@ import 'package:Chalet/view/core/widgets_builder.dart';
 import 'package:flutter/material.dart';
 
 class ListItem {
-  double prezzo = 0.0;
-  String header = '\t';
-  String body = '\t';
+  String header;
+  double? prezzo;
+  String? body;
   String? infos;
-  String category = '\t';
-  bool isExpanded;
+  String? category;
+  bool? isExpanded;
   int number;
 
   ListItem({
-    required this.prezzo,
     required this.header,
-    required this.body,
-    this.isExpanded = false,
-    this.infos = '\t',
-    this.category = '\t',
+    this.prezzo,
+    this.body,
+    this.isExpanded,
+    this.infos,
+    this.category,
     this.number = 0,
   });
 }
@@ -27,14 +27,14 @@ class OmbrelloniItem extends ListItem {
   OmbrelloniItem(
       {isExpanded,
       header,
-      body = '\t',
+      body,
       infos,
-      prezzo = 0.0,
+      prezzo,
       category = 'Ombrelloni',
       number = 0,
       this.busyIcon})
       : super(
-            isExpanded: isExpanded!,
+            isExpanded: isExpanded,
             header: header,
             body: body,
             infos: infos,
@@ -102,21 +102,21 @@ List<OmbrelloniItem> getFile() {
 
 class LettiniItem extends ListItem {
   LettiniItem({
-    isExpanded,
     header,
+    isExpanded,
     body,
     infos,
     category = 'Lettini',
     prezzo,
     number,
   }) : super(
-          isExpanded: isExpanded!,
           header: header,
+          isExpanded: isExpanded,
           body: body,
           infos: infos,
           category: category,
-          number: number,
           prezzo: prezzo,
+          number: number,
         );
 }
 
@@ -149,24 +149,13 @@ List<LettiniItem> getLettini() {
 }
 
 class MenuItem extends ListItem {
-  MenuItem(
-      {header,
-      isExpanded,
-      body = '\t',
-      this.nome = '\t',
-      this.id = 42,
-      prezzo = 0.0,
-      category = 'Ristorante'})
+  MenuItem({header, isExpanded, prezzo, category = 'Ristorante'})
       : super(
-            body: body,
-            header: header,
-            category: category,
-            prezzo: prezzo,
-            isExpanded: isExpanded!);
-
-  final String nome;
-  //final double prezzo;
-  final double id;
+          header: header,
+          isExpanded: isExpanded,
+          prezzo: prezzo,
+          category: category,
+        );
 }
 
 final List<MenuItem> _menu = <MenuItem>[
@@ -260,4 +249,55 @@ List<MenuItem> getVini() {
 
 List<MenuItem> getAmari() {
   return _amari;
+}
+
+class EventiItem extends ListItem {
+  EventiItem({
+    required this.eventSpawnRange,
+    required this.maxPartecipanti,
+    header,
+  }) : super(
+          header: header,
+          prezzo: 0.0,
+        );
+
+  final DateTimeRange eventSpawnRange;
+  int maxPartecipanti;
+}
+
+final List<EventiItem> _eventi = [
+  EventiItem(
+      header: 'Torneo di beach volley maschile',
+      maxPartecipanti: 32,
+      eventSpawnRange: DateTimeRange(
+          start: DateTime(2022, 06, 14), end: DateTime(2022, 06, 27))),
+  EventiItem(
+      header: 'Torneo di beach volley femminile',
+      maxPartecipanti: 32,
+      eventSpawnRange: DateTimeRange(
+          start: DateTime(2022, 06, 14), end: DateTime(2022, 06, 27))),
+  EventiItem(
+      header: 'Torneo di beach volley misto',
+      maxPartecipanti: 32,
+      eventSpawnRange: DateTimeRange(
+          start: DateTime(2022, 07, 06), end: DateTime(2022, 07, 19))),
+  EventiItem(
+      header: 'Torneo di briscola',
+      maxPartecipanti: 50,
+      eventSpawnRange: DateTimeRange(
+          start: DateTime(2022, 07, 01), end: DateTime(2022, 07, 04))),
+  EventiItem(
+      header: 'Torneo di burraco',
+      maxPartecipanti: 40,
+      eventSpawnRange: DateTimeRange(
+          start: DateTime(2022, 07, 05), end: DateTime(2022, 07, 09))),
+  EventiItem(
+      header: 'Calcio saponato',
+      maxPartecipanti: 80,
+      eventSpawnRange: DateTimeRange(
+          start: DateTime(2022, 07, 10), end: DateTime(2022, 07, 22))),
+];
+
+List<EventiItem> getEventi() {
+  return _eventi;
 }

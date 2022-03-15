@@ -89,9 +89,9 @@ void _clearCart() {
 void initCart(BuildContext context) {
   _children.clear();
   for (MultipleCounter counter in globalCounters.values) {
-    _loadOrders(counter, counter.countMap.keys.first.category);
+    _loadOrders(counter, counter.countMap.keys.first.category!);
     _children.addAll(_initCategoryList(
-        context, counter, counter.countMap.keys.first.category));
+        context, counter, counter.countMap.keys.first.category!));
   }
 }
 

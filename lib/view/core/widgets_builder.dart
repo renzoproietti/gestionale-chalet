@@ -226,7 +226,7 @@ class _ListContainerOmbrelloniState extends State<ListContainerOmbrelloni> {
               TextButton(
                 onPressed: widget.onPrenotaPressed,
                 child:
-                    createText(widget.item.body, color: Colors.blue, size: 18),
+                    createText(widget.item.body!, color: Colors.blue, size: 18),
               ),
             ],
           )

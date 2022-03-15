@@ -1,11 +1,11 @@
 import 'package:Chalet/model/items.dart';
+import 'package:Chalet/view/external/datepicker_dialog.dart';
 import 'package:flutter/material.dart';
 import '../external/custom_expansion_panel.dart';
 import '../core/widgets_builder.dart';
 import 'package:Chalet/controller/list_item_handler.dart';
 import 'package:Chalet/view/external/custom_expansion_panel.dart'
     as custom_panel;
-
 
 class SezioneOmbrelloni extends StatefulWidget {
   @override
@@ -117,9 +117,16 @@ class _SezioneOmbrelloniState extends State<SezioneOmbrelloni> {
                                   return ListContainerOmbrelloni(
                                     item: ombrellone,
                                     counter: widget.counter,
-                                    onPrenotaPressed: () => setState(() {
-                                      addItem(ombrellone, widget.counter);
-                                    }),
+                                    onPrenotaPressed: () {
+                                      showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  CustomDatePicker())
+                                          .whenComplete(() => setState(() {
+                                                addItem(
+                                                    ombrellone, widget.counter);
+                                              }));
+                                    },
                                   );
                                 }).toList()));
                       }).toList(),
