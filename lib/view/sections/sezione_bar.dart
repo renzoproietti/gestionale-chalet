@@ -1,3 +1,4 @@
+import 'package:Chalet/model/items.dart';
 import 'package:flutter/material.dart';
 import 'package:Chalet/controller/list_item_handler.dart';
 import '../external/custom_expansion_panel.dart';

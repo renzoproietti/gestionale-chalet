@@ -1,3 +1,4 @@
+import 'package:Chalet/model/items.dart';
 import 'package:flutter/material.dart';
 import '../../controller/list_item_handler.dart';
 
@@ -234,3 +235,14 @@ class _ListContainerOmbrelloniState extends State<ListContainerOmbrelloni> {
     );
   }
 }
+
+const Image greenLight = Image(
+  image: AssetImage("lib/assets/images/green_circle.png"),
+  width: 24,
+  height: 24,
+);
+const Image redLight = Image(
+  image: AssetImage("lib/assets/images/red_circle.png"),
+  width: 24,
+  height: 24,
+);

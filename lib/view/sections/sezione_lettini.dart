@@ -1,37 +1,10 @@
+import 'package:Chalet/model/items.dart';
 import 'package:flutter/material.dart';
 import '../external/custom_expansion_panel.dart';
 import '../core/widgets_builder.dart';
 import 'package:Chalet/controller/list_item_handler.dart';
 import 'package:Chalet/view/external/custom_expansion_panel.dart'
     as custom_panel;
-
-List<LettiniItem> _lettini = <LettiniItem>[
-  LettiniItem(
-      header: "Lettini",
-      body: 'Aggiungi',
-      infos: '\t',
-      number: 0,
-      prezzo: 6.0,
-      isExpanded: false),
-  LettiniItem(
-      header: "Sdraio",
-      body: 'Aggiungi',
-      infos: '\t',
-      number: 0,
-      prezzo: 5.0,
-      isExpanded: false),
-  LettiniItem(
-      header: "Sedie",
-      body: 'Aggiungi',
-      infos: '\t',
-      number: 0,
-      prezzo: 4.0,
-      isExpanded: false),
-];
-
-List<LettiniItem> getLettini() {
-  return _lettini;
-}
 
 class SezioneLettini extends StatefulWidget {
   @override
@@ -103,7 +76,7 @@ class _SezioneLettiniState extends State<SezioneLettini> {
                             vertical: 9, horizontal: 0),
                         expansionCallback: widget.callback,
                         inBetweenPadding: 0.2,
-                        children: _lettini.map((ListItem item) {
+                        children: getLettini().map((ListItem item) {
                           widget.counter.addEntry(MapEntry(item, item.number));
                           return CustomExpansionPanel(
                             backgroundColor: Colors.white,

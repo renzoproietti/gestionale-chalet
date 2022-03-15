@@ -1,3 +1,4 @@
+import 'package:Chalet/model/items.dart';
 import 'package:flutter/material.dart';
 import 'package:Chalet/view/sections/landing_section.dart';
 import 'package:Chalet/authentication/services/auth.dart';
@@ -7,7 +8,6 @@ import 'package:Chalet/view/sections/sezione_ombrelloni.dart';
 import 'package:Chalet/view/sections/sezione_eventi.dart';
 import 'package:Chalet/view/core/widgets_builder.dart';
 import 'package:Chalet/controller/cart_handler.dart';
-import '../controller/list_item_handler.dart';
 import 'sections/sezione_profilo.dart';
 import '../authentication/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';

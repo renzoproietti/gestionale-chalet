@@ -1,3 +1,4 @@
+import 'package:Chalet/model/items.dart';
 import 'package:flutter/material.dart';
 import '../external/custom_expansion_panel.dart';
 import '../core/widgets_builder.dart';
@@ -5,62 +6,6 @@ import 'package:Chalet/controller/list_item_handler.dart';
 import 'package:Chalet/view/external/custom_expansion_panel.dart'
     as custom_panel;
 
-List<OmbrelloniItem> _file = <OmbrelloniItem>[
-  OmbrelloniItem(
-      header: "Prima fila",
-      isExpanded: false,
-      busyIcon: greenLight,
-      prezzo: 15.00),
-  OmbrelloniItem(
-      header: "Seconda fila",
-      isExpanded: false,
-      busyIcon: redLight,
-      prezzo: 13.00),
-  OmbrelloniItem(
-      header: "Terza fila",
-      isExpanded: false,
-      busyIcon: greenLight,
-      prezzo: 11.00),
-  OmbrelloniItem(
-      header: "Quarta fila",
-      isExpanded: false,
-      busyIcon: greenLight,
-      prezzo: 9.00),
-  OmbrelloniItem(
-      header: "Quinta fila",
-      isExpanded: false,
-      busyIcon: redLight,
-      prezzo: 7.00),
-  OmbrelloniItem(
-      header: "Sesta fila",
-      isExpanded: false,
-      busyIcon: greenLight,
-      prezzo: 5.00),
-  OmbrelloniItem(
-      header: "Settima fila",
-      isExpanded: false,
-      busyIcon: greenLight,
-      prezzo: 4.00),
-];
-const int ombrelloniPerFila = 10;
-
-List<OmbrelloniItem> initFila(OmbrelloniItem fila) {
-  List<OmbrelloniItem> _ombrelloni = <OmbrelloniItem>[];
-  for (int i = 1; i < ombrelloniPerFila; i++) {
-    _ombrelloni.add(OmbrelloniItem(
-        header: '$i',
-        prezzo: fila.prezzo,
-        body: "Prenota",
-        isExpanded: false,
-        number: 0));
-  }
-
-  return _ombrelloni;
-}
-
-List<OmbrelloniItem> getFile() {
-  return _file;
-}
 
 class SezioneOmbrelloni extends StatefulWidget {
   @override

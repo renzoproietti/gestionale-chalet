@@ -1,3 +1,4 @@
+import 'package:Chalet/model/items.dart';
 import 'package:flutter/material.dart';
 import 'package:Chalet/view/external/datepicker_dialog.dart';
 import 'package:Chalet/controller/list_item_handler.dart';
@@ -29,12 +30,25 @@ class _CartState extends State<Cart> {
               height: MediaQuery.of(context).size.height / 4,
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
-            OutlinedButton(
-              child: const Icon(Icons.payments_rounded),
-              onPressed: null,
-              style: OutlinedButton.styleFrom(
-                  shape: const CircleBorder(), primary: Colors.blueGrey),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                OutlinedButton(
+                  onPressed: () => setState(() {
+                    _clearCart();
+                  }),
+                  child: const Icon(Icons.highlight_remove),
+                  style: OutlinedButton.styleFrom(
+                      shape: const CircleBorder(), primary: Colors.blueGrey),
+                ),
+                OutlinedButton(
+                  child: const Icon(Icons.payments_rounded),
+                  onPressed: null,
+                  style: OutlinedButton.styleFrom(
+                      shape: const CircleBorder(), primary: Colors.blueGrey),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -55,7 +69,6 @@ void _loadOrders(MultipleCounter counter, String category) {
 
 /// Aggiunge gli ordini non presenti e aggiorna quelli già presenti
 void updateOrders(MultipleCounter counter, String category) {
-  _clearOrders();
   _loadOrders(counter, category);
   _subChildren.update(
       counter.category!, (value) => _subChildrenToWidget(counter, category));
@@ -64,6 +77,12 @@ void updateOrders(MultipleCounter counter, String category) {
 /// Pulisce gli ordini
 void _clearOrders() {
   _subChildren.clear();
+}
+
+void _clearCart() {
+  for (MultipleCounter counter in globalCounters.values) {
+    counter.clear();
+  }
 }
 
 /// Inizializza il carrello
