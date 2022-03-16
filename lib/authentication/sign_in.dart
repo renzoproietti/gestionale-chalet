@@ -45,7 +45,8 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
     // Trigger the authentication flow
     _currentUser = await GoogleSignIn()
         .signIn()
-        .whenComplete(() => createMessenger(context));
+        .onError((error, stackTrace) => createMessenger(context, false))
+        .whenComplete(() => createMessenger(context, true));
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
@@ -337,10 +338,17 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
   }
 }
 
-dynamic createMessenger(BuildContext context) {
-  return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content:
-        createText(AppLocalizations.of(context)!.accessoeffettuato, size: 18),
-    backgroundColor: Colors.green,
-  ));
+dynamic createMessenger(BuildContext context, bool success) {
+  return ScaffoldMessenger.of(context).showSnackBar(success
+      ? SnackBar(
+          content: createText(AppLocalizations.of(context)!.accessoeffettuato,
+              size: 18),
+          duration: Duration(milliseconds: 2000),
+          backgroundColor: Colors.green,
+        )
+      : SnackBar(
+          content: createText("Accesso fallito", size: 18),
+          duration: Duration(milliseconds: 2000),
+          backgroundColor: Colors.red,
+        ));
 }
