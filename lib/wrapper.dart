@@ -2,18 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:Chalet/authentication/sign_in.dart';
 import 'package:Chalet/view/home_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
-  const Wrapper({Key? key}) : super(key: key);
+  Wrapper({Key? key, GoogleSignInAccount? account}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User?>(context);
+    User? user = Provider.of<User?>(context);
     if (user == null) {
-      return const SignIn();
+      return SignIn();
     } else {
-      return const HomePage();
+      return HomePage();
     }
   }
 }

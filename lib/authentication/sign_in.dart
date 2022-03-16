@@ -1,12 +1,23 @@
+import 'package:Chalet/authentication/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:Chalet/authentication/services/auth.dart';
-import 'package:Chalet/view/core/widgets_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../view/core/widgets_builder.dart';
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
+
 class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+  //const SignIn({Key? key}) : super(key: key);
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -26,27 +37,49 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
-  late TabController _tabController;
+  GoogleSignInAccount? _currentUser;
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
+  late TabController _tabController;
 
   Future<void> _handleSignIn() async {
     try {
-      await _googleSignIn.signIn();
+      await _googleSignIn.signIn().whenComplete(() {
+        createMessenger(context);
+      });
     } catch (error) {
       print('$error');
     }
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+      setState(() {
+        _currentUser = account;
+        print('Signed in as $_currentUser');
+      });
+    });
   }
 
   @override
@@ -57,9 +90,13 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
       extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xff161055),
       appBar: AppBar(
-        title: createText(AppLocalizations.of(context)!.registrati +
-            '/' +
-            AppLocalizations.of(context)!.accedi),
+        title: const Text(
+          'Chalet',
+          style: TextStyle(
+              fontFamily: 'DancingScript',
+              fontSize: 40,
+              fontWeight: FontWeight.w500),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
@@ -88,7 +125,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                 indent: 50,
                 endIndent: 50,
               ),
-              Padding(padding: EdgeInsets.only(top: 15)),
+              const Padding(padding: EdgeInsets.only(top: 15)),
               createText(AppLocalizations.of(context)!.nomeutente.toUpperCase(),
                   size: 20),
               const Padding(padding: EdgeInsets.only(top: 10)),
@@ -104,7 +141,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                       filled: true,
                       isDense: true,
                       fillColor: Colors.white12),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
                 width: MediaQuery.of(context).size.width / 1.25,
               ),
@@ -112,20 +149,20 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
               createText(AppLocalizations.of(context)!.password.toUpperCase(),
                   size: 20),
               const Padding(padding: EdgeInsets.only(top: 10)),
-              SizedBox(
+              Container(
                 child: TextFormField(
                   onChanged: (value) {
                     setState(() => pswlogin = value);
                   },
                   autocorrect: false,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(50.0))),
                       filled: true,
                       isDense: true,
                       fillColor: Colors.white12),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                   obscureText: true,
                 ),
                 width: MediaQuery.of(context).size.width / 1.25,
@@ -137,7 +174,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                   child: createText(
                       AppLocalizations.of(context)!.passdimenticata,
                       size: 14,
-                      color: Colors.blue)),
+                      color: Colors.white)),
               const Divider(
                 thickness: 2,
                 indent: 50,
@@ -159,13 +196,11 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                   child: createText(AppLocalizations.of(context)!.accedi,
                       size: 20, weight: FontWeight.bold)),
               const Padding(padding: EdgeInsets.only(top: 15)),
-              createText(AppLocalizations.of(context)!.oppure, size: 14),
+              createText('oppure', size: 14),
               const Padding(padding: EdgeInsets.only(top: 15)),
               SignInButton(
                 Buttons.GoogleDark,
-                onPressed: () async {
-                  _handleSignIn();
-                },
+                onPressed: signInWithGoogle,
                 text: AppLocalizations.of(context)!.accedicon + ' Google',
                 padding: EdgeInsets.all(5),
               ),
@@ -272,7 +307,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                       setState(() => password = value);
                     },
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0))),
@@ -310,42 +345,10 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*onPressed: () async{
-dynamic result = _auth.signInAnon();
-if(result == null){
-print('errore nel signin');
-}else {
-print('Signed In');
-print (result);
-}*/
-
-
-
-
+dynamic createMessenger(BuildContext context) {
+  return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content:
+        createText(AppLocalizations.of(context)!.accessoeffettuato, size: 18),
+    backgroundColor: Colors.green,
+  ));
+}

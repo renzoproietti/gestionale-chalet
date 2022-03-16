@@ -53,7 +53,7 @@ class _ChaletState extends State<Chalet> {
         supportedLocales: getSupportedLocales(),
         localizationsDelegates: getDelegates(),
         localeResolutionCallback: localeResolutionCallback,
-        home: const Wrapper(),
+        home: Wrapper(),
       ),
     );
   }
