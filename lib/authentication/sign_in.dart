@@ -17,7 +17,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 );
 
 class SignIn extends StatefulWidget {
-  //const SignIn({Key? key}) : super(key: key);
+  const SignIn({Key? key}) : super(key: key);
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -43,13 +43,13 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
 
   Future<UserCredential> _signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn()
+    _currentUser = await GoogleSignIn()
         .signIn()
         .whenComplete(() => createMessenger(context));
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+        await _currentUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
