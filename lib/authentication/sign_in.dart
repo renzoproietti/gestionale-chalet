@@ -41,19 +41,11 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
 
   late TabController _tabController;
 
-  Future<void> _handleSignIn() async {
-    try {
-      await _googleSignIn.signIn().whenComplete(() {
-        createMessenger(context);
-      });
-    } catch (error) {
-      print('$error');
-    }
-  }
-
-  Future<UserCredential> signInWithGoogle() async {
+  Future<UserCredential> _signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await GoogleSignIn()
+        .signIn()
+        .whenComplete(() => createMessenger(context));
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
@@ -200,7 +192,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
               const Padding(padding: EdgeInsets.only(top: 15)),
               SignInButton(
                 Buttons.GoogleDark,
-                onPressed: signInWithGoogle,
+                onPressed: _signInWithGoogle,
                 text: AppLocalizations.of(context)!.accedicon + ' Google',
                 padding: EdgeInsets.all(5),
               ),
