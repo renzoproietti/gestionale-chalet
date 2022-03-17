@@ -142,9 +142,7 @@ class _StateProfile extends State<Profile> {
             onTap: () async {
               Navigator.push(context,
                   MaterialPageRoute(builder: (buildContext) => SignIn()));
-            } /*Navigator.push(context,
-                MaterialPageRoute(builder: (buildContext) => SignInDemo()))*/
-            ,
+            },
             child: Container(
               alignment: Alignment.centerLeft,
               height: 60,

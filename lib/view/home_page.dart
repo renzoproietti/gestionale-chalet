@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
         controller: _pageController,
         padEnds: false,
         children: <Widget>[
-          createHomeScreen(context, _pageController), //1st page
+          SezioneLanding(pageController: _pageController), //1st page
           SezioneOmbrelloni(
               pageController: _pageController,
               callback: (int index, bool isExpanded) => setState(() {
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                     getMenu()[index].isExpanded = !getMenu()[index].isExpanded!;
                   })), //3rd page
           //4th page
-          createSezioneEventi(context, _pageController) //5th page
+          SezioneEventi(pageController: _pageController), //5th page
         ],
       ),
       floatingActionButton: FloatingActionButton(
