@@ -25,11 +25,14 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> with TickerProviderStateMixin {
   //LOGIN
-  String nomeutente = "";
+  String errorlogin = "";
+  String emaillogin = "";
   String pswlogin = "";
   final AuthService _authlogin = AuthService();
+  final _formKeylogin = GlobalKey<FormState>();
 
-  //REGISTER
+
+  String error = "";
   String nome = "";
   String cognome = "";
   String email = "";
@@ -50,7 +53,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-        await _currentUser?.authentication;
+    await _currentUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -105,105 +108,123 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height / 7)),
-              const Divider(
-                height: 20,
-                thickness: 2,
-                indent: 50,
-                endIndent: 50,
-              ),
-              const Padding(padding: EdgeInsets.only(top: 15)),
-              createText(AppLocalizations.of(context)!.nomeutente.toUpperCase(),
-                  size: 20),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              SizedBox(
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() => nomeutente = value);
-                  },
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0))),
-                      filled: true,
-                      isDense: true,
-                      fillColor: Colors.white12),
-                  style: const TextStyle(color: Colors.white),
+          Form(
+            key : _formKeylogin,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 7)),
+                const Divider(
+                  height: 20,
+                  thickness: 2,
+                  indent: 50,
+                  endIndent: 50,
                 ),
-                width: MediaQuery.of(context).size.width / 1.25,
-              ),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              createText(AppLocalizations.of(context)!.password.toUpperCase(),
-                  size: 20),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              SizedBox(
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() => pswlogin = value);
-                  },
-                  autocorrect: false,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(50.0))),
-                      filled: true,
-                      isDense: true,
-                      fillColor: Colors.white12),
-                  style: const TextStyle(color: Colors.white),
-                  obscureText: true,
+                const Padding(padding: EdgeInsets.only(top: 15)),
+                createText(AppLocalizations.of(context)!.email.toUpperCase(),
+                    size: 20),
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                SizedBox(
+                  child: TextFormField(
+                    validator: (value) => value!.length < 1
+                        ? 'Inserisci la tua mail di 6 o piu caratteri'
+                        : null,
+                    onChanged: (value) {
+                      setState(() => email = value);
+                    },
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0))),
+                        filled: true,
+                        isDense: true,
+                        fillColor: Colors.white12),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  width: MediaQuery.of(context).size.width / 1.25,
                 ),
-                width: MediaQuery.of(context).size.width / 1.25,
-              ),
-              TextButton(
-                  onPressed: () {
-                    //EMAIL PASSWORD DIMENTICATA//
-                  },
-                  child: createText(
-                      AppLocalizations.of(context)!.passdimenticata,
-                      size: 14,
-                      color: Colors.white)),
-              const Divider(
-                thickness: 2,
-                indent: 50,
-                endIndent: 50,
-              ),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1)),
-                      primary: const Color(0xff4285F4),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.of(context).size.width / 4.9,
-                          vertical: 10)),
-                  onPressed: () async {
-                    print(nomeutente);
-                    print(pswlogin);
-                  },
-                  child: createText(AppLocalizations.of(context)!.accedi,
-                      size: 20, weight: FontWeight.bold)),
-              const Padding(padding: EdgeInsets.only(top: 15)),
-              createText('oppure', size: 14),
-              const Padding(padding: EdgeInsets.only(top: 15)),
-              SignInButton(
-                Buttons.GoogleDark,
-                onPressed: _signInWithGoogle,
-                text: AppLocalizations.of(context)!.accedicon + ' Google',
-                padding: const EdgeInsets.all(5),
-              ),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              const Divider(
-                thickness: 2,
-                indent: 50,
-                endIndent: 50,
-              )
-            ],
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                createText(AppLocalizations.of(context)!.password.toUpperCase(),
+                    size: 20),
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                Container(
+                  child: TextFormField(
+                    validator: (value) => value!.length < 1
+                        ? 'Inserisci la tua password di 6 o piu caratteri'
+                        : null,
+                    onChanged: (value) {
+                      setState(() => pswlogin = value);
+                    },
+                    autocorrect: false,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50.0))),
+                        filled: true,
+                        isDense: true,
+                        fillColor: Colors.white12),
+                    style: const TextStyle(color: Colors.white),
+                    obscureText: true,
+                  ),
+                  width: MediaQuery.of(context).size.width / 1.25,
+                ),
+                TextButton(
+                    onPressed: () {
+                      //EMAIL PASSWORD DIMENTICATA//
+                    },
+                    child: createText(
+                        AppLocalizations.of(context)!.passdimenticata,
+                        size: 14,
+                        color: Colors.white)),
+                const Divider(
+                  thickness: 2,
+                  indent: 50,
+                  endIndent: 50,
+                ),
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(1)),
+                        primary: const Color(0xff4285F4),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.of(context).size.width / 4.9,
+                            vertical: 10)),
+                    onPressed: () async {
+                      if (_formKeylogin.currentState!.validate()) {
+                        dynamic result = await _authlogin.signIn(email: emaillogin, password: pswlogin);
+                        if(result == null){
+                          setState(() {
+                            error = 'non è stato possibile accedere con queste credenziali';
+                          });
+                        }
+                      }},
+                    child: createText(AppLocalizations.of(context)!.accedi,
+                        size: 20, weight: FontWeight.bold)),
+                SizedBox(height: 12.0),
+                Text(error,
+                  style: const TextStyle(color: Colors.red, fontSize: 14.0),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 15)),
+                createText('oppure', size: 14),
+                const Padding(padding: EdgeInsets.only(top: 15)),
+                SignInButton(
+                  Buttons.GoogleDark,
+                  onPressed: _signInWithGoogle,
+                  text: AppLocalizations.of(context)!.accedicon + ' Google',
+                  padding: const EdgeInsets.all(5),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                const Divider(
+                  thickness: 2,
+                  indent: 50,
+                  endIndent: 50,
+                )
+              ],
+            ),
           ),
           Form(
             key: _formKey,
@@ -227,14 +248,14 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                 SizedBox(
                   child: TextFormField(
                     validator: (value) =>
-                        value!.length < 1 ? 'Inserisci il tuo nome' : null,
+                    value!.length < 1 ? 'Inserisci il tuo nome' : null,
                     onChanged: (value) {
                       setState(() => nome = value);
                     },
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(50.0))),
+                            BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
@@ -249,14 +270,14 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                 SizedBox(
                   child: TextFormField(
                     validator: (value) =>
-                        value!.length < 1 ? 'Inserisci il tuo cognome' : null,
+                    value!.length < 1 ? 'Inserisci il tuo cognome' : null,
                     onChanged: (value) {
                       setState(() => cognome = value);
                     },
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(50.0))),
+                            BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
@@ -279,7 +300,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(50.0))),
+                            BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
@@ -303,7 +324,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(50.0))),
+                            BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
@@ -341,14 +362,14 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
 dynamic createMessenger(BuildContext context, bool success) {
   return ScaffoldMessenger.of(context).showSnackBar(success
       ? SnackBar(
-          content: createText(AppLocalizations.of(context)!.accessoeffettuato,
-              size: 18),
-          duration: const Duration(milliseconds: 2000),
-          backgroundColor: Colors.green,
-        )
+    content: createText(AppLocalizations.of(context)!.accessoeffettuato,
+        size: 18),
+    duration: const Duration(milliseconds: 2000),
+    backgroundColor: Colors.green,
+  )
       : SnackBar(
-          content: createText("Accesso fallito", size: 18),
-          duration: const Duration(milliseconds: 2000),
-          backgroundColor: Colors.red,
-        ));
+    content: createText("Accesso fallito", size: 18),
+    duration: const Duration(milliseconds: 2000),
+    backgroundColor: Colors.red,
+  ));
 }
