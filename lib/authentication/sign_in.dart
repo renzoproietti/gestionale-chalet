@@ -241,50 +241,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                   indent: 50,
                   endIndent: 50,
                 ),
-                const Padding(padding: EdgeInsets.only(top: 15)),
-                createText(AppLocalizations.of(context)!.nome.toUpperCase(),
-                    size: 20),
-                const Padding(padding: EdgeInsets.only(top: 10)),
-                SizedBox(
-                  child: TextFormField(
-                    validator: (value) =>
-                    value!.length < 1 ? 'Inserisci il tuo nome' : null,
-                    onChanged: (value) {
-                      setState(() => nome = value);
-                    },
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(50.0))),
-                        filled: true,
-                        isDense: true,
-                        fillColor: Colors.white12),
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  width: MediaQuery.of(context).size.width / 1.25,
-                ),
-                const Padding(padding: EdgeInsets.only(top: 15)),
-                createText(AppLocalizations.of(context)!.cognome.toUpperCase(),
-                    size: 20),
-                const Padding(padding: EdgeInsets.only(top: 10)),
-                SizedBox(
-                  child: TextFormField(
-                    validator: (value) =>
-                    value!.length < 1 ? 'Inserisci il tuo cognome' : null,
-                    onChanged: (value) {
-                      setState(() => cognome = value);
-                    },
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(50.0))),
-                        filled: true,
-                        isDense: true,
-                        fillColor: Colors.white12),
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  width: MediaQuery.of(context).size.width / 1.25,
-                ),
+
                 const Padding(padding: EdgeInsets.only(top: 15)),
                 createText(AppLocalizations.of(context)!.email.toUpperCase(),
                     size: 20),
@@ -341,13 +298,13 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        print(nome);
-                        print(cognome);
-                        print(email);
-                        print(password);
+                      dynamic result = await _auth.signUp(email: email, password: password);
+                      if(result == null){
+                        setState(() {
+                          error = 'non è stato possibile accedere con queste credenziali';
+                        });
                       }
-                      // _auth.signInAnon();
-                    },
+                    }},
                   ),
                 ),
               ],
