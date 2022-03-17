@@ -1,4 +1,3 @@
-import 'package:Chalet/view/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:Chalet/controller/internationalization/internationalization.dart';

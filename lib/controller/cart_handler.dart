@@ -56,7 +56,6 @@ class _CartState extends State<Cart> {
   }
 }
 
-const List<String> _categories = ["Ombrelloni", "Lettini", "Ristorante"];
 List<Widget> _children = [];
 Map<String, List<Widget>> _subChildren = {};
 

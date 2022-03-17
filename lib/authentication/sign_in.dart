@@ -94,7 +94,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
         elevation: 0.0,
         centerTitle: true,
         bottom: TabBar(
-          labelPadding: EdgeInsets.only(bottom: 10),
+          labelPadding: const EdgeInsets.only(bottom: 10),
           tabs: [
             createText(AppLocalizations.of(context)!.accedi),
             createText(AppLocalizations.of(context)!.registrati)
@@ -134,7 +134,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                       filled: true,
                       isDense: true,
                       fillColor: Colors.white12),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 width: MediaQuery.of(context).size.width / 1.25,
               ),
@@ -142,20 +142,20 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
               createText(AppLocalizations.of(context)!.password.toUpperCase(),
                   size: 20),
               const Padding(padding: EdgeInsets.only(top: 10)),
-              Container(
+              SizedBox(
                 child: TextFormField(
                   onChanged: (value) {
                     setState(() => pswlogin = value);
                   },
                   autocorrect: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(50.0))),
                       filled: true,
                       isDense: true,
                       fillColor: Colors.white12),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   obscureText: true,
                 ),
                 width: MediaQuery.of(context).size.width / 1.25,
@@ -178,7 +178,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(1)),
-                      primary: Color(0xff4285F4),
+                      primary: const Color(0xff4285F4),
                       padding: EdgeInsets.symmetric(
                           horizontal: MediaQuery.of(context).size.width / 4.9,
                           vertical: 10)),
@@ -195,7 +195,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                 Buttons.GoogleDark,
                 onPressed: _signInWithGoogle,
                 text: AppLocalizations.of(context)!.accedicon + ' Google',
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
               ),
               const Padding(padding: EdgeInsets.only(top: 10)),
               const Divider(
@@ -220,7 +220,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                   indent: 50,
                   endIndent: 50,
                 ),
-                Padding(padding: EdgeInsets.only(top: 15)),
+                const Padding(padding: EdgeInsets.only(top: 15)),
                 createText(AppLocalizations.of(context)!.nome.toUpperCase(),
                     size: 20),
                 const Padding(padding: EdgeInsets.only(top: 10)),
@@ -231,18 +231,18 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                     onChanged: (value) {
                       setState(() => nome = value);
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   width: MediaQuery.of(context).size.width / 1.25,
                 ),
-                Padding(padding: EdgeInsets.only(top: 15)),
+                const Padding(padding: EdgeInsets.only(top: 15)),
                 createText(AppLocalizations.of(context)!.cognome.toUpperCase(),
                     size: 20),
                 const Padding(padding: EdgeInsets.only(top: 10)),
@@ -253,18 +253,18 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                     onChanged: (value) {
                       setState(() => cognome = value);
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   width: MediaQuery.of(context).size.width / 1.25,
                 ),
-                Padding(padding: EdgeInsets.only(top: 15)),
+                const Padding(padding: EdgeInsets.only(top: 15)),
                 createText(AppLocalizations.of(context)!.email.toUpperCase(),
                     size: 20),
                 const Padding(padding: EdgeInsets.only(top: 10)),
@@ -276,18 +276,18 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                     onChanged: (value) {
                       setState(() => email = value);
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   width: MediaQuery.of(context).size.width / 1.25,
                 ),
-                Padding(padding: EdgeInsets.only(top: 15)),
+                const Padding(padding: EdgeInsets.only(top: 15)),
                 createText(AppLocalizations.of(context)!.password.toUpperCase(),
                     size: 20),
                 const Padding(padding: EdgeInsets.only(top: 10)),
@@ -300,22 +300,22 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                       setState(() => password = value);
                     },
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0))),
                         filled: true,
                         isDense: true,
                         fillColor: Colors.white12),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   width: MediaQuery.of(context).size.width / 1.25,
                 ),
                 Container(
-                  padding:
-                      EdgeInsets.only(bottom: 0, right: 0, top: 30, left: 0),
+                  padding: const EdgeInsets.only(
+                      bottom: 0, right: 0, top: 30, left: 0),
                   child: ElevatedButton(
-                    child: Text(
+                    child: const Text(
                       'Registrati',
                     ),
                     onPressed: () async {
@@ -343,12 +343,12 @@ dynamic createMessenger(BuildContext context, bool success) {
       ? SnackBar(
           content: createText(AppLocalizations.of(context)!.accessoeffettuato,
               size: 18),
-          duration: Duration(milliseconds: 2000),
+          duration: const Duration(milliseconds: 2000),
           backgroundColor: Colors.green,
         )
       : SnackBar(
           content: createText("Accesso fallito", size: 18),
-          duration: Duration(milliseconds: 2000),
+          duration: const Duration(milliseconds: 2000),
           backgroundColor: Colors.red,
         ));
 }

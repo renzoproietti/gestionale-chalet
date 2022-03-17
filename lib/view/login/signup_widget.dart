@@ -29,7 +29,7 @@ class SignUpState extends State<SignUpWidget> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-      padding: EdgeInsets.only(top: 30.0),
+      padding: const EdgeInsets.only(top: 30.0),
       child: Column(
         children: <Widget>[
           Stack(
@@ -41,7 +41,7 @@ class SignUpState extends State<SignUpWidget> {
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0)),
-                child: Container(
+                child: SizedBox(
                   width: 360.00,
                   height: 480.00,
                   child: Column(
@@ -188,7 +188,7 @@ class SignUpState extends State<SignUpWidget> {
                           highlightColor: Colors.transparent,
                           splashColor: AppColours.colorEnd,
                           child: const Padding(
-                            padding: const EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 42.0),
                             child: Text(
                               "Sign Up",
@@ -273,7 +273,7 @@ class SignUpState extends State<SignUpWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: 10.0, right: 40.0),
+                padding: const EdgeInsets.only(top: 10.0, right: 40.0),
                 child: GestureDetector(
                   onTap: () => {},
                   child: Container(
@@ -307,16 +307,16 @@ class SignUpState extends State<SignUpWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0, right: 40.0),
+                padding: const EdgeInsets.only(top: 10.0, right: 40.0),
                 child: GestureDetector(
                   onTap: () => {},
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
-                    decoration: new BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
-                    child: new Icon(
+                    child: const Icon(
                       FontAwesomeIcons.github,
                       color: Color(0xFF0084ff),
                     ),
@@ -324,16 +324,16 @@ class SignUpState extends State<SignUpWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: GestureDetector(
                   onTap: () => {},
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
-                    decoration: new BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
-                    child: new Icon(
+                    child: const Icon(
                       FontAwesomeIcons.google,
                       color: Color(0xFF0084ff),
                     ),

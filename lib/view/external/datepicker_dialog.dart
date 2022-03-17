@@ -19,7 +19,7 @@ class CustomDatePickerState extends State<CustomDatePicker> {
       width: MediaQuery.of(context).size.width / 1.25,
       height: MediaQuery.of(context).size.height / 2.5,
       child: SfDateRangePicker(
-        monthViewSettings: DateRangePickerMonthViewSettings(firstDayOfWeek: 1),
+        monthViewSettings: const DateRangePickerMonthViewSettings(firstDayOfWeek: 1),
         controller: _controller,
         selectionMode: DateRangePickerSelectionMode.range,
         enablePastDates: false,

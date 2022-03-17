@@ -15,8 +15,7 @@ class LoginWidget extends StatefulWidget {
 class LoginState extends State<LoginWidget> {
   final FocusNode focusEmail = FocusNode();
   final FocusNode focusPassword = FocusNode();
-  final GlobalKey<ScaffoldState> _mainScaffoldKey =
-  new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _mainScaffoldKey = GlobalKey<ScaffoldState>();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -27,31 +26,31 @@ class LoginState extends State<LoginWidget> {
         backgroundColor: Colors.black54,
         key: _mainScaffoldKey,
         body: Container(
-          padding: EdgeInsets.only(top: 30.0),
+          padding: const EdgeInsets.only(top: 30.0),
           child: Column(
             children: <Widget>[
               Stack(
-                clipBehavior: Clip.none, alignment: Alignment.topCenter,
+                clipBehavior: Clip.none,
+                alignment: Alignment.topCenter,
                 children: <Widget>[
                   Card(
                     elevation: 2.0,
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
+                    child: SizedBox(
                       width: 360.00,
                       height: 440.00,
                       child: Column(
                         children: <Widget>[
-                          Container(
-                              child: new Image(
-                                  width: 60.0,
-                                  height: 60.0,
-                                  fit: BoxFit.none,
-                                  image: new AssetImage(
-                                      'assets/images/android_new_logo.jpg'))),
+                          const Image(
+                              width: 60.0,
+                              height: 60.0,
+                              fit: BoxFit.none,
+                              image: AssetImage(
+                                  'assets/images/android_new_logo.jpg')),
                           Padding(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                                 top: 20.0,
                                 bottom: 20.0,
                                 left: 25.0,
@@ -60,11 +59,11 @@ class LoginState extends State<LoginWidget> {
                               focusNode: focusEmail,
                               controller: emailController,
                               keyboardType: TextInputType.emailAddress,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: "SignikaSemiBold",
                                   fontSize: 16.0,
                                   color: Colors.black),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   icon: Icon(
                                     FontAwesomeIcons.envelope,
@@ -83,7 +82,7 @@ class LoginState extends State<LoginWidget> {
                             color: Colors.grey,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                                 top: 20.0,
                                 bottom: 20.0,
                                 left: 25.0,
@@ -91,11 +90,11 @@ class LoginState extends State<LoginWidget> {
                             child: TextField(
                               focusNode: focusPassword,
                               controller: passwordController,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: "SignikaSemiBold",
                                   fontSize: 16.0,
                                   color: Colors.black),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   icon: Icon(
                                     FontAwesomeIcons.lock,
@@ -114,10 +113,11 @@ class LoginState extends State<LoginWidget> {
                             color: Colors.grey,
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 60.0, bottom: 26.0),
-                            decoration: BoxDecoration(
+                            margin:
+                                const EdgeInsets.only(top: 60.0, bottom: 26.0),
+                            decoration: const BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
+                                    BorderRadius.all(Radius.circular(5.0)),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                       color: AppColours.colorStart,
@@ -133,15 +133,15 @@ class LoginState extends State<LoginWidget> {
                                       AppColours.colorEnd,
                                       AppColours.colorStart
                                     ],
-                                    begin: const FractionalOffset(0.2, 0.2),
-                                    end: const FractionalOffset(1.0, 1.0),
+                                    begin: FractionalOffset(0.2, 0.2),
+                                    end: FractionalOffset(1.0, 1.0),
                                     stops: [0.1, 1.0],
                                     tileMode: TileMode.clamp)),
                             child: MaterialButton(
                               highlightColor: Colors.transparent,
                               splashColor: AppColours.colorEnd,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
                                     vertical: 10.0, horizontal: 42.0),
                                 child: Text(
                                   "Login",
@@ -151,23 +151,21 @@ class LoginState extends State<LoginWidget> {
                                       fontSize: 22.0),
                                 ),
                               ),
-                              onPressed: () => displaySnackBar("Login clicked"),
+                              onPressed:
+                                  () {}, //displaySnackBar("Login clicked"),
                             ),
                           ),
-                          Container(
-                            child: FlatButton(
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    color: Colors.black,
-                                    fontSize: 18.0,
-                                    fontFamily: "SignikaRegular"),
-                              ),
-                              onPressed: () {
-                                displaySnackBar("Forgot clicked");
-                              },
+                          OutlinedButton(
+                            child: const Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.black,
+                                  fontSize: 18.0,
+                                  fontFamily: "SignikaRegular"),
                             ),
+                            onPressed: () {},
+                            //displaySnackBar("Forgot clicked");
                           )
                         ],
                       ),
@@ -176,9 +174,9 @@ class LoginState extends State<LoginWidget> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: TextButton(
-                  child: Text(
+                  child: const Text(
                     "Not have account?",
                     style: TextStyle(
                         color: Colors.white,
@@ -189,20 +187,20 @@ class LoginState extends State<LoginWidget> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     gradient: LinearGradient(
                         colors: [Colors.white, Colors.white],
-                        begin: const FractionalOffset(0.2, 0.2),
-                        end: const FractionalOffset(0.5, 0.5),
+                        begin: FractionalOffset(0.2, 0.2),
+                        end: FractionalOffset(0.5, 0.5),
                         stops: [0.1, 0.5],
                         tileMode: TileMode.clamp)),
                 child: MaterialButton(
                   highlightColor: Colors.transparent,
                   splashColor: Colors.white70,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 42.0),
+                  child: const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
                     child: Text(
                       "SignUp",
                       style: TextStyle(
@@ -220,26 +218,26 @@ class LoginState extends State<LoginWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      decoration: BoxDecoration(
-                        gradient: new LinearGradient(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
                             colors: [
                               Colors.white10,
                               Colors.white,
                             ],
-                            begin: const FractionalOffset(0.0, 0.0),
-                            end: const FractionalOffset(1.0, 1.0),
+                            begin: FractionalOffset(0.0, 0.0),
+                            end: FractionalOffset(1.0, 1.0),
                             stops: [0.0, 1.0],
                             tileMode: TileMode.clamp),
                       ),
                       width: 100.0,
                       height: 1.0,
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(left: 15.0, right: 15.0),
                       child: Text(
                         "OR",
@@ -251,14 +249,14 @@ class LoginState extends State<LoginWidget> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        gradient: new LinearGradient(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
                             colors: [
                               Colors.white,
                               Colors.white10,
                             ],
-                            begin: const FractionalOffset(0.0, 0.0),
-                            end: const FractionalOffset(1.0, 1.0),
+                            begin: FractionalOffset(0.0, 0.0),
+                            end: FractionalOffset(1.0, 1.0),
                             stops: [0.0, 1.0],
                             tileMode: TileMode.clamp),
                       ),
@@ -272,16 +270,16 @@ class LoginState extends State<LoginWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: 10.0, right: 40.0),
+                    padding: const EdgeInsets.only(top: 10.0, right: 40.0),
                     child: GestureDetector(
-                      onTap: () => displaySnackBar("Forgot clicked"),
+                      onTap: () {}, //displaySnackBar("Forgot clicked"),
                       child: Container(
                         padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
-                        child: new Icon(
+                        child: const Icon(
                           FontAwesomeIcons.facebookF,
                           color: Color(0xFF0084ff),
                         ),
@@ -289,16 +287,16 @@ class LoginState extends State<LoginWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 10.0, right: 40.0),
+                    padding: const EdgeInsets.only(top: 10.0, right: 40.0),
                     child: GestureDetector(
-                      onTap: () => displaySnackBar("Instagram clicked"),
+                      onTap: () {}, //displaySnackBar("Instagram clicked"),
                       child: Container(
                         padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
-                        child: new Icon(
+                        child: const Icon(
                           FontAwesomeIcons.instagram,
                           color: Color(0xFF0084ff),
                         ),
@@ -306,16 +304,16 @@ class LoginState extends State<LoginWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 10.0, right: 40.0),
+                    padding: const EdgeInsets.only(top: 10.0, right: 40.0),
                     child: GestureDetector(
-                      onTap: () => displaySnackBar("Github clicked"),
+                      onTap: () {}, //=> displaySnackBar("Github clicked"),
                       child: Container(
                         padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
-                        child: new Icon(
+                        child: const Icon(
                           FontAwesomeIcons.github,
                           color: Color(0xFF0084ff),
                         ),
@@ -323,16 +321,16 @@ class LoginState extends State<LoginWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: GestureDetector(
-                      onTap: () => displaySnackBar("Google clicked"),
+                      onTap: () {}, //=> displaySnackBar("Google clicked"),
                       child: Container(
                         padding: const EdgeInsets.all(15.0),
-                        decoration: new BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
-                        child: new Icon(
+                        child: const Icon(
                           FontAwesomeIcons.google,
                           color: Color(0xFF0084ff),
                         ),
@@ -344,18 +342,5 @@ class LoginState extends State<LoginWidget> {
             ],
           ),
         ));
-  }
-
-  void displaySnackBar(String value) {
-    _mainScaffoldKey.currentState?.showSnackBar(new SnackBar(
-      content: new Text(
-        value,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            color: Colors.white, fontSize: 16.0, fontFamily: "SignikaRegular"),
-      ),
-      backgroundColor: Colors.blue,
-      duration: Duration(seconds: 3),
-    ));
   }
 }

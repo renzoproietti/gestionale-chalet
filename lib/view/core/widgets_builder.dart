@@ -14,18 +14,17 @@ class CustomHomeButton extends Container {
   Function()? _onPressed;
   int? _page;
   Duration? _animationTime;
-  double? _size;
   EdgeInsets? _innerPadding;
 
-  CustomHomeButton(
-      {required Widget? child,
-      Function()? onPressed,
-      Key? key,
-      PageController? pageController,
-      int? page,
-      Duration? animationTime,
-      required EdgeInsets? innerPadding})
-      : super(child: child, key: key) {
+  CustomHomeButton({
+    required Widget child,
+    required EdgeInsets innerPadding,
+    Function()? onPressed,
+    Key? key,
+    PageController? pageController,
+    int? page,
+    Duration? animationTime,
+  }) : super(child: child, key: key) {
     _pageController = pageController;
     _page = page;
     _animationTime = animationTime;

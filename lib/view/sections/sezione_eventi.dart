@@ -26,9 +26,9 @@ class _SezioneEventiState extends State<SezioneEventi> {
                 image: AssetImage("lib/assets/images/event_icon.png"),
                 width: 48,
                 height: 48),
-            innerPadding: EdgeInsets.all(18),
+            innerPadding: const EdgeInsets.all(18),
             page: 0,
-            animationTime: Duration(milliseconds: 600),
+            animationTime: const Duration(milliseconds: 600),
           ),
           Padding(
               padding: EdgeInsets.only(

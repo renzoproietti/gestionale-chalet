@@ -40,63 +40,60 @@ class _StateProfile extends State<Profile> {
           InkWell(
             onTap: () => showDialog(
               context: context,
-              builder: (context) => Container(
-                child: AlertDialog(
-                  contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 80),
-                  elevation: 24.0,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  content: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      createText(
-                        "Seleziona lingua \n",
-                        color: Colors.black,
-                        size: 22,
-                      ),
-                      createText(
-                        "Select language \n \n \n",
-                        color: Colors.black,
-                        size: 19,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton(
-                              onPressed: () {
-                                updateLocale(Locale('en', 'UK'));
-                                Chalet.setLocale(context, _locale);
-                                Navigator.of(context).pop();
-                              },
-                              child: const Image(
-                                image: AssetImage(
-                                    "lib/assets/images/united-kingdom.png"),
-                                width: 80,
-                                height: 80,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(
-                                      side: BorderSide(color: Colors.white)))),
-                          ElevatedButton(
-                              onPressed: () {
-                                updateLocale(Locale('it', 'IT'));
-                                Chalet.setLocale(context, _locale);
-                                Navigator.of(context).pop();
-                              },
-                              child: const Image(
-                                image:
-                                    AssetImage("lib/assets/images/italy.png"),
-                                width: 80,
-                                height: 80,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  shape: const CircleBorder(
-                                      side: BorderSide(color: Colors.white))))
-                        ],
-                      ),
-                    ],
-                  ),
+              builder: (context) => AlertDialog(
+                contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 80),
+                elevation: 24.0,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    createText(
+                      "Seleziona lingua \n",
+                      color: Colors.black,
+                      size: 22,
+                    ),
+                    createText(
+                      "Select language \n \n \n",
+                      color: Colors.black,
+                      size: 19,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              updateLocale(const Locale('en', 'UK'));
+                              Chalet.setLocale(context, _locale);
+                              Navigator.of(context).pop();
+                            },
+                            child: const Image(
+                              image: AssetImage(
+                                  "lib/assets/images/united-kingdom.png"),
+                              width: 80,
+                              height: 80,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder(
+                                    side: BorderSide(color: Colors.white)))),
+                        ElevatedButton(
+                            onPressed: () {
+                              updateLocale(const Locale('it', 'IT'));
+                              Chalet.setLocale(context, _locale);
+                              Navigator.of(context).pop();
+                            },
+                            child: const Image(
+                              image: AssetImage("lib/assets/images/italy.png"),
+                              width: 80,
+                              height: 80,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder(
+                                    side: BorderSide(color: Colors.white))))
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -141,7 +138,7 @@ class _StateProfile extends State<Profile> {
           InkWell(
             onTap: () async {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (buildContext) => SignIn()));
+                  MaterialPageRoute(builder: (buildContext) => const SignIn()));
             },
             child: Container(
               alignment: Alignment.centerLeft,

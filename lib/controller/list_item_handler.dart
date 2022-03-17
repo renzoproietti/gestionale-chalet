@@ -1,5 +1,4 @@
 import 'package:Chalet/model/items.dart';
-import 'package:flutter/material.dart';
 
 ///Classe che gestisce il numero di oggetti selezionati in una sezione.
 ///L'hashmap [countMap] associa ad ogni tipo un contatore, che è il numero
