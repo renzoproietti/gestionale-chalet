@@ -13,11 +13,10 @@ class DatabaseService{
 
   final CollectionReference CasottoCollection = FirebaseFirestore.instance.collection('Casotto');
 
-  Future updateUserData(String nome, String cognome, String email) async{
+  Future updateUserData(String email, String password) async{
     return await CasottoCollection.doc(uid).set({
-      'nome' : nome,
-      'cognome' : cognome,
       'email' : email,
+      'password' : password,
     });
 
   }

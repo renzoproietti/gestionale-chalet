@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () async {
                   await _auth.signOut();
                 },
-                icon: const Icon(Icons.person),
+                icon: const Icon(Icons.logout),
                 tooltip: 'Logout',
               ),
               InkWell(
