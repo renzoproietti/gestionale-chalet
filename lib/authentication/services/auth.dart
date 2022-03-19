@@ -33,7 +33,7 @@ class AuthService {
       await DatabaseService(uid: user!.uid).updateUserData(email, password);
       return user;
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      if (e.code == 'invalid-email'){}
     }
   }
 
@@ -42,7 +42,7 @@ class AuthService {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      if ((e.code == 'invalid-email') || (e.code == 'wrong-password')){}
     }
   }
 
