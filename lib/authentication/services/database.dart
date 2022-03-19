@@ -11,7 +11,7 @@ class DatabaseService{
 
   //collection reference
 
-  final CollectionReference CasottoCollection = FirebaseFirestore.instance.collection('Casotto');
+  final CollectionReference CasottoCollection = FirebaseFirestore.instance.collection('Utenti');
 
   Future updateUserData(String email, String password) async{
     return await CasottoCollection.doc(uid).set({

@@ -129,11 +129,19 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                 const Padding(padding: EdgeInsets.only(top: 10)),
                 SizedBox(
                   child: TextFormField(
-                    validator: (value) => value!.length < 1
-                        ? 'Inserisci la tua mail di 6 o piu caratteri'
-                        : null,
+                    key: ValueKey('email'),
+                    validator: (value) {
+                      if (value!.isEmpty || !value.contains('@') )
+                        return 'Perfavore inserisci una mail valida';
+                      return null;
+                        },
+                    keyboardType: TextInputType.emailAddress,
+                    //decoration: InputDecoration(labelText: 'Email address'),
+                    onSaved: (value) {
+                    emaillogin = value!;
+                    },
                     onChanged: (value) {
-                      setState(() => email = value);
+                      setState(() => emaillogin = value);
                     },
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -150,7 +158,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                 createText(AppLocalizations.of(context)!.password.toUpperCase(),
                     size: 20),
                 const Padding(padding: EdgeInsets.only(top: 10)),
-                Container(
+                SizedBox(
                   child: TextFormField(
                     validator: (value) => value!.length < 1
                         ? 'Inserisci la tua password di 6 o piu caratteri'
@@ -198,14 +206,14 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                         dynamic result = await _authlogin.signIn(email: emaillogin, password: pswlogin);
                         if(result == null){
                           setState(() {
-                            error = 'non è stato possibile accedere con queste credenziali';
+                            errorlogin = 'Email non esistente o password errata';
                           });
                         }
                       }},
                     child: createText(AppLocalizations.of(context)!.accedi,
                         size: 20, weight: FontWeight.bold)),
                 SizedBox(height: 12.0),
-                Text(error,
+                Text(errorlogin,
                   style: const TextStyle(color: Colors.red, fontSize: 14.0),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 15)),
@@ -296,18 +304,27 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                     child: const Text(
                       'Registrati',
                     ),
+
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                       dynamic result = await _auth.signUp(email: email, password: password);
                       if(result == null){
                         setState(() {
-                          error = 'non è stato possibile registrarsi con queste credenziali';
+                          error = 'Email già esistente';
                         });
                       }
                     }},
+
+                  ),
+                ),
+                Text(error,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 14,
                   ),
                 ),
               ],
+
             ),
           ),
         ],
