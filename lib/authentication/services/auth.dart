@@ -1,3 +1,4 @@
+import 'package:Chalet/authentication/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -23,11 +24,14 @@ class AuthService {
   //SIGN UP METHOD
   Future signUp({required String email, required String password}) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      dynamic result = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return null;
+      User? user = result.user;
+
+      await DatabaseService(uid: user!.uid).updateUserData('nome', 'cognome', 'email');
+      return user;
     } on FirebaseAuthException catch (e) {
       return e.message;
     }

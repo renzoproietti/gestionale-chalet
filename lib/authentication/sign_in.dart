@@ -301,7 +301,7 @@ class _SignInState extends State<SignIn> with TickerProviderStateMixin {
                       dynamic result = await _auth.signUp(email: email, password: password);
                       if(result == null){
                         setState(() {
-                          error = 'non è stato possibile accedere con queste credenziali';
+                          error = 'non è stato possibile registrarsi con queste credenziali';
                         });
                       }
                     }},

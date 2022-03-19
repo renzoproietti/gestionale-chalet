@@ -1,4 +1,5 @@
 import 'package:Chalet/model/items.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Chalet/view/sections/landing_section.dart';
 import 'package:Chalet/authentication/services/auth.dart';
@@ -10,6 +11,8 @@ import 'package:Chalet/view/core/widgets_builder.dart';
 import 'package:Chalet/controller/cart_handler.dart';
 import 'sections/sezione_profilo.dart';
 import '../authentication/services/auth.dart';
+import 'package:Chalet/authentication/services/database.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 ///Classe responsabile per la home page in generale,
@@ -47,87 +50,89 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-          toolbarHeight: 70,
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.table_rows_rounded,
-              size: 32,
-            ),
-            onPressed: () {
-              Navigator.of(context).push(createRoute(const Profile()));
-            },
-          ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              icon: const Icon(Icons.person),
-              tooltip: 'Logout',
-            ),
-            InkWell(
-              onTap: () => showMenu(
-                  context: context,
-                  position: RelativeRect.fromLTRB(
-                      MediaQuery.of(context).size.width, 0, 0, 0),
-                  items: menu),
-              child: const Icon(
-                Icons.more_vert_outlined,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+            toolbarHeight: 70,
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.table_rows_rounded,
                 size: 32,
               ),
-            )
+              onPressed: () {
+                Navigator.of(context).push(createRoute(const Profile()));
+              },
+            ),
+            actions: <Widget>[
+              IconButton(
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+                icon: const Icon(Icons.person),
+                tooltip: 'Logout',
+              ),
+              InkWell(
+                onTap: () => showMenu(
+                    context: context,
+                    position: RelativeRect.fromLTRB(
+                        MediaQuery.of(context).size.width, 0, 0, 0),
+                    items: menu),
+                child: const Icon(
+                  Icons.more_vert_outlined,
+                  size: 32,
+                ),
+              )
+            ],
+            centerTitle: true,
+            title: const Text(
+              'Chalet',
+              style: TextStyle(
+                  fontFamily: 'DancingScript',
+                  fontSize: 40,
+                  fontWeight: FontWeight.w500),
+            )),
+        body:
+        PageView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          controller: _pageController,
+          padEnds: false,
+          children: <Widget>[
+            SezioneLanding(pageController: _pageController), //1st page
+            SezioneOmbrelloni(
+                pageController: _pageController,
+                callback: (int index, bool isExpanded) => setState(() {
+                      getFile()[index].isExpanded = !getFile()[index].isExpanded!;
+                    })),
+            SezioneLettini(
+                pageController: _pageController,
+                callback: (int index, bool isExpanded) => setState(() {
+                      getLettini()[index].isExpanded =
+                          !getLettini()[index].isExpanded!;
+                    })),
+            SezioneBar(
+                pageController: _pageController,
+                callback: (int index, bool isExpanded) => setState(() {
+                      getMenu()[index].isExpanded = !getMenu()[index].isExpanded!;
+                    })), //3rd page
+            //4th page
+            SezioneEventi(pageController: _pageController), //5th page
           ],
-          centerTitle: true,
-          title: const Text(
-            'Chalet',
-            style: TextStyle(
-                fontFamily: 'DancingScript',
-                fontSize: 40,
-                fontWeight: FontWeight.w500),
-          )),
-      body: PageView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        controller: _pageController,
-        padEnds: false,
-        children: <Widget>[
-          SezioneLanding(pageController: _pageController), //1st page
-          SezioneOmbrelloni(
-              pageController: _pageController,
-              callback: (int index, bool isExpanded) => setState(() {
-                    getFile()[index].isExpanded = !getFile()[index].isExpanded!;
-                  })),
-          SezioneLettini(
-              pageController: _pageController,
-              callback: (int index, bool isExpanded) => setState(() {
-                    getLettini()[index].isExpanded =
-                        !getLettini()[index].isExpanded!;
-                  })),
-          SezioneBar(
-              pageController: _pageController,
-              callback: (int index, bool isExpanded) => setState(() {
-                    getMenu()[index].isExpanded = !getMenu()[index].isExpanded!;
-                  })), //3rd page
-          //4th page
-          SezioneEventi(pageController: _pageController), //5th page
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-          elevation: 0,
-          onPressed: () {
-            initCart(context);
-            showDialog(context: context, builder: (context) => Cart(_cartKey));
-          },
-          child: const Icon(Icons.shopping_cart_outlined),
-          backgroundColor: Colors.black26,
-          foregroundColor: Colors.white,
-          mini: false,
-          shape: const CircleBorder(side: BorderSide(color: Colors.white))),
-    );
+        ),
+        floatingActionButton: FloatingActionButton(
+            elevation: 0,
+            onPressed: () {
+              initCart(context);
+              showDialog(context: context, builder: (context) => Cart(_cartKey));
+            },
+            child: const Icon(Icons.shopping_cart_outlined),
+            backgroundColor: Colors.black26,
+            foregroundColor: Colors.white,
+            mini: false,
+            shape: const CircleBorder(side: BorderSide(color: Colors.white))),
+      );
+
   }
 }
 
