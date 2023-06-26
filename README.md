@@ -1,7 +1,7 @@
 # Chalet
 Chalet è la nuova app pensata per uno stabilimento balneare che consente di accedere ai diversi servizi dello stesso. Basata sulla semplicità d'uso e una UI moderna e interattiva permetterà ai clienti di scegliere il proprio posto al sole o gustarsi le loro pietanze preferite in pochi semplici click.
 
-![ombrelloni](https://github.com/renzoproietti/gestionale-chalet/assets/80969286/bce19993-7424-4275-86a5-a7fa03ca26e8)
+![ombrelloni](https://github.com/renzoproietti/gestionale-chalet/assets/80969286/bce19993-7424-4275-86a5-a7fa03ca26e8) width="300" height="600"
 
 
 <img src="https://raw.githubusercontent.com/renzoproietti/gestionale-chalet/main/screenshots/ombrelloni.jpg" width="300" height="600" />
