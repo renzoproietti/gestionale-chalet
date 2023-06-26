@@ -30,6 +30,9 @@ L'applicativo permette all'utente di registrarsi classicamente con e-mail e pass
 ### Layout
 Una volta effettuato l'accesso l'utente viene rimandato alla home page, dove potrà scegliere tra diverse categorie e fare i suoi ordini. Il design dell'app è basato per la maggior parte su uno scrolling verticale. All'esterno ci sono le varie pagine, o categorie, e ogni categoria mette a disposizione liste di oggetti a cui il cliente può accedere, prenotare, visualizzare, filtrare, etc.
 
+<img src="https://github.com/renzoproietti/gestionale-chalet/assets/80969286/a90d2c2a-a132-4e4d-87b8-9b95df0511a2" width="300" height="600" />
+
+
 
 ##
 ### Carrello
