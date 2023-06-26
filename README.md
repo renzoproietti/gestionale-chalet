@@ -3,7 +3,7 @@ Chalet è la nuova app pensata per uno stabilimento balneare che consente di acc
 
 <img src="https://raw.githubusercontent.com/renzoproietti/gestionale-chalet/main/screenshots/ombrelloni.jpg" width="300" height="600" />
 
-<img src="https://github.com/renzoproietti/gestionale-chalet/screenshots/lettini.jpg" width="300" height="600" />
+<img src="https://github.com/renzoproietti/gestionale-chalet/blob/main/screenshots/carrello_lettini.jpg.gz" width="300" height="600" />
 
 <img src="https://github.com/renzoproietti/gestionale-chalet/blob/main/screenshots/ristorante.jpg" width="300" height="600" />
 
